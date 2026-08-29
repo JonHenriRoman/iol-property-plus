@@ -6,8 +6,9 @@ organisation's Corporate Web Architecture Standard (`../Architecture.md`).
 This repository is currently a **scaffold**: it satisfies sections 2–6 of the
 standard (baseline technology, dependency policy, repository layout, application
 rules, lint/format, TypeScript & environment safety) plus the metadata surface
-from section 4.2. Docker (section 7), AWS/ECS (section 8), the GitLab pipeline
-(section 9) and the test suites (section 10) are not yet in place.
+from section 4.2 and a Drizzle client introspected from the live database.
+Docker (section 7), AWS/ECS (section 8), the GitLab pipeline (section 9) and the
+test suites (section 10) are not yet in place.
 
 ## Requirements
 
@@ -40,6 +41,8 @@ pnpm dev                 # http://localhost:3000  (Turbopack)
 | `pnpm format:check` | Prettier check (CI gate)               |
 | `pnpm test`         | `vitest run` — pending section 10      |
 | `pnpm test:e2e`     | `playwright test` — pending section 10 |
+| `pnpm db:pull`      | Re-introspect the database schema      |
+| `pnpm db:check`     | Read-only DB connectivity probe        |
 
 ## Environment variables
 
@@ -49,20 +52,42 @@ never be committed.
 
 Two Zod schemas validate the environment, each once on module load:
 
-| File                | Scope                                                                              | Contents                                |
-| ------------------- | ---------------------------------------------------------------------------------- | --------------------------------------- |
-| `src/config/env.ts` | public — safe to import from a Client Component                                    | `NEXT_PUBLIC_SITE_URL`                  |
-| `src/server/env.ts` | server-only — `import 'server-only'`, build fails if a Client Component imports it | `NODE_ENV`, `APP_ENV`, `GIT_COMMIT_SHA` |
+| File                | Scope                                                                              | Contents                                                |
+| ------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `src/config/env.ts` | public — safe to import from a Client Component                                    | `NEXT_PUBLIC_SITE_URL`                                  |
+| `src/server/env.ts` | server-only — `import 'server-only'`, build fails if a Client Component imports it | `NODE_ENV`, `APP_ENV`, `GIT_COMMIT_SHA`, `DATABASE_URL` |
 
 `src/instrumentation.ts` imports `src/server/env.ts` at server start, so an
 invalid server environment is caught at boot: `register()` throws, every route
 (including `/api/health`) returns 500, the ALB marks the task unhealthy and the
 deployment rolls back.
 
-Server-only values are read only from `src/server/*`. Secrets (e.g. a future
-`DATABASE_URL`) are injected at runtime through ECS Secrets Manager / SSM
-references — never committed, never placed in `NEXT_PUBLIC_*`, never baked into
-the image. `.env.example` holds variable names and safe placeholder values only.
+Server-only values are read only from `src/server/*`. Secrets are injected at
+runtime through ECS Secrets Manager / SSM references — never committed, never
+placed in `NEXT_PUBLIC_*`, never baked into the image. `.env.example` holds
+variable names and safe placeholder values only.
+
+## Database
+
+The PostgreSQL schema (`iol_property_plus`, 24 tables) is **owned in DataGrip**.
+This repo never creates, alters or migrates it — it only introspects.
+
+| Path                                      | Notes                                                                                                                                                         |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/server/db/schema.ts`, `relations.ts` | **Generated** by `pnpm db:pull` (`drizzle-kit pull` + `scripts/fix-generated-schema.mjs`). Do not edit. Excluded from ESLint/Prettier, type-checked by `tsc`. |
+| `src/server/db/custom-types.ts`           | Hand-written `citext` / `tsvector` column types that `drizzle-kit` can't map.                                                                                 |
+| `src/server/db/index.ts`                  | Hand-written `server-only` client. Import **`@/server/db`**, never `@/server/db/schema` directly.                                                             |
+| `drizzle.config.ts`                       | `drizzle-kit` config — reads `process.env.DATABASE_URL` (it runs outside Next and can't load the `server-only` env schema).                                   |
+
+`drizzle-kit`'s migration snapshot (`src/server/db/meta/`, `*.sql`) is
+git-ignored — DataGrip owns DDL.
+
+`DATABASE_URL` defaults to `postgresql://localhost:5432/iol_property_plus`. The
+local instance uses trust auth (no credentials); a deployed instance gets a full
+URL from ECS secrets via `.env.local` / the pipeline, never `.env.example`.
+
+- `pnpm db:pull` — re-introspect after a DataGrip schema change.
+- `pnpm db:check` — read-only connectivity + schema-match probe against the real database.
 
 ## Health endpoint
 
@@ -171,6 +196,10 @@ to _select_ these; only the resolved versions are committed.
 | `react` / `react-dom`                  | 19.2.8           | Identical versions; satisfy `next`'s `^19` peer.                                                            |
 | `server-only`                          | 0.0.1            | Build-time server/client boundary guard (React team).                                                       |
 | `zod`                                  | 4.4.3            | Runtime env-schema validation (section 6). Held at 4.4.x — the 4.5 line published hours before this change. |
+| `drizzle-orm`                          | 0.45.2           | Typed DB client over the introspected schema.                                                               |
+| `postgres`                             | 3.4.9            | PostgreSQL driver (postgres.js) — pure JS, no native build.                                                 |
+| `drizzle-kit` (dev)                    | 0.31.10          | `drizzle-kit pull` introspection.                                                                           |
+| `tsx` (dev)                            | 4.22.5           | Runs `scripts/*.ts` (`pnpm db:check`). Held ~2 months back from latest.                                     |
 | `@eslint/js`                           | 9.39.5           | ESLint recommended config; pinned to the `eslint` version.                                                  |
 | `eslint-config-next`                   | 16.3.3           | Same release line as `next` (standard section 2.2).                                                         |
 | `typescript`                           | 6.0.3            | See deviation below.                                                                                        |
