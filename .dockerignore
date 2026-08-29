@@ -1,0 +1,33 @@
+# VCS
+.git
+.gitignore
+.gitattributes
+
+# installed / generated — rebuilt inside the image
+node_modules
+.next
+out
+build
+*.tsbuildinfo
+next-env.d.ts
+
+# environment — the image is configured at runtime by ECS; .env.local may hold secrets
+.env
+.env.*
+
+# local tooling & editors
+.cursor
+.vscode
+.idea
+.DS_Store
+
+# tests, reports, docs
+tests
+coverage
+test-results
+playwright-report
+*.md
+
+# docker
+Dockerfile*
+.dockerignore

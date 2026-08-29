@@ -3,12 +3,12 @@
 Corporate website built on Next.js (App Router) and TypeScript, following the
 organisation's Corporate Web Architecture Standard (`../Architecture.md`).
 
-This repository is currently a **scaffold**: it satisfies sections 2–6 of the
+This repository is currently a **scaffold**: it satisfies sections 2–7 of the
 standard (baseline technology, dependency policy, repository layout, application
-rules, lint/format, TypeScript & environment safety) plus the metadata surface
-from section 4.2 and a Drizzle client introspected from the live database.
-Docker (section 7), AWS/ECS (section 8), the GitLab pipeline (section 9) and the
-test suites (section 10) are not yet in place.
+rules, lint/format, TypeScript & environment safety, multi-stage Docker) plus
+the metadata surface from section 4.2 and a Drizzle client introspected from the
+live database. AWS/ECS (section 8), the GitLab pipeline (section 9) and the test
+suites (section 10) are not yet in place.
 
 ## Requirements
 
@@ -94,6 +94,32 @@ URL from ECS secrets via `.env.local` / the pipeline, never `.env.example`.
 `GET /api/health` → `{ "status": "ok" }`. Unauthenticated, no external
 dependency. `dynamic = 'force-dynamic'` so it is never served from a
 prerendered cache. Intended as the ALB target-group health check.
+
+## Docker
+
+Multi-stage `Dockerfile` on `node:24.19.0-bookworm-slim` (matches `.nvmrc`):
+
+| Stage     | Does                                                                                                                                                                      |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `base`    | `corepack enable` — pnpm resolves to the pinned `11.24.0` from `packageManager`. Never `pnpm@latest`.                                                                     |
+| `deps`    | `pnpm install --frozen-lockfile` (all deps — `next build` needs the dev ones).                                                                                            |
+| `builder` | `pnpm run build` → `.next/standalone`. `NEXT_PUBLIC_SITE_URL` is a build `ARG` (inlined at build time; the pipeline passes the real value).                               |
+| `runner`  | Copies only `.next/standalone`, `.next/static`, `public`. No source, no pnpm, no dev dependencies. Runs as non-root `nextjs` (uid/gid 1001). `CMD ["node", "server.js"]`. |
+
+```sh
+docker build --pull \
+  --build-arg NEXT_PUBLIC_SITE_URL=https://your-domain \
+  -t iol-property-plus .
+docker run -d -p 3000:3000 iol-property-plus
+curl http://localhost:3000/api/health          # {"status":"ok"}
+```
+
+Runtime config (`APP_ENV`, `GIT_COMMIT_SHA`, `DATABASE_URL`, secrets) is injected
+by ECS at run time, never baked in — `.dockerignore` excludes every `.env*`.
+`postgres` / `drizzle-orm` are absent from the standalone bundle until a route
+imports `@/server/db`; `next build` traces them in at that point.
+
+Base-image digest pin and the pipeline `--build-arg`s are section 9.
 
 ## Metadata and SEO
 
