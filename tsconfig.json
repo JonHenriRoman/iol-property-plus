@@ -27,6 +27,7 @@
       "@/assets/*": ["./src/assets/*"],
       "@/components/*": ["./src/components/*"],
       "@/config/*": ["./src/config/*"],
+      "@/features/*": ["./src/features/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/server/*": ["./src/server/*"],
       "@/styles/*": ["./src/styles/*"],

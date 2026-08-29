@@ -15,9 +15,37 @@ export default defineConfig([
       perfectionist,
       'unused-imports': unusedImports,
     },
+    settings: {
+      'import-x/resolver': {
+        typescript: true,
+      },
+    },
     rules: {
       'import-x/first': 'error',
       'import-x/newline-after-import': ['error', { count: 1 }],
+      'import-x/no-restricted-paths': [
+        'error',
+        {
+          zones: [
+            {
+              target: './src/lib',
+              from: ['./src/server', './src/features', './src/components', './src/app'],
+              message:
+                'src/lib must stay framework-neutral: no imports from server, features, components or app.',
+            },
+            {
+              target: './src/components/ui',
+              from: ['./src/features', './src/server'],
+              message: 'Generic UI primitives must not depend on a feature or on server code.',
+            },
+            {
+              target: './src/features',
+              from: './src/app',
+              message: 'Feature modules must not import from route files.',
+            },
+          ],
+        },
+      ],
       'perfectionist/sort-imports': [
         'error',
         {
