@@ -17,10 +17,14 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:pull": "drizzle-kit pull && node scripts/fix-generated-schema.mjs",
+    "db:check": "tsx scripts/check-db.ts"
   },
   "dependencies": {
+    "drizzle-orm": "0.45.2",
     "next": "16.3.3",
+    "postgres": "3.4.9",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "server-only": "0.0.1",
@@ -32,6 +36,7 @@
     "@types/node": "24.13.3",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
+    "drizzle-kit": "0.31.10",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.3",
     "eslint-config-prettier": "10.1.8",
@@ -40,6 +45,7 @@
     "eslint-plugin-unused-imports": "4.4.1",
     "prettier": "3.9.6",
     "tailwindcss": "4.3.3",
+    "tsx": "4.22.5",
     "typescript": "6.0.3"
   }
 }

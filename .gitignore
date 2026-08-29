@@ -34,5 +34,9 @@ next-env.d.ts
 # testing
 /coverage
 
+# drizzle-kit migration snapshot — DataGrip owns DDL, we only introspect
+/src/server/db/meta/
+/src/server/db/*.sql
+
 # editor
 .idea

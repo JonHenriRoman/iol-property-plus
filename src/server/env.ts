@@ -8,14 +8,18 @@ import { z } from 'zod';
  * Component's graph. Validated once on module load; `src/instrumentation.ts`
  * also imports it at server start so a misconfigured deploy exits at boot.
  *
- * Secrets (e.g. a future DATABASE_URL) are injected at runtime via ECS Secrets
- * Manager / SSM and must never be copied into the image.
+ * Deployed environments inject DATABASE_URL (and any future secret) at runtime
+ * via ECS Secrets Manager / SSM; secrets must never be copied into the image.
+ * Local dev falls back to the trust-auth localhost database.
  */
 
 const serverEnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']),
   APP_ENV: z.enum(['development', 'staging', 'production']).default('development'),
   GIT_COMMIT_SHA: z.string().min(1).default('dev'),
+  DATABASE_URL: z
+    .url({ protocol: /^postgres(ql)?$/ })
+    .default('postgresql://localhost:5432/iol_property_plus'),
 });
 
 const parsed = serverEnvSchema.safeParse(process.env);

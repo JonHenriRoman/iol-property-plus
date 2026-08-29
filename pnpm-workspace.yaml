@@ -1,4 +1,6 @@
 onlyBuiltDependencies:
   - unrs-resolver
+  - esbuild
 allowBuilds:
+  esbuild: true
   unrs-resolver: true
