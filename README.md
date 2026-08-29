@@ -58,9 +58,39 @@ dependency. Intended as the ALB target-group health check.
 
 ## Project layout
 
-Standard section 3 layout. Path aliases (`tsconfig.json`):
-`@/assets/*`, `@/components/*`, `@/config/*`, `@/lib/*`, `@/server/*`,
-`@/styles/*`, `@/types/*`. Use them instead of deep relative imports.
+Architecture Standard section 3. Import via the `@/*` aliases below, never deep
+relative paths.
+
+| Path                           | Alias            | What belongs here                                                                                                              |
+| ------------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `src/app/`                     | —                | Route files only. Keep them thin: parse input, call a feature or service, map the response. No business logic.                 |
+| `src/app/api/*/route.ts`       | —                | Route handlers. Validate, delegate, return a status.                                                                           |
+| `src/features/<feature>/`      | `@/features/*`   | One self-contained vertical. `index.ts` is the **only** public entry point; nothing outside the feature imports its internals. |
+| `src/components/layout/`       | `@/components/*` | Header, footer, navigation, page shell.                                                                                        |
+| `src/components/sections/`     | `@/components/*` | Page sections shared by more than one feature.                                                                                 |
+| `src/components/ui/`           | `@/components/*` | Small generic primitives. Must not import a feature or server code.                                                            |
+| `src/config/`                  | `@/config/*`     | Typed public/site configuration. Browser-safe values only.                                                                     |
+| `src/lib/`                     | `@/lib/*`        | Framework-neutral helpers, grouped by responsibility. May not import from `app`, `server`, `features` or `components`.         |
+| `src/server/`                  | `@/server/*`     | Server-only integrations. Every file starts with `import 'server-only'`. Never reached from a Client Component.                |
+| `src/styles/`                  | `@/styles/*`     | Design tokens and global style fragments.                                                                                      |
+| `src/types/`                   | `@/types/*`      | Shared domain types.                                                                                                           |
+| `src/assets/`                  | `@/assets/*`     | Images, SVGs and fonts imported by `src/` code (not the ones served raw from `public/`).                                       |
+| `public/{fonts,icons,images}/` | —                | Static files served at the URL root.                                                                                           |
+| `tests/unit/`                  | —                | Fast, isolated. No network, no database.                                                                                       |
+| `tests/integration/`           | —                | Several modules together. Still deterministic and offline.                                                                     |
+| `tests/e2e/`                   | —                | Playwright browser journeys against a locally built app.                                                                       |
+
+The `src/app` → `src/features` → `src/config` / `src/server` boundary is enforced,
+not just documented:
+
+- **Build-time:** `src/server/*` imports the `server-only` package. If a Client
+  Component pulls a server module into its graph, `next build` fails.
+- **Lint-time:** `import-x/no-restricted-paths` zones in `eslint.config.js` fail
+  `pnpm lint` on the disallowed edges in the table above.
+
+`src/server/release-info.ts` is a scaffold-time affordance (deploy identity from
+env). It can be folded into the section 6 env schema once the section 9 pipeline
+injects `GIT_COMMIT_SHA` / `APP_ENV`.
 
 Styling is **Tailwind CSS 4** (`src/app/globals.css` → `@import "tailwindcss"`,
 `postcss.config.mjs`). Do not introduce a second styling system.
@@ -74,6 +104,7 @@ to _select_ these; only the resolved versions are committed.
 | -------------------------------------- | ---------------- | ----------------------------------------------------- |
 | `next`                                 | 16.3.3           | Latest stable App Router release.                     |
 | `react` / `react-dom`                  | 19.2.8           | Identical versions; satisfy `next`'s `^19` peer.      |
+| `server-only`                          | 0.0.1            | Build-time server/client boundary guard (React team). |
 | `eslint-config-next`                   | 16.3.3           | Same release line as `next` (standard section 2.2).   |
 | `typescript`                           | 6.0.3            | See deviation below.                                  |
 | `eslint`                               | 9.39.5           | See deviation below.                                  |

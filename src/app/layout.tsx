@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
 
+import { siteConfig } from '@/config/site';
+
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'IOL Property Plus',
-    template: '%s | IOL Property Plus',
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: 'IOL Property Plus corporate website.',
+  description: siteConfig.description,
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
