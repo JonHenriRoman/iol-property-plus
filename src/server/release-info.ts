@@ -1,12 +1,13 @@
 import 'server-only';
 
+import { serverEnv } from './env';
+
 /**
  * Deploy identity for the running instance.
  *
  * Scaffold-time affordance. §9 requires the pipeline to publish build metadata
  * (commit SHA, pipeline id, image digest) and §8 requires a one-to-one mapping
- * between commit SHA, image tag and task-definition revision. Once the pipeline
- * injects these, this module can be replaced by the §6 env schema.
+ * between commit SHA, image tag and task-definition revision.
  */
 
 export interface ReleaseInfo {
@@ -16,7 +17,7 @@ export interface ReleaseInfo {
 
 export function getReleaseInfo(): ReleaseInfo {
   return {
-    commitSha: process.env.GIT_COMMIT_SHA ?? 'dev',
-    environment: process.env.APP_ENV ?? 'development',
+    commitSha: serverEnv.GIT_COMMIT_SHA,
+    environment: serverEnv.APP_ENV,
   };
 }

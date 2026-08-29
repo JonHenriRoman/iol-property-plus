@@ -3,11 +3,11 @@
 Corporate website built on Next.js (App Router) and TypeScript, following the
 organisation's Corporate Web Architecture Standard (`../Architecture.md`).
 
-This repository is currently a **scaffold**: it satisfies sections 2–5 of the
+This repository is currently a **scaffold**: it satisfies sections 2–6 of the
 standard (baseline technology, dependency policy, repository layout, application
-rules, lint/format) plus the metadata surface from section 4.2. Environment
-validation (section 6), Docker (section 7), AWS/ECS (section 8), the GitLab
-pipeline (section 9) and the test suites (section 10) are not yet in place.
+rules, lint/format, TypeScript & environment safety) plus the metadata surface
+from section 4.2. Docker (section 7), AWS/ECS (section 8), the GitLab pipeline
+(section 9) and the test suites (section 10) are not yet in place.
 
 ## Requirements
 
@@ -44,14 +44,25 @@ pnpm dev                 # http://localhost:3000  (Turbopack)
 ## Environment variables
 
 Copy `.env.example` to `.env.local` (git-ignored) and fill in real values.
+`.env`, `.env.local` and `.env.*.local` are ignored by `.gitignore` and must
+never be committed.
 
-| Variable               | Scope  | Notes                                          |
-| ---------------------- | ------ | ---------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | public | Embedded in the client bundle. Never a secret. |
+Two Zod schemas validate the environment, each once on module load:
 
-Server-only values and secrets are read only from server modules and, in
-deployed environments, injected through ECS Secrets Manager / SSM references —
-never committed and never placed in `NEXT_PUBLIC_*`.
+| File                | Scope                                                                              | Contents                                |
+| ------------------- | ---------------------------------------------------------------------------------- | --------------------------------------- |
+| `src/config/env.ts` | public — safe to import from a Client Component                                    | `NEXT_PUBLIC_SITE_URL`                  |
+| `src/server/env.ts` | server-only — `import 'server-only'`, build fails if a Client Component imports it | `NODE_ENV`, `APP_ENV`, `GIT_COMMIT_SHA` |
+
+`src/instrumentation.ts` imports `src/server/env.ts` at server start, so an
+invalid server environment is caught at boot: `register()` throws, every route
+(including `/api/health`) returns 500, the ALB marks the task unhealthy and the
+deployment rolls back.
+
+Server-only values are read only from `src/server/*`. Secrets (e.g. a future
+`DATABASE_URL`) are injected at runtime through ECS Secrets Manager / SSM
+references — never committed, never placed in `NEXT_PUBLIC_*`, never baked into
+the image. `.env.example` holds variable names and safe placeholder values only.
 
 ## Health endpoint
 
@@ -154,23 +165,24 @@ profile (`.prettierrc`); `.prettierignore` covers generated output but **not**
 Resolved and reviewed against the npm registry on 2026-08-29. `@latest` was used
 to _select_ these; only the resolved versions are committed.
 
-| Package                                | Version          | Reason                                                     |
-| -------------------------------------- | ---------------- | ---------------------------------------------------------- |
-| `next`                                 | 16.3.3           | Latest stable App Router release.                          |
-| `react` / `react-dom`                  | 19.2.8           | Identical versions; satisfy `next`'s `^19` peer.           |
-| `server-only`                          | 0.0.1            | Build-time server/client boundary guard (React team).      |
-| `@eslint/js`                           | 9.39.5           | ESLint recommended config; pinned to the `eslint` version. |
-| `eslint-config-next`                   | 16.3.3           | Same release line as `next` (standard section 2.2).        |
-| `typescript`                           | 6.0.3            | See deviation below.                                       |
-| `eslint`                               | 9.39.5           | See deviation below.                                       |
-| `eslint-config-prettier`               | 10.1.8           | `/flat` entry, placed last in the config.                  |
-| `eslint-plugin-import-x`               | 4.17.1           | Import ordering (standard section 5).                      |
-| `eslint-plugin-perfectionist`          | 5.10.1           | Import/member sorting (standard section 5).                |
-| `eslint-plugin-unused-imports`         | 4.4.1            | `no-unused-imports` error (standard section 5).            |
-| `prettier`                             | 3.9.6            | Stable Prettier 3.                                         |
-| `tailwindcss` / `@tailwindcss/postcss` | 4.3.3            | Styling system.                                            |
-| `@types/node`                          | 24.13.3          | Pinned to the Node **24** line, not `@latest` (26.x).      |
-| `@types/react` / `@types/react-dom`    | 19.2.18 / 19.2.5 | Match React 19.2.                                          |
+| Package                                | Version          | Reason                                                                                                      |
+| -------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| `next`                                 | 16.3.3           | Latest stable App Router release.                                                                           |
+| `react` / `react-dom`                  | 19.2.8           | Identical versions; satisfy `next`'s `^19` peer.                                                            |
+| `server-only`                          | 0.0.1            | Build-time server/client boundary guard (React team).                                                       |
+| `zod`                                  | 4.4.3            | Runtime env-schema validation (section 6). Held at 4.4.x — the 4.5 line published hours before this change. |
+| `@eslint/js`                           | 9.39.5           | ESLint recommended config; pinned to the `eslint` version.                                                  |
+| `eslint-config-next`                   | 16.3.3           | Same release line as `next` (standard section 2.2).                                                         |
+| `typescript`                           | 6.0.3            | See deviation below.                                                                                        |
+| `eslint`                               | 9.39.5           | See deviation below.                                                                                        |
+| `eslint-config-prettier`               | 10.1.8           | `/flat` entry, placed last in the config.                                                                   |
+| `eslint-plugin-import-x`               | 4.17.1           | Import ordering (standard section 5).                                                                       |
+| `eslint-plugin-perfectionist`          | 5.10.1           | Import/member sorting (standard section 5).                                                                 |
+| `eslint-plugin-unused-imports`         | 4.4.1            | `no-unused-imports` error (standard section 5).                                                             |
+| `prettier`                             | 3.9.6            | Stable Prettier 3.                                                                                          |
+| `tailwindcss` / `@tailwindcss/postcss` | 4.3.3            | Styling system.                                                                                             |
+| `@types/node`                          | 24.13.3          | Pinned to the Node **24** line, not `@latest` (26.x).                                                       |
+| `@types/react` / `@types/react-dom`    | 19.2.18 / 19.2.5 | Match React 19.2.                                                                                           |
 
 ### Approved deviations from the standard
 
