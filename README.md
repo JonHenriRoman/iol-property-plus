@@ -3,11 +3,11 @@
 Corporate website built on Next.js (App Router) and TypeScript, following the
 organisation's Corporate Web Architecture Standard (`../Architecture.md`).
 
-This repository is currently a **scaffold**: it satisfies section 2 of the
-standard (baseline technology, dependency policy) plus the minimum of sections
-3–5 needed for the skeleton to run and pass its own quality gates. Docker
-(section 7), AWS/ECS (section 8), the GitLab pipeline (section 9) and the test
-suites (section 10) are not yet in place.
+This repository is currently a **scaffold**: it satisfies sections 2–5 of the
+standard (baseline technology, dependency policy, repository layout, application
+rules, lint/format) plus the metadata surface from section 4.2. Environment
+validation (section 6), Docker (section 7), AWS/ECS (section 8), the GitLab
+pipeline (section 9) and the test suites (section 10) are not yet in place.
 
 ## Requirements
 
@@ -54,7 +54,38 @@ never committed and never placed in `NEXT_PUBLIC_*`.
 ## Health endpoint
 
 `GET /api/health` → `{ "status": "ok" }`. Unauthenticated, no external
-dependency. Intended as the ALB target-group health check.
+dependency. `dynamic = 'force-dynamic'` so it is never served from a
+prerendered cache. Intended as the ALB target-group health check.
+
+## Metadata and SEO
+
+All metadata is driven from `src/config/site.ts` — no URL or name is hardcoded
+elsewhere.
+
+| Route                   | Source                                       | Notes                                                                                          |
+| ----------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `/robots.txt`           | `src/app/robots.ts`                          | Allows `/`, disallows `/api/`, names the sitemap.                                              |
+| `/sitemap.xml`          | `src/app/sitemap.ts`                         | Lists `/` only; add routes as pages are added.                                                 |
+| `/manifest.webmanifest` | `src/app/manifest.ts`                        | Name, colours, `display: standalone`, icons.                                                   |
+| `/icon`, `/apple-icon`  | `src/app/icon.tsx`, `src/app/apple-icon.tsx` | **Placeholder** monograms rendered by `next/og` at build time. Replace with real brand assets. |
+| `/opengraph-image`      | `src/app/opengraph-image.tsx`                | 1200×630 **placeholder**; also used for the Twitter card.                                      |
+
+Canonical URL, Open Graph and Twitter tags are set in `src/app/layout.tsx`.
+
+External images are denied by policy: `next.config.ts` sets
+`images.remotePatterns: []`. Add a specific `{ protocol, hostname, pathname }`
+entry when an external image is genuinely required — never a wildcard hostname.
+
+## Client Components
+
+Server Components are the default. The only Client Component is:
+
+| File                | Why                                                                                                                                                                                                                           |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/app/error.tsx` | Next.js requires `error.tsx` to be a Client Component: it runs a browser error boundary and receives a `reset()` callback. Also uses `useEffect` to log. It is a leaf route file — the boundary is already as low as it goes. |
+
+`global-error.tsx` (a second Client Component) is deferred until root-layout
+failure handling is actually needed.
 
 ## Project layout
 
