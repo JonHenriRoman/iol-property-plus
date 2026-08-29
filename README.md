@@ -28,16 +28,18 @@ pnpm install --frozen-lockfile
 pnpm dev                 # http://localhost:3000  (Turbopack)
 ```
 
-| Script              | Purpose                              |
-| ------------------- | ------------------------------------ |
-| `pnpm dev`          | Development server                   |
-| `pnpm build`        | Production build (standalone output) |
-| `pnpm start`        | Serve the production build           |
-| `pnpm lint`         | ESLint, `--max-warnings=0`           |
-| `pnpm lint:fix`     | ESLint with autofix                  |
-| `pnpm typecheck`    | `tsc --noEmit`                       |
-| `pnpm format`       | Prettier write                       |
-| `pnpm format:check` | Prettier check (CI gate)             |
+| Script              | Purpose                                |
+| ------------------- | -------------------------------------- |
+| `pnpm dev`          | Development server                     |
+| `pnpm build`        | Production build (standalone output)   |
+| `pnpm start`        | Serve the production build             |
+| `pnpm lint`         | ESLint, `--max-warnings=0`             |
+| `pnpm lint:fix`     | ESLint with autofix                    |
+| `pnpm typecheck`    | `tsc --noEmit`                         |
+| `pnpm format`       | Prettier write                         |
+| `pnpm format:check` | Prettier check (CI gate)               |
+| `pnpm test`         | `vitest run` — pending section 10      |
+| `pnpm test:e2e`     | `playwright test` — pending section 10 |
 
 ## Environment variables
 
@@ -126,27 +128,49 @@ injects `GIT_COMMIT_SHA` / `APP_ENV`.
 Styling is **Tailwind CSS 4** (`src/app/globals.css` → `@import "tailwindcss"`,
 `postcss.config.mjs`). Do not introduce a second styling system.
 
+## Lint and format
+
+`eslint.config.js` is flat config, composed in the order the Architecture
+Standard section 5 prescribes:
+
+1. `@eslint/js` recommended
+2. `eslint-config-next` — `core-web-vitals`, then `typescript`
+3. project rules — `import-x/*` (including the section 3 `no-restricted-paths`
+   zones), `perfectionist/*`, `sort-vars`, `unused-imports/*`, `no-debugger`,
+   `prefer-const`
+4. one file-scoped override: `import-x/exports-last` is **off** for
+   `src/app/**/*.{ts,tsx}` because Next.js route files co-locate segment config
+   (`export const metadata`, `size`, `dynamic`) with the default export
+5. `eslint-config-prettier/flat` — **last**, so it wins every formatting conflict
+6. `globalIgnores` for generated output
+
+No `.eslintrc`, no `next lint`, no rule disabled globally to paper over a single
+file, no `eslint-disable` comments in source. Prettier uses the corporate-sites
+profile (`.prettierrc`); `.prettierignore` covers generated output but **not**
+`.ts`/`.tsx` — those are format-checked.
+
 ## Selected dependency versions
 
 Resolved and reviewed against the npm registry on 2026-08-29. `@latest` was used
 to _select_ these; only the resolved versions are committed.
 
-| Package                                | Version          | Reason                                                |
-| -------------------------------------- | ---------------- | ----------------------------------------------------- |
-| `next`                                 | 16.3.3           | Latest stable App Router release.                     |
-| `react` / `react-dom`                  | 19.2.8           | Identical versions; satisfy `next`'s `^19` peer.      |
-| `server-only`                          | 0.0.1            | Build-time server/client boundary guard (React team). |
-| `eslint-config-next`                   | 16.3.3           | Same release line as `next` (standard section 2.2).   |
-| `typescript`                           | 6.0.3            | See deviation below.                                  |
-| `eslint`                               | 9.39.5           | See deviation below.                                  |
-| `eslint-config-prettier`               | 10.1.8           | `/flat` entry, placed last in the config.             |
-| `eslint-plugin-import-x`               | 4.17.1           | Import ordering (standard section 5).                 |
-| `eslint-plugin-perfectionist`          | 5.10.1           | Import/member sorting (standard section 5).           |
-| `eslint-plugin-unused-imports`         | 4.4.1            | `no-unused-imports` error (standard section 5).       |
-| `prettier`                             | 3.9.6            | Stable Prettier 3.                                    |
-| `tailwindcss` / `@tailwindcss/postcss` | 4.3.3            | Styling system.                                       |
-| `@types/node`                          | 24.13.3          | Pinned to the Node **24** line, not `@latest` (26.x). |
-| `@types/react` / `@types/react-dom`    | 19.2.18 / 19.2.5 | Match React 19.2.                                     |
+| Package                                | Version          | Reason                                                     |
+| -------------------------------------- | ---------------- | ---------------------------------------------------------- |
+| `next`                                 | 16.3.3           | Latest stable App Router release.                          |
+| `react` / `react-dom`                  | 19.2.8           | Identical versions; satisfy `next`'s `^19` peer.           |
+| `server-only`                          | 0.0.1            | Build-time server/client boundary guard (React team).      |
+| `@eslint/js`                           | 9.39.5           | ESLint recommended config; pinned to the `eslint` version. |
+| `eslint-config-next`                   | 16.3.3           | Same release line as `next` (standard section 2.2).        |
+| `typescript`                           | 6.0.3            | See deviation below.                                       |
+| `eslint`                               | 9.39.5           | See deviation below.                                       |
+| `eslint-config-prettier`               | 10.1.8           | `/flat` entry, placed last in the config.                  |
+| `eslint-plugin-import-x`               | 4.17.1           | Import ordering (standard section 5).                      |
+| `eslint-plugin-perfectionist`          | 5.10.1           | Import/member sorting (standard section 5).                |
+| `eslint-plugin-unused-imports`         | 4.4.1            | `no-unused-imports` error (standard section 5).            |
+| `prettier`                             | 3.9.6            | Stable Prettier 3.                                         |
+| `tailwindcss` / `@tailwindcss/postcss` | 4.3.3            | Styling system.                                            |
+| `@types/node`                          | 24.13.3          | Pinned to the Node **24** line, not `@latest` (26.x).      |
+| `@types/react` / `@types/react-dom`    | 19.2.18 / 19.2.5 | Match React 19.2.                                          |
 
 ### Approved deviations from the standard
 

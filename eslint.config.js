@@ -1,3 +1,4 @@
+import js from '@eslint/js';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier/flat';
@@ -7,6 +8,7 @@ import unusedImports from 'eslint-plugin-unused-imports';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
+  js.configs.recommended,
   ...nextVitals,
   ...nextTs,
   {
@@ -22,6 +24,7 @@ export default defineConfig([
     },
     rules: {
       'import-x/first': 'error',
+      'import-x/exports-last': 'error',
       'import-x/newline-after-import': ['error', { count: 1 }],
       'import-x/no-restricted-paths': [
         'error',
@@ -57,6 +60,7 @@ export default defineConfig([
       'perfectionist/sort-named-imports': 'error',
       'perfectionist/sort-named-exports': 'error',
       'perfectionist/sort-variable-declarations': 'off',
+      'sort-vars': ['error', { ignoreCase: false }],
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
@@ -72,6 +76,15 @@ export default defineConfig([
       ],
       'no-debugger': 'error',
       'prefer-const': 'error',
+    },
+  },
+  {
+    // Next.js route files co-locate segment config (`export const metadata`,
+    // `size`, `contentType`, `dynamic`) with the default export by convention;
+    // exports-last cannot be satisfied without fighting the framework.
+    files: ['src/app/**/*.{ts,tsx}'],
+    rules: {
+      'import-x/exports-last': 'off',
     },
   },
   prettier,
