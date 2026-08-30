@@ -1,0 +1,186 @@
+{
+ "items": [
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:25:05.107",
+   "changeType": "New",
+   "id": 7112349,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T06:59:25.983",
+   "listingNumber": "166235",
+   "changeType": "Modified",
+   "id": 7247652,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:10:30.49",
+   "changeType": "New",
+   "id": 7284129,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T06:58:34.723",
+   "listingNumber": "168328",
+   "changeType": "Modified",
+   "id": 7367302,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T06:57:13.257",
+   "listingNumber": "168588",
+   "changeType": "Modified",
+   "id": 7475136,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:40:16.13",
+   "changeType": "New",
+   "id": 7500959,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T06:56:22.033",
+   "listingNumber": "168741",
+   "changeType": "Modified",
+   "id": 7507782,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T08:27:17.46",
+   "listingNumber": "168796",
+   "changeType": "Modified",
+   "id": 7509898,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T06:55:34.5",
+   "listingNumber": "169037",
+   "changeType": "Modified",
+   "id": 7557697,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T06:53:51.763",
+   "listingNumber": "329887",
+   "changeType": "Modified",
+   "id": 7576259,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T06:52:13.883",
+   "listingNumber": "554308",
+   "changeType": "Modified",
+   "id": 7590466,
+   "listingUrl": null
+  },
+  {
+   "status": "Listed",
+   "changeDate": "2026-08-28T07:14:25.853",
+   "listingNumber": "554883",
+   "changeType": "Modified",
+   "id": 7595954,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T07:58:16.52",
+   "changeType": "New",
+   "id": 7603970,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:08:30.487",
+   "changeType": "New",
+   "id": 7614734,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:30:14.353",
+   "changeType": "Modified",
+   "id": 7644233,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T07:30:56.96",
+   "changeType": "New",
+   "id": 7647804,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:23:27.747",
+   "changeType": "New",
+   "id": 7650762,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:18:56.183",
+   "changeType": "New",
+   "id": 7654790,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T08:50:25.14",
+   "changeType": "New",
+   "id": 6268143,
+   "listingUrl": null
+  },
+  {
+   "status": "List",
+   "changeDate": "2026-08-28T09:20:40.673",
+   "changeType": "New",
+   "id": 7243837,
+   "listingUrl": null
+  },
+  {
+   "status": "Withdraw",
+   "changeDate": "2026-08-28T00:05:06.083",
+   "listingNumber": "161769",
+   "changeType": "Removed",
+   "id": 7221122,
+   "listingUrl": "https://listings.example.test/7221122"
+  },
+  {
+   "status": "Withdraw",
+   "changeDate": "2026-08-28T00:05:07.767",
+   "listingNumber": "1412781",
+   "listingUrl": "https://listings.example.test/7443027",
+   "changeType": "Removed",
+   "id": 7443027
+  },
+  {
+   "status": "Withdraw",
+   "changeDate": "2026-08-28T00:05:11.453",
+   "listingNumber": "165076",
+   "changeType": "Removed",
+   "id": 7442763,
+   "listingUrl": "https://listings.example.test/7442763"
+  },
+  {
+   "status": "Withdraw",
+   "changeDate": "2026-08-28T00:05:14.01",
+   "listingNumber": "163705",
+   "changeType": "Removed",
+   "id": 7443932,
+   "listingUrl": "https://listings.example.test/7443932"
+  }
+ ],
+ "nextFromDate": "2026-08-30T17:00:00.0000000+02:00"
+}

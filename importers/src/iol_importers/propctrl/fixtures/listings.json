@@ -1,0 +1,4659 @@
+[
+ {
+  "listingId": 7247652,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   9367538
+  ],
+  "branchId": 2324,
+  "created": "2025-09-11T21:04:54.12",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 500
+  },
+  "expires": "2026-10-01T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Lapa",
+      "tagType": "Outbuildings"
+     }
+    ],
+    "type": "OutBuilding",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Secure Parking",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Breakfast Nook",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Pantry",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Scullery",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Eye Level Oven",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Extractor Fan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Stove",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Landscaped",
+      "tagType": "Garden"
+     }
+    ],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Double",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Electric Door",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Roll Up",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Atrium",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "FamilyTVRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Full",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Full",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Main en Suite",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Guest Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Single Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Laminated Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Laminated Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Bus",
+      "tagType": "NearbyPublicTransport"
+     },
+     {
+      "description": "Minibus Taxi",
+      "tagType": "NearbyPublicTransport"
+     }
+    ],
+    "type": "NearbyPublicTransport",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 202
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "e8474dca-973a-4729-b4b1-2f7d5e73c098",
+    "modified": "2025-09-11T20:46:06.863",
+    "url": "https://images.example.test/e8474dca-973a-4729-b4b1-2f7d5e73c098.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "58350b38-0223-4bae-8ced-862dbed91af2",
+    "modified": "2025-09-11T20:46:08.69",
+    "url": "https://images.example.test/58350b38-0223-4bae-8ced-862dbed91af2.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "f178c9e9-f63d-40d9-a6bf-0b09bd0c4f59",
+    "modified": "2025-09-11T20:46:21.523",
+    "url": "https://images.example.test/f178c9e9-f63d-40d9-a6bf-0b09bd0c4f59.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 1500,
+  "listingNumber": "166235",
+  "listingStatus": "Active",
+  "listPrice": 1990000,
+  "location": {
+   "latitude": -25.8364487,
+   "longitude": 28.2906672,
+   "address": "157 Moreleta Park"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "**ON SHOW \u2013 strictly by appointment only**\r\n\r\nStep into the warmth and charm of this beautiful thatched family home in the heart of Moreleta Park.\r\n\r\nLocated close to top schools, shopping center's, a",
+  "marketingHeading": "Beautiful, Rustic Thatched Home in Moreleta Park",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 1100,
+  "showLocation": true,
+  "suburbId": 10622,
+  "updated": "2026-08-28T06:59:25.983",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7284129,
+  "agencyId": 11687,
+  "agentMandateType": "Open",
+  "agentIds": [
+   8482625
+  ],
+  "branchId": 14080,
+  "created": "2025-10-09T11:10:44.96",
+  "estateName": "WALDORAMA",
+  "expires": "2027-01-31T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Full",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Shower, Toilet and Basin",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Double",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Breakfast Nook",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Under Counter Oven",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Hob",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Livingroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Totally Fenced",
+      "tagType": "Security"
+     },
+     {
+      "description": "Security Gate",
+      "tagType": "Security"
+     },
+     {
+      "description": "Safe",
+      "tagType": "Security"
+     }
+    ],
+    "type": "Security",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 126
+  },
+  "images": [
+   {
+    "fileId": "3f6c72a5-0b2d-4bd8-befd-29318b05e523",
+    "modified": "2026-03-03T18:22:32.357",
+    "url": "https://images.example.test/3f6c72a5-0b2d-4bd8-befd-29318b05e523.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "41666a64-c9ff-44c8-a596-10118205a049",
+    "modified": "2026-03-03T18:22:32.513",
+    "url": "https://images.example.test/41666a64-c9ff-44c8-a596-10118205a049.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "bb64ead5-74a5-4fe5-9958-4a6c9fbeb53c",
+    "modified": "2026-03-03T18:22:32.603",
+    "url": "https://images.example.test/bb64ead5-74a5-4fe5-9958-4a6c9fbeb53c.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 2104,
+  "listingStatus": "Active",
+  "listPrice": 1150000,
+  "mandateType": "Sale",
+  "marketingDescription": "Discover comfortable and contemporary living in this beautifully maintained townhouse, perfectly located in the heart of Rayton. This modern home features:\r\n\r\n2 spacious bedrooms\r\n\r\n2 stylish bathroom",
+  "marketingHeading": "2 Bedroom Townhouse for Sale in Rayton",
+  "noTransferDuty": false,
+  "ownershipType": "SectionalTitle",
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "Townhouse",
+  "showLocation": false,
+  "streetName": "DE BRUIN AVENUE",
+  "suburbId": 9670,
+  "updated": "2026-08-28T08:10:30.49",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7367302,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   9367538
+  ],
+  "branchId": 2324,
+  "created": "2025-12-17T12:14:58.457",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 1028
+  },
+  "expires": "2026-10-01T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Air Conditioner",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Air Conditioner",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Air Conditioner",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Queen Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Full",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Full",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Guest Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 0.5
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "DiningRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Air Conditioner",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "FamilyTVRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Double",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Landscaped",
+      "tagType": "Garden"
+     }
+    ],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Air Conditioner",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Walk-in-closet",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Breakfast Nook",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Pantry",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Scullery",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Extractor Fan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Hob",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Livingroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Office",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Staff Quarters/Domestic Rooms",
+      "tagType": "Outbuildings"
+     },
+     {
+      "description": "Domestic Bathroom",
+      "tagType": "Outbuildings"
+     }
+    ],
+    "type": "OutBuilding",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Pool",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "EntranceHall",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Visitors Parking",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 514
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "8eae4d0e-a62e-4910-8203-230a7ea55f98",
+    "modified": "2026-06-25T19:53:39.02",
+    "url": "https://images.example.test/8eae4d0e-a62e-4910-8203-230a7ea55f98.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "5d0feda5-1ce6-4406-8ba0-0535ac81c6d9",
+    "modified": "2026-06-25T19:53:39.157",
+    "url": "https://images.example.test/5d0feda5-1ce6-4406-8ba0-0535ac81c6d9.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "7d743339-6613-49ab-91cb-5fe7d88a58d0",
+    "modified": "2026-06-25T19:53:39.597",
+    "url": "https://images.example.test/7d743339-6613-49ab-91cb-5fe7d88a58d0.jpg",
+    "caption": ""
+   }
+  ],
+  "listingNumber": "168328",
+  "listingStatus": "Active",
+  "listPrice": 3165000,
+  "location": {
+   "latitude": -25.8264877,
+   "longitude": 28.2891331,
+   "address": "101 Witdoring"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "**ON SHOW \u2013 strictly by appointment only**\r\n\r\nSituated in the sought-after suburb of Moreleta Park, this spacious family home offers an exceptional opportunity to create your dream residence in a prim",
+  "marketingHeading": "Prime Living in Moreleta Park - TLC",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 1800,
+  "showLocation": true,
+  "suburbId": 10622,
+  "updated": "2026-08-28T06:58:34.723",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false,
+  "zoning": "GeneralResidential"
+ },
+ {
+  "listingId": 7475136,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   9367538
+  ],
+  "branchId": 2324,
+  "created": "2026-03-20T11:22:19.933",
+  "expires": "2026-09-30T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Double",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Electric Door",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Tip Up",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Double",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Electric Door",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Tip Up",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Washing Machine Connection",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Stove",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Vinyl Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Office",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Visitors Parking",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Carpets",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Carpets",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Carpets",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Bath",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "DiningRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Carpets",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Balcony",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "FamilyTVRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 130
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "a9858630-9a69-4ab3-90f5-8b7710192bf3",
+    "modified": "2026-03-20T11:22:19.967",
+    "url": "https://images.example.test/a9858630-9a69-4ab3-90f5-8b7710192bf3.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "1d652091-82a3-4703-be39-41d5ca8eba48",
+    "modified": "2026-03-20T11:22:20.443",
+    "url": "https://images.example.test/1d652091-82a3-4703-be39-41d5ca8eba48.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "602af062-2615-462e-a813-e27a007ff521",
+    "modified": "2026-03-20T11:22:20.57",
+    "url": "https://images.example.test/602af062-2615-462e-a813-e27a007ff521.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 2737,
+  "listingNumber": "168588",
+  "listingStatus": "Active",
+  "listPrice": 1450000,
+  "location": {
+   "latitude": -25.7456244,
+   "longitude": 28.3082175,
+   "address": "174 Catharina Drive"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "**ON SHOW \u2013 strictly by appointment only**\r\n\r\nPerfect for young professionals or buyers looking for work-from-home flexibility in a secure, tree-filled complex. Step into space, comfort, and character",
+  "marketingHeading": "Charming Townhouse in La Montagne",
+  "noTransferDuty": false,
+  "ownershipType": "SectionalTitle",
+  "petsAllowed": true,
+  "priceReduced": true,
+  "pricingOption": "ListPrice",
+  "propertyType": "Townhouse",
+  "rates": 850,
+  "showLocation": true,
+  "suburbId": 2943,
+  "updated": "2026-08-28T06:57:13.257",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7507782,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   9367538
+  ],
+  "branchId": 2324,
+  "created": "2026-04-21T12:06:54.143",
+  "expires": "2026-10-31T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Single Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "FamilyTVRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Stove (Oven & Hob)",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Centre Island",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Pool",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Underground",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Underground",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Totally Fenced",
+      "tagType": "Security"
+     },
+     {
+      "description": "Electric Garage",
+      "tagType": "Security"
+     },
+     {
+      "description": "Security Gate",
+      "tagType": "Security"
+     },
+     {
+      "description": "24 Hour Access",
+      "tagType": "Security"
+     },
+     {
+      "description": "Guard House",
+      "tagType": "Security"
+     },
+     {
+      "description": "Guard",
+      "tagType": "Security"
+     }
+    ],
+    "type": "Security",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Other",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Other",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 89
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "41dcd8f8-17e0-4b31-a2ff-bfd1fbe62105",
+    "modified": "2026-04-21T12:06:56.36",
+    "url": "https://images.example.test/41dcd8f8-17e0-4b31-a2ff-bfd1fbe62105.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "09877a55-0c39-4608-8f89-582bc07ef858",
+    "modified": "2026-04-21T12:06:54.347",
+    "url": "https://images.example.test/09877a55-0c39-4608-8f89-582bc07ef858.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "3f3d29a7-a4b5-47cd-8708-d40ea5d46f45",
+    "modified": "2026-04-21T12:06:54.423",
+    "url": "https://images.example.test/3f3d29a7-a4b5-47cd-8708-d40ea5d46f45.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 2900,
+  "listingNumber": "168741",
+  "listingStatus": "Active",
+  "listPrice": 1750000,
+  "location": {
+   "latitude": -25.7594734,
+   "longitude": 28.2368461,
+   "address": "124A Brooks Street"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "**ON SHOW \u2013 strictly by appointment only**\r\n\r\nSituated in the heart of Brooklyn, the property is within close proximity to universities, shopping centers, restaurants, and major transport routes. This",
+  "marketingHeading": "Ideal Student Living in the heart of Brooklyn",
+  "noTransferDuty": false,
+  "ownershipType": "SectionalTitle",
+  "petsAllowed": false,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "FlatApartment",
+  "rates": 1300,
+  "showLocation": true,
+  "suburbId": 614,
+  "updated": "2026-08-28T06:56:22.033",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7509898,
+  "agencyId": 9821,
+  "agentMandateType": "DualJoint",
+  "agentIds": [
+   7401997,
+   8472637,
+   7688836
+  ],
+  "branchId": 11866,
+  "created": "2026-04-22T15:37:52.893",
+  "doorNumber": "13",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 810
+  },
+  "expires": "2026-11-01T00:00:00",
+  "features": [
+   {
+    "options": [],
+    "type": "Other",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Patio",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Bath",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Partially Fenced",
+      "tagType": "Security"
+     },
+     {
+      "description": "Security Gate",
+      "tagType": "Security"
+     },
+     {
+      "description": "Burglar Bars",
+      "tagType": "Security"
+     }
+    ],
+    "type": "Security",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Balcony",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Septic Tank",
+      "tagType": "SpecialFeature"
+     }
+    ],
+    "type": "SpecialFeature",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Balcony",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "DiningRoom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Open Plan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Balcony",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Country Style",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Wooden Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Balcony",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Livingroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Carport",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Shade Net Covered",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Single",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Double",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 194
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "2e8d4329-111b-438a-9e7f-b555f6d86bf0",
+    "modified": "2026-06-19T14:51:13.9",
+    "url": "https://images.example.test/2e8d4329-111b-438a-9e7f-b555f6d86bf0.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "8c087263-39d3-4213-baa7-607c4e4fc859",
+    "modified": "2026-06-19T16:21:01.4",
+    "url": "https://images.example.test/8c087263-39d3-4213-baa7-607c4e4fc859.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "c10fea2d-effe-4232-ba11-4b07f5b78b33",
+    "modified": "2026-04-30T19:54:13.28",
+    "url": "https://images.example.test/c10fea2d-effe-4232-ba11-4b07f5b78b33.jpg",
+    "caption": ""
+   }
+  ],
+  "listingNumber": "168796",
+  "listingStatus": "Active",
+  "listPrice": 3600000,
+  "location": {
+   "latitude": -34.015315,
+   "longitude": 22.7846590000001,
+   "address": "13 Wally Van Der Walt Street"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "Well positioned in sought-after Wally van der Walt Street on The Island in Sedgefield, this property offers comfortable, easy living with plenty of space to enjoy. Set on an 810m\u00b2 stand, it suits both",
+  "marketingHeading": "Well positioned, versatile 4 bedroom home on The island.",
+  "noTransferDuty": false,
+  "occupationDate": "2026-04-22T00:00:00",
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": true,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 1400,
+  "showLocation": true,
+  "sizeOfOutBuildings": {
+   "measurementUnit": "Metresquared",
+   "size": 28
+  },
+  "streetName": "WALLY VAN DER WALT STREET",
+  "suburbId": 11600,
+  "updated": "2026-08-28T08:27:17.46",
+  "standaloneBuilding": true,
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": true,
+  "waterTank": false,
+  "zoning": "SingleResidential"
+ },
+ {
+  "listingId": 7557697,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   9367538
+  ],
+  "branchId": 2324,
+  "created": "2026-05-26T22:04:52.467",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 9332
+  },
+  "expires": "2026-12-26T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower, Toilet and Basin",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "FamilyTVRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Stove (Oven & Hob)",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Granite Tops",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Washing Machine Connection",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Pool",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Underground",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Other",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Other",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 56
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "1270155e-8f3f-472b-8cc3-4af68d0bdde7",
+    "modified": "2026-05-26T22:04:52.72",
+    "url": "https://images.example.test/1270155e-8f3f-472b-8cc3-4af68d0bdde7.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "f682e748-d965-47a8-ac9f-2fb6665a6874",
+    "modified": "2026-05-26T22:04:53.003",
+    "url": "https://images.example.test/f682e748-d965-47a8-ac9f-2fb6665a6874.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "920589f3-7776-4e22-aca7-87c217167678",
+    "modified": "2026-05-26T22:04:53.073",
+    "url": "https://images.example.test/920589f3-7776-4e22-aca7-87c217167678.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 1900,
+  "listingNumber": "169037",
+  "listingStatus": "Active",
+  "listPrice": 1395000,
+  "location": {
+   "latitude": -25.759299471759643,
+   "longitude": 28.23585904708251,
+   "address": "124C Brooks Street"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "**ON SHOW \u2013 strictly by appointment only**\r\n\r\nIdeally situated in the heart of Brooklyn, this complex is close to major universities, shopping center's, restaurants, and key transport routes, offering",
+  "marketingHeading": "Excellent Single Student Living at the Stylish IQ Brooklyn",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": false,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "FlatApartment",
+  "rates": 700,
+  "showLocation": true,
+  "suburbId": 614,
+  "updated": "2026-08-28T06:55:34.5",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7576259,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   9367538
+  ],
+  "branchId": 2324,
+  "created": "2026-06-11T19:56:50.757",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 21447
+  },
+  "expires": "2026-09-11T00:00:00",
+  "features": [
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "FamilyTVRoom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Pool",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 133
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "22a2d918-6468-42e6-b383-9bb43749783f",
+    "modified": "2026-06-23T20:15:32.373",
+    "url": "https://images.example.test/22a2d918-6468-42e6-b383-9bb43749783f.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "35ea584a-80f0-4621-9983-12a5d78b0659",
+    "modified": "2026-06-23T20:15:32.583",
+    "url": "https://images.example.test/35ea584a-80f0-4621-9983-12a5d78b0659.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "ceaf4265-2492-40ca-b3ad-d1a5403812a6",
+    "modified": "2026-06-11T19:56:51.363",
+    "url": "https://images.example.test/ceaf4265-2492-40ca-b3ad-d1a5403812a6.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 3100,
+  "listingNumber": "329887",
+  "listingStatus": "Active",
+  "listPrice": 1330000,
+  "location": {
+   "latitude": -25.8417759,
+   "longitude": 28.1946365,
+   "address": "242 Glover Street"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "**ON SHOW \u2013 strictly by appointment only**\r\n\r\nPerfectly positioned in the heart of Die Hoewes, this inviting property offers the ideal balance between everyday convenience and comfortable living. Whet",
+  "marketingHeading": "A Home That Puts Convenience on Your Doorstep",
+  "noTransferDuty": false,
+  "ownershipType": "SectionalTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "FlatApartment",
+  "rates": 890,
+  "showLocation": true,
+  "suburbId": 433,
+  "updated": "2026-08-28T06:53:51.763",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 6268143,
+  "agencyId": 10880,
+  "agentMandateType": "Open",
+  "agentIds": [
+   7858733
+  ],
+  "branchId": 13151,
+  "created": "2023-12-11T13:20:14.893",
+  "doorNumber": "16",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 564
+  },
+  "estateName": "Monte Cristo",
+  "expires": "2026-10-31T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Laminated Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Visitors Parking",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Secure Parking",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Domestic Bathroom",
+      "tagType": "Outbuildings"
+     },
+     {
+      "description": "Outside Toilets",
+      "tagType": "Outbuildings"
+     }
+    ],
+    "type": "OutBuilding",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Patio",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Fireplace",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "BraaiRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Braai",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Satellite Dish",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Jacuzzi",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Driveway",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Paveway",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Balcony",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Special Lights",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Sliding Doors",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Built-in Bar",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Special doors",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Totally walled",
+      "tagType": "SpecialFeature"
+     }
+    ],
+    "type": "SpecialFeature",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Totally Fenced",
+      "tagType": "Security"
+     },
+     {
+      "description": "Electric Gate",
+      "tagType": "Security"
+     },
+     {
+      "description": "Security Gate",
+      "tagType": "Security"
+     },
+     {
+      "description": "24 Hour Response",
+      "tagType": "Security"
+     },
+     {
+      "description": "Intercom",
+      "tagType": "Security"
+     },
+     {
+      "description": "24 Hour Access",
+      "tagType": "Security"
+     },
+     {
+      "description": "Guard House",
+      "tagType": "Security"
+     },
+     {
+      "description": "Guard",
+      "tagType": "Security"
+     },
+     {
+      "description": "Perimeter Wall",
+      "tagType": "Security"
+     }
+    ],
+    "type": "Security",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Spacious",
+      "tagType": "EntranceHall"
+     },
+     {
+      "description": "Staircase",
+      "tagType": "EntranceHall"
+     }
+    ],
+    "type": "EntranceHall",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Auto Cleaning Equipment",
+      "tagType": "Pool"
+     },
+     {
+      "description": "Splash Pool",
+      "tagType": "Pool"
+     }
+    ],
+    "type": "Pool",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Office",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Livingroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Livingroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Open Plan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Pantry",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Scullery",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Laundry",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Extractor Fan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Dishwasher Connection",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Washing Machine Connection",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Centre Island",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Stove",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Electric Door",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Roll Up",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Single",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Covered",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Double",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Electric Door",
+      "tagType": "Garage"
+     },
+     {
+      "description": "Roll Up",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "DiningRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Guest Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Bath",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Double Basin",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Bath",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Balcony",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Laminated Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Balcony",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Laminated Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Minibus Taxi",
+      "tagType": "NearbyPublicTransport"
+     }
+    ],
+    "type": "NearbyPublicTransport",
+    "value": 1
+   }
+  ],
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "847c0894-ecd1-4e7f-98c1-ab30efdd38d1",
+    "modified": "2026-08-27T13:52:22.49",
+    "url": "https://images.example.test/847c0894-ecd1-4e7f-98c1-ab30efdd38d1.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "6f60ec87-a2c4-4a62-8b10-05f7517de90f",
+    "modified": "2026-08-27T13:52:22.603",
+    "url": "https://images.example.test/6f60ec87-a2c4-4a62-8b10-05f7517de90f.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "2be3c421-a6a5-44cd-a139-71a2bc543c11",
+    "modified": "2026-08-27T13:52:22.677",
+    "url": "https://images.example.test/2be3c421-a6a5-44cd-a139-71a2bc543c11.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 3000,
+  "listingNumber": "www. daleensproperties.co.za",
+  "listingStatus": "Active",
+  "listPrice": 4600000,
+  "location": {
+   "latitude": -26.1808812,
+   "longitude": 28.2614886,
+   "address": "16 Monte Cristo,\r\nMonte Cristo Blvd"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "This luxurious double-story house embodies modern living, offering a perfect blend of comfort, style, and functionality within a secure and prestigious estate. \r\nThe house stands majestically within a",
+  "marketingHeading": "Elegant 4-Bedroom Family Home with Study in a Secure Estate",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 4000,
+  "showLocation": true,
+  "streetName": "North Rand Road",
+  "suburbId": 1915,
+  "updated": "2026-08-28T08:50:25.14",
+  "wheelchairAccessible": false,
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7243837,
+  "agencyId": 10880,
+  "agentIds": [
+   7858734
+  ],
+  "branchId": 13151,
+  "constructionYear": 2025,
+  "created": "2025-09-09T16:18:35.957",
+  "doorNumber": "5",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 2056
+  },
+  "estateName": "The Block",
+  "expires": "2026-11-30T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Patio",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Livingroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Carport",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Single",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Visitors Parking",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Carport",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Secure Parking",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Single",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Totally Fenced",
+      "tagType": "Security"
+     },
+     {
+      "description": "Electric Gate",
+      "tagType": "Security"
+     },
+     {
+      "description": "Intercom",
+      "tagType": "Security"
+     },
+     {
+      "description": "Closed Circuit TV",
+      "tagType": "Security"
+     },
+     {
+      "description": "Electric Fencing",
+      "tagType": "Security"
+     },
+     {
+      "description": "Perimeter Wall",
+      "tagType": "Security"
+     }
+    ],
+    "type": "Security",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Braai",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Driveway",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Paveway",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Sliding Doors",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Special doors",
+      "tagType": "SpecialFeature"
+     },
+     {
+      "description": "Totally walled",
+      "tagType": "SpecialFeature"
+     }
+    ],
+    "type": "SpecialFeature",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Queen Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Basin (Separate)",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Bath",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Breakfast Nook",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Laundry",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Dishwasher Connection",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Washing Machine Connection",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Hob",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Stove",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Minibus Taxi",
+      "tagType": "NearbyPublicTransport"
+     }
+    ],
+    "type": "NearbyPublicTransport",
+    "value": 1
+   }
+  ],
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "fe2d7ee4-628c-4787-a89e-fc195e74dc7d",
+    "modified": "2025-09-09T16:18:36.167",
+    "url": "https://images.example.test/fe2d7ee4-628c-4787-a89e-fc195e74dc7d.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "f8ee6e94-86b9-4840-a2d0-dbd76dd9c87b",
+    "modified": "2025-09-09T16:18:36.103",
+    "url": "https://images.example.test/f8ee6e94-86b9-4840-a2d0-dbd76dd9c87b.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "b467a80f-6747-483e-9a5f-3cdcb9f75a49",
+    "modified": "2025-09-09T16:18:36.127",
+    "url": "https://images.example.test/b467a80f-6747-483e-9a5f-3cdcb9f75a49.jpg",
+    "caption": ""
+   }
+  ],
+  "listingNumber": "www.daleensproperties.co.za",
+  "listingStatus": "Active",
+  "leasePeriod": "12 Months",
+  "listPrice": 10500,
+  "location": {
+   "latitude": -26.1419197,
+   "longitude": 28.3465737,
+   "address": "Unit 5 The Block,\r\n209 Pretoria Road"
+  },
+  "mandateType": "Rental",
+  "marketingDescription": "These two-bedroom, two-bathroom apartments are just for you to start a family, move in with a friend, or make it a home with family.\r\n\r\nWith stylish finishings like sparkling tiles and built-in cupboa",
+  "marketingHeading": "Newly build for you to start fresh",
+  "noTransferDuty": false,
+  "occupationDate": "2026-10-01T00:00:00",
+  "ownershipType": "SectionalTitle",
+  "petsAllowed": false,
+  "priceReduced": false,
+  "pricingOption": "PerMonth",
+  "propertyType": "FlatApartment",
+  "showLocation": true,
+  "streetName": "Pretoria Road",
+  "suburbId": 2169,
+  "updated": "2026-08-28T09:20:40.673",
+  "standaloneBuilding": false,
+  "numberOfFloors": 2,
+  "wheelchairAccessible": false,
+  "generator": false,
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false,
+  "backupWaterSupply": false
+ },
+ {
+  "listingId": 7590466,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   9367538
+  ],
+  "branchId": 2324,
+  "created": "2026-06-25T15:01:05.727",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 1500
+  },
+  "expires": "2026-12-25T00:00:00",
+  "features": [],
+  "images": [
+   {
+    "fileId": "923c5420-315c-476a-a39d-c0cdb7719011",
+    "modified": "2026-06-25T15:18:44.353",
+    "url": "https://images.example.test/923c5420-315c-476a-a39d-c0cdb7719011.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "f066614f-fd04-4f93-92b9-a0dbbc9c910b",
+    "modified": "2026-06-25T15:01:05.903",
+    "url": "https://images.example.test/f066614f-fd04-4f93-92b9-a0dbbc9c910b.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "2229ae6c-f54a-4837-ae3e-878684be2435",
+    "modified": "2026-06-25T15:01:06.027",
+    "url": "https://images.example.test/2229ae6c-f54a-4837-ae3e-878684be2435.jpg",
+    "caption": ""
+   }
+  ],
+  "listingNumber": "554308",
+  "listingStatus": "Active",
+  "listPrice": 1450000,
+  "location": {
+   "latitude": -25.8249028,
+   "longitude": 28.2492239,
+   "address": "1515 Erasmuskloof"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "Build the home you've always envisioned on this exceptional 1,500m\u00b2 vacant stand situated in one of Erasmuskloof's most desirable streets.\r\n\r\nPositioned on an elevated site, this generously sized stan",
+  "marketingHeading": "Vacant Stand with Exceptional Views in Erasmuskloof",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "VacantLand",
+  "rates": 2800,
+  "showLocation": true,
+  "suburbId": 2916,
+  "updated": "2026-08-28T06:52:13.883",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false,
+  "zoning": "GeneralResidential"
+ },
+ {
+  "listingId": 7603970,
+  "agencyId": 8808,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9471031
+  ],
+  "branchId": 10681,
+  "constructionYear": 1983,
+  "created": "2026-07-08T16:08:12.64",
+  "doorNumber": "6",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 2014
+  },
+  "expires": "2027-01-08T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Single Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Common Toilet",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Shower",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Single",
+      "tagType": "Garage"
+     }
+    ],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Communal",
+      "tagType": "Garden"
+     }
+    ],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Breakfast Nook",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Laundry",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Stove (Oven & Hob)",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Office",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Communal Pool",
+      "tagType": "Pool"
+     }
+    ],
+    "type": "Pool",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Secure Parking",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Minibus Taxi",
+      "tagType": "NearbyPublicTransport"
+     }
+    ],
+    "type": "NearbyPublicTransport",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 99
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "a99efaca-6d02-4f04-82c7-a6efcad1bf4c",
+    "modified": "2026-07-08T16:08:12.663",
+    "url": "https://images.example.test/a99efaca-6d02-4f04-82c7-a6efcad1bf4c.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "b335f109-641e-46fe-aace-b58cae9c6472",
+    "modified": "2026-07-08T16:08:12.747",
+    "url": "https://images.example.test/b335f109-641e-46fe-aace-b58cae9c6472.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "9f69d3bd-b6c8-4fc1-bc0e-11eb8c8a9ddd",
+    "modified": "2026-07-08T16:08:12.83",
+    "url": "https://images.example.test/9f69d3bd-b6c8-4fc1-bc0e-11eb8c8a9ddd.jpg",
+    "caption": ""
+   }
+  ],
+  "levy": 3500,
+  "listingStatus": "Active",
+  "listPrice": 850000,
+  "mandateType": "Sale",
+  "marketingDescription": "Lock up and go two bedroom townhouse is in a small six unit complex in Scottburgh Central.  The area is peaceful and quiet.  This townhouse is on 2 levels, ground floor and an upstairs first floor.  P",
+  "marketingHeading": "Small complex townhouse on quiet street ",
+  "noTransferDuty": false,
+  "ownershipType": "SectionalTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "Townhouse",
+  "rates": 1500,
+  "showLocation": false,
+  "streetName": "Williamson Street ",
+  "suburbId": 6304,
+  "updated": "2026-08-28T07:58:16.52",
+  "standaloneBuilding": false,
+  "wheelchairAccessible": true,
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false,
+  "zoning": "GeneralResidential"
+ },
+ {
+  "listingId": 7614734,
+  "agencyId": 1414,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9226954,
+   1071390,
+   9304147
+  ],
+  "branchId": 2324,
+  "created": "2026-07-18T12:36:44.907",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 1763
+  },
+  "expires": "2027-01-18T00:00:00",
+  "features": [
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Office",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Pool",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 728
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "f63b2b08-8d01-431d-8aa2-646b1113ae98",
+    "modified": "2026-08-28T08:04:11.053",
+    "url": "https://images.example.test/f63b2b08-8d01-431d-8aa2-646b1113ae98.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "3c8c42a9-001a-49e4-b43e-cb1522be6797",
+    "modified": "2026-08-28T07:55:58.993",
+    "url": "https://images.example.test/3c8c42a9-001a-49e4-b43e-cb1522be6797.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "be9e2642-2bad-4afc-a569-6366ef718410",
+    "modified": "2026-08-28T07:55:59.137",
+    "url": "https://images.example.test/be9e2642-2bad-4afc-a569-6366ef718410.jpg",
+    "caption": ""
+   }
+  ],
+  "listingStatus": "Active",
+  "listPrice": 2955000,
+  "location": {
+   "latitude": -25.6844411,
+   "longitude": 28.15798,
+   "address": "706 Berg Avenue"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "ON SHOW \u2013 STRICTLY BY APPOINTMENT ONLY\r\n\r\nSet on an impressive 1,763m\u00b2 stand and offering approximately 728m\u00b2 under roof, this is far more than a conventional three-bedroom home. Its exceptional scale",
+  "marketingHeading": "Expansive Ninapark Family Entertainer with Pool, Games Room and Bar",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": true,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 3500,
+  "showLocation": true,
+  "suburbId": 3983,
+  "updated": "2026-08-28T08:08:30.487",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7647804,
+  "agencyId": 8458,
+  "agentMandateType": "Open",
+  "agentIds": [
+   8702173
+  ],
+  "branchId": 10271,
+  "created": "2026-08-20T08:22:59.793",
+  "doorNumber": "143",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 246
+  },
+  "expires": "2026-11-25T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Cottage",
+      "tagType": "Outbuildings"
+     }
+    ],
+    "type": "OutBuilding",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Cottage",
+      "tagType": "Outbuildings"
+     }
+    ],
+    "type": "OutBuilding",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Security",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "DiningRoom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Livingroom",
+    "value": 1
+   }
+  ],
+  "images": [
+   {
+    "fileId": "ee5b4dae-f6dc-4a29-9f9e-49832ec295fc",
+    "modified": "2026-08-20T08:22:59.97",
+    "url": "https://images.example.test/ee5b4dae-f6dc-4a29-9f9e-49832ec295fc.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "dd1657d6-96a3-4e5b-804b-92f47470a829",
+    "modified": "2026-08-20T08:23:00.073",
+    "url": "https://images.example.test/dd1657d6-96a3-4e5b-804b-92f47470a829.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "e11ad3eb-b8c2-45fd-8c11-df75c68be464",
+    "modified": "2026-08-20T08:23:00.213",
+    "url": "https://images.example.test/e11ad3eb-b8c2-45fd-8c11-df75c68be464.jpg",
+    "caption": ""
+   }
+  ],
+  "listingStatus": "Active",
+  "listPrice": 1250000,
+  "mandateType": "Sale",
+  "marketingDescription": "Looking for a Kensington property with more accommodation than expected? This three-bedroom home offers a practical layout, two additional cottages and a secure, established setting on a 246 m\u00b2 stand,",
+  "marketingHeading": "3 Bedroom Home with 2 Cottages in Kensington",
+  "noTransferDuty": false,
+  "occupationDate": "2026-08-20T00:00:00",
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 835,
+  "showLocation": false,
+  "streetName": "CUMBERLAND ROAD",
+  "suburbId": 4217,
+  "updated": "2026-08-28T07:30:56.96",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7650762,
+  "agencyId": 9608,
+  "agentMandateType": "Sole",
+  "agentIds": [
+   6703197
+  ],
+  "branchId": 11618,
+  "constructionYear": 2026,
+  "created": "2026-08-24T10:42:21.027",
+  "doorNumber": "6900",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 499
+  },
+  "estateName": "Sky City",
+  "expires": "2026-10-31T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Queen Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Single Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Strong room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Linen room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Twin Beds",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Queen Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Single Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Strong room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Linen room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Twin Beds",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "King Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Single Bed",
+      "tagType": "Bedroom"
+     },
+     {
+      "description": "Strong room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Linen room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Twin Beds",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Main en Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "En Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Shower, Toilet and Basin",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Strong room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Linen room",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Guest Toilet",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Bath, Toilet and Basin",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Strong room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Linen room",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Immaculate Condition",
+      "tagType": "Garden"
+     },
+     {
+      "description": "Landscaped",
+      "tagType": "Garden"
+     }
+    ],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Open Plan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Stove (Oven & Hob)",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Granite Tops",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Washing Machine Connection",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Blinds",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Curtain Rails",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Strong room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Linen room",
+      "tagType": "RoomOptions"
+     },
+     {
+      "description": "Built in Cupboards",
+      "tagType": "Kitchen"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Visitors Parking",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Carport",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Secure Parking",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Double",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Minibus Taxi",
+      "tagType": "NearbyPublicTransport"
+     }
+    ],
+    "type": "NearbyPublicTransport",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 70
+  },
+  "furnishedType": "Yes",
+  "images": [
+   {
+    "fileId": "4cae1273-2603-4167-b243-872fa32a7ba8",
+    "modified": "2026-08-24T10:42:21.05",
+    "url": "https://images.example.test/4cae1273-2603-4167-b243-872fa32a7ba8.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "077a46df-08ca-4975-8626-b6fb2c0f57be",
+    "modified": "2026-08-24T10:42:21.15",
+    "url": "https://images.example.test/077a46df-08ca-4975-8626-b6fb2c0f57be.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "717b1ac3-5c9e-4dab-bd59-8bacad3a17ce",
+    "modified": "2026-08-24T10:42:21.237",
+    "url": "https://images.example.test/717b1ac3-5c9e-4dab-bd59-8bacad3a17ce.jpg",
+    "caption": ""
+   }
+  ],
+  "listingStatus": "Active",
+  "listPrice": 1149900,
+  "location": {
+   "latitude": -26.4181081,
+   "longitude": 28.1125383,
+   "address": "6900 Kepfish street"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "This home offers a large 499m2 stand with a 70m2 single storey Tuscan house, there is no shortage of space. From the attractive lounge entrance to the bedrooms, this specious home is well designed for",
+  "marketingHeading": "Specious 3-bedroom house for sale in Sky City",
+  "noTransferDuty": false,
+  "occupationDate": "2026-10-31T00:00:00",
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": true,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 700,
+  "showLocation": true,
+  "streetName": "Kelpfish",
+  "suburbId": 17552,
+  "updated": "2026-08-28T08:23:27.747",
+  "standaloneBuilding": true,
+  "wheelchairAccessible": true,
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": true,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7654790,
+  "agencyId": 11687,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9561935
+  ],
+  "branchId": 14080,
+  "commercialInfo": {
+   "descriptivePropertyType": "Accommodation",
+   "monthlyRatesPriceType": "Total",
+   "monthlyLeviesPriceType": "Total"
+  },
+  "created": "2026-08-27T09:52:39.29",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 2974
+  },
+  "expires": "2027-02-27T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Double Bed",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 15
+   },
+   {
+    "options": [],
+    "type": "CommercialParking",
+    "value": 15
+   },
+   {
+    "options": [],
+    "type": "CommercialBathroom",
+    "value": 15
+   },
+   {
+    "options": [],
+    "type": "CommercialKitchen",
+    "value": 1
+   }
+  ],
+  "images": [
+   {
+    "fileId": "e586f4ef-5db0-44bf-a20d-965d3c976fee",
+    "modified": "2026-08-27T09:52:39.897",
+    "url": "https://images.example.test/e586f4ef-5db0-44bf-a20d-965d3c976fee.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "981b0bc5-00a7-450d-9da2-77bbd430a905",
+    "modified": "2026-08-27T09:52:39.603",
+    "url": "https://images.example.test/981b0bc5-00a7-450d-9da2-77bbd430a905.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "47ca788c-6713-4e0b-b386-f2bcf6b3410d",
+    "modified": "2026-08-27T09:52:40.17",
+    "url": "https://images.example.test/47ca788c-6713-4e0b-b386-f2bcf6b3410d.jpg",
+    "caption": ""
+   }
+  ],
+  "listingStatus": "Active",
+  "listPrice": 3580000,
+  "mandateType": "Sale",
+  "marketingDescription": "A captivating property set within Mpumalanga\u2019s rich natural and cultural landscape. The area features serene trout dams that create an idyllic outdoor setting, while ancient stone circles and nearby h",
+  "marketingHeading": "Prime Hospitality Opportunity: 15-Room Lodge with Diverse Accommodation Styles",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "Commercial",
+  "showLocation": false,
+  "suburbId": 2662,
+  "updated": "2026-08-28T08:18:56.183",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ },
+ {
+  "listingId": 7112349,
+  "agencyId": 11687,
+  "agentMandateType": "Open",
+  "agentIds": [
+   9206912
+  ],
+  "branchId": 14080,
+  "created": "2025-06-23T13:46:53.37",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 1903
+  },
+  "expires": "2027-01-28T00:00:00",
+  "features": [
+   {
+    "options": [
+     {
+      "description": "Built-in Braai",
+      "tagType": "SpecialFeature"
+     }
+    ],
+    "type": "SpecialFeature",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "EntranceHall",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Outside Toilets",
+      "tagType": "Outbuildings"
+     }
+    ],
+    "type": "OutBuilding",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "Livingroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Open Plan",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Laundry",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Stove (Oven & Hob)",
+      "tagType": "Kitchen"
+     },
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Garage",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Open Plan",
+      "tagType": "RoomOptions"
+     }
+    ],
+    "type": "DiningRoom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Shower, Toilet and Basin",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Main en Suite",
+      "tagType": "Bathroom"
+     },
+     {
+      "description": "Bath, Toilet and Basin",
+      "tagType": "Bathroom"
+     }
+    ],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Built-in Cupboards",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Tiled Floors",
+      "tagType": "FloorOptions"
+     },
+     {
+      "description": "Walk-in-closet",
+      "tagType": "Bedroom"
+     }
+    ],
+    "type": "Bedroom",
+    "value": 1
+   }
+  ],
+  "images": [
+   {
+    "fileId": "4a40c62d-b09d-4cd6-923a-6eff4541eb74",
+    "modified": "2025-06-23T13:39:02.57",
+    "url": "https://images.example.test/4a40c62d-b09d-4cd6-923a-6eff4541eb74.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "7b468ebd-af68-4174-8246-576cf53d72f5",
+    "modified": "2025-06-23T13:38:56.507",
+    "url": "https://images.example.test/7b468ebd-af68-4174-8246-576cf53d72f5.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "746c8803-c23c-4182-a120-5996427e4c86",
+    "modified": "2025-06-23T13:38:56.943",
+    "url": "https://images.example.test/746c8803-c23c-4182-a120-5996427e4c86.jpg",
+    "caption": ""
+   }
+  ],
+  "listingStatus": "Sold",
+  "listPrice": 750000,
+  "mandateType": "Sale",
+  "marketingDescription": "Live comfortably in this well-maintained 3-bedroom home, ideally located.\r\n\r\nExceptional opportunity awaits!\r\n\r\nThis stunning home boasts:\r\n3 Bedrooms\r\n2 Bathrooms\r\nOpen plan lounge-dining room + Kitc",
+  "marketingHeading": " CHARMING 3 BEDROOM HOUSE FOR SALE IN BLOEMHOF NORTH WEST!",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 747,
+  "showLocation": false,
+  "suburbId": 6536,
+  "updated": "2026-08-28T08:25:05.107",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": true,
+  "waterTank": false
+ },
+ {
+  "listingId": 7500959,
+  "agencyId": 11687,
+  "agentMandateType": "Sole",
+  "agentIds": [
+   9410733,
+   9206912
+  ],
+  "branchId": 14080,
+  "farmInfo": {},
+  "created": "2026-04-16T08:35:53.247",
+  "doorNumber": "0",
+  "erfSize": {
+   "measurementUnit": "Hectare",
+   "size": 21.41
+  },
+  "expires": "2027-04-16T00:00:00",
+  "features": [],
+  "images": [
+   {
+    "fileId": "723f7774-849c-4e78-98bf-b32bd1394595",
+    "modified": "2026-04-16T08:35:53.327",
+    "url": "https://images.example.test/723f7774-849c-4e78-98bf-b32bd1394595.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "48941d50-415e-4907-a6d9-173ab172591d",
+    "modified": "2026-04-16T08:35:53.46",
+    "url": "https://images.example.test/48941d50-415e-4907-a6d9-173ab172591d.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "cc4eef67-2b58-4295-b21c-83c4c4ab620b",
+    "modified": "2026-04-16T08:35:53.56",
+    "url": "https://images.example.test/cc4eef67-2b58-4295-b21c-83c4c4ab620b.jpg",
+    "caption": ""
+   }
+  ],
+  "listingStatus": "Sold",
+  "listPrice": 640000,
+  "mandateType": "Sale",
+  "marketingDescription": "Don't miss this excellent opportunity to own a productive piece of land with abundant water!\r\nLocated close to Bloemhof and conveniently situated near the N12, this smallholding is ideal for starting",
+  "marketingHeading": "Water-Rich Smallholding for Sale Near Bloemhof, North West",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "Farm",
+  "showLocation": false,
+  "streetName": " ",
+  "suburbId": 25366,
+  "updated": "2026-08-28T08:40:16.13",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": true,
+  "waterTank": false
+ },
+ {
+  "listingId": 7595954,
+  "agencyId": 12285,
+  "agentMandateType": "Sole",
+  "agentIds": [
+   8955773,
+   8955743
+  ],
+  "branchId": 14727,
+  "created": "2026-07-01T14:41:37.053",
+  "erfSize": {
+   "measurementUnit": "Metresquared",
+   "size": 1812
+  },
+  "expires": "2027-01-01T00:00:00",
+  "features": [
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Courtyard",
+      "tagType": "Garden"
+     },
+     {
+      "description": "Water Feature",
+      "tagType": "Garden"
+     }
+    ],
+    "type": "Garden",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Office",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Flatlet",
+      "tagType": "Outbuildings"
+     }
+    ],
+    "type": "OutBuilding",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Visitors Parking",
+      "tagType": "Parking"
+     },
+     {
+      "description": "Secure Parking",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   }
+  ],
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "3cea1d2c-4b25-425f-beaa-f7afd1d21093",
+    "modified": "2026-07-02T13:25:36.34",
+    "url": "https://images.example.test/3cea1d2c-4b25-425f-beaa-f7afd1d21093.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "33fc4c30-4b1a-46f2-b7ff-c047d48343cb",
+    "modified": "2026-07-02T13:25:36.46",
+    "url": "https://images.example.test/33fc4c30-4b1a-46f2-b7ff-c047d48343cb.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "eaea440d-84ea-4407-ac45-ba02467f25d0",
+    "modified": "2026-07-02T13:25:36.583",
+    "url": "https://images.example.test/eaea440d-84ea-4407-ac45-ba02467f25d0.jpg",
+    "caption": ""
+   }
+  ],
+  "listingNumber": "554883",
+  "listingStatus": "Sold",
+  "listPrice": 2690000,
+  "location": {
+   "latitude": -26.1268867,
+   "longitude": 28.1525747,
+   "address": "4B Columbus Avenue"
+  },
+  "mandateType": "Sale",
+  "marketingDescription": "Situated in the secure, boomed-off area of Eastleigh Ridge, this expansive 1,812sqm property presents an exceptional opportunity with endless potential.\r\n\r\nThis property offers the flexibility to be t",
+  "marketingHeading": "Large Versatile Property for Sale in Eastleigh Ridge",
+  "noTransferDuty": false,
+  "ownershipType": "FullFreeTitle",
+  "petsAllowed": true,
+  "priceReduced": false,
+  "pricingOption": "ListPrice",
+  "propertyType": "House",
+  "rates": 2254,
+  "showLocation": true,
+  "suburbId": 1246,
+  "updated": "2026-08-28T07:14:25.853",
+  "backupBatteryInverter": true,
+  "solarPanel": true,
+  "solarGeyser": true,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": true
+ },
+ {
+  "listingId": 7644233,
+  "agencyId": 2480,
+  "agentIds": [
+   9461940
+  ],
+  "branchId": 3502,
+  "created": "2026-08-17T12:33:50.167",
+  "expires": "2027-02-17T00:00:00",
+  "features": [
+   {
+    "options": [],
+    "type": "Bedroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Bathroom",
+    "value": 1
+   },
+   {
+    "options": [],
+    "type": "Kitchen",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Carport",
+      "tagType": "Parking"
+     }
+    ],
+    "type": "Parking",
+    "value": 1
+   },
+   {
+    "options": [
+     {
+      "description": "Fibre",
+      "tagType": "InternetAccess"
+     }
+    ],
+    "type": "InternetAccess",
+    "value": 1
+   }
+  ],
+  "floorArea": {
+   "measurementUnit": "Metresquared",
+   "size": 56
+  },
+  "furnishedType": "No",
+  "images": [
+   {
+    "fileId": "97b529f3-aae7-4422-8e6b-87da6d228218",
+    "modified": "2026-08-17T12:33:50.197",
+    "url": "https://images.example.test/97b529f3-aae7-4422-8e6b-87da6d228218.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "116bd172-57c3-4483-aa2d-8f45bf355d3e",
+    "modified": "2026-08-17T12:33:50.467",
+    "url": "https://images.example.test/116bd172-57c3-4483-aa2d-8f45bf355d3e.jpg",
+    "caption": ""
+   },
+   {
+    "fileId": "442c1885-87e5-4460-9bfb-b7ad0233d5ea",
+    "modified": "2026-08-17T12:33:50.54",
+    "url": "https://images.example.test/442c1885-87e5-4460-9bfb-b7ad0233d5ea.jpg",
+    "caption": ""
+   }
+  ],
+  "listingStatus": "Withdrawn",
+  "listPrice": 6300,
+  "mandateType": "Rental",
+  "marketingDescription": "This neat and well-maintained ground-floor apartment features a spacious bedroom with built-in cupboards and ample room for a king-size bed, a bathroom fitted with a bath and shower attachment, a brig",
+  "marketingHeading": " Ground Floor Apartment to Let",
+  "noTransferDuty": false,
+  "ownershipType": "SectionalTitle",
+  "petsAllowed": false,
+  "priceReduced": false,
+  "pricingOption": "PerMonth",
+  "propertyType": "FlatApartment",
+  "showLocation": true,
+  "suburbId": 4457,
+  "updated": "2026-08-28T08:30:14.353",
+  "backupBatteryInverter": false,
+  "solarPanel": false,
+  "solarGeyser": false,
+  "gasGeyser": false,
+  "borehole": false,
+  "waterTank": false
+ }
+]

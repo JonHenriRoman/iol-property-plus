@@ -12,9 +12,11 @@ from dotenv import dotenv_values
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DOWNLOAD_DIR = REPO_ROOT / "data" / "property24"
 PROPDATA_DIR = REPO_ROOT / "data" / "propdata"
+PROPCTRL_DIR = REPO_ROOT / "data" / "propctrl"
 
 _DEFAULT_DATABASE_URL = "postgresql://localhost:5432/iol_property_plus"
 _DEFAULT_PROPDATA_LOGIN_URL = "https://api-gw.propdata.net/users/public-api/login/"
+_DEFAULT_PROPCTRL_BASE_URL = "https://api.propctrl.com"
 
 
 def _from_env_or_local(name: str) -> str | None:
@@ -59,4 +61,30 @@ def resolve_propdata_credentials() -> PropdataCredentials | None:
         username=username,
         password=password,
         login_url=_from_env_or_local("PROP_DATA_API_LOGIN_URL") or _DEFAULT_PROPDATA_LOGIN_URL,
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class PropctrlCredentials:
+    username: str
+    password: str
+    base_url: str
+
+
+def resolve_propctrl_credentials() -> PropctrlCredentials | None:
+    """PropCtrl HTTP Basic credentials from the environment or .env.local.
+
+    Returns None (not an error) when unset, so the offline test suite and the
+    Next.js side never need them. The credentials are never logged or persisted.
+    """
+    username = _from_env_or_local("PROPCTRL_API_USERNAME")
+    password = _from_env_or_local("PROPCTRL_API_PASSWORD")
+    if not username or not password:
+        return None
+    return PropctrlCredentials(
+        username=username,
+        password=password,
+        base_url=(
+            _from_env_or_local("PROPCTRL_API_BASE_URL") or _DEFAULT_PROPCTRL_BASE_URL
+        ).rstrip("/"),
     )
