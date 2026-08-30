@@ -261,7 +261,10 @@ FROM (VALUES
 JOIN cities c ON c.slug = v.city_slug;
 INSERT INTO property_types (name, slug) VALUES
     ('House', 'house'), ('Apartment', 'apartment'), ('Townhouse', 'townhouse'),
-    ('Vacant Land', 'vacant-land');
+    ('Vacant Land', 'vacant-land'), ('Cluster', 'cluster'), ('Farm', 'farm'),
+    ('Apartment Block', 'apartment-block'), ('Office', 'office'),
+    ('Workshop', 'workshop'), ('Residential Estate', 'residential-estate'),
+    ('Development', 'development');
 """
 
 

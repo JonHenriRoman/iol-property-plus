@@ -1,0 +1,59 @@
+{
+  "747": {
+    "id": 747,
+    "province": "Mpumalanga",
+    "country": "South Africa",
+    "area": "Witbank",
+    "province_slug": "mpumalanga",
+    "area_slug": "witbank",
+    "suburb": "Ben Fleur",
+    "suburb_slug": "ben-fleur",
+    "postal_code": "1035"
+  },
+  "1957": {
+    "id": 1957,
+    "province": "Gauteng",
+    "country": "South Africa",
+    "area": "Sandton",
+    "province_slug": "gauteng",
+    "area_slug": "sandton",
+    "suburb": "Broadacres",
+    "suburb_slug": "broadacres",
+    "postal_code": "2194"
+  },
+  "4311": {
+    "id": 4311,
+    "province": "Gauteng",
+    "country": "South Africa",
+    "area": "Randfontein",
+    "province_slug": "gauteng",
+    "area_slug": "randfontein",
+    "suburb": "Delmas Industrial",
+    "suburb_slug": "delmas-industrial",
+    "postal_code": null
+  },
+  "4410": {
+    "id": 4410,
+    "province": "Gauteng",
+    "country": "South Africa",
+    "area": "Centurion",
+    "province_slug": "gauteng",
+    "area_slug": "centurion",
+    "suburb": "Die Hoewes",
+    "suburb_slug": "die-hoewes",
+    "property24_id": 433,
+    "postal_code": "157"
+  },
+  "4607": {
+    "id": 4607,
+    "province": "Eastern Cape",
+    "country": "South Africa",
+    "area": "Port Alfred",
+    "province_slug": "eastern-cape",
+    "area_slug": "port-alfred",
+    "suburb": "East Bank",
+    "suburb_slug": "east-bank",
+    "property24_id": 8377,
+    "postal_code": "6170"
+  }
+}

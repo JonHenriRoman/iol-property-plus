@@ -53,6 +53,24 @@ def test_property_type_true_miss_raises_mapping_error(db):
             resolve_property_type(cur, feed_id, "Spaceship")
 
 
+def test_vendor_listing_type_namespaces_the_mapping_key(db):
+    with db.connect() as conn:
+        feed_id = _feed_id(conn)
+        with conn.cursor() as cur:
+            res = resolve_property_type(cur, feed_id, "Apartment", "residential")
+            com = resolve_property_type(cur, feed_id, "Apartment", "commercial")
+        conn.commit()
+        keys = {
+            r["vendor_value"]
+            for r in conn.execute(
+                "SELECT vendor_value FROM property_type_vendor_mappings"
+            ).fetchall()
+        }
+    # both resolved via the bare-name fallback, but each persisted a namespaced row
+    assert res == com
+    assert keys == {"residential:Apartment", "commercial:Apartment"}
+
+
 def test_suburb_direct_and_alternate_name(db):
     with db.connect() as conn, conn.cursor() as cur:
         assert resolve_suburb(cur, "Claremont") is not None

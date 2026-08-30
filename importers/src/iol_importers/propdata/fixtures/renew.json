@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "headers": {
+    "token": "__REDACTED_TOKEN__"
+  },
+  "body": {
+    "id": 26388,
+    "email": "apiuser@example.test"
+  }
+}

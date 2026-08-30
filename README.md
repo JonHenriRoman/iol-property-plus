@@ -200,6 +200,19 @@ deletes, idempotent, reads live `expires_at`. Needs no migration. Run it with
 `uv run --project importers iol-expire-listings`; intended to run nightly (cron
 `15 2 * * *`) after the feed imports — see [`importers/README.md`](importers/README.md).
 
+### Propdata feed adapter
+
+`importers/src/iol_importers/propdata/` — the first real vendor feed. HTTP Basic
+login → one bearer token per client; the token is **renewed** (not
+re-authenticated) each run and kept server-side only, never logged. Pulls the
+four listing categories (residential / commercial / holiday / projects) with full
+pagination and feeds each through the listing importer, tagged by
+`vendor_listing_type`. Credentials live in `.env.local`
+(`PROP_DATA_API_USERNAME` / `PROP_DATA_API_PASSWORD`); `.env.example` and
+`src/server/env.ts` carry them as optional. Field mappings not verifiable against
+the live API are flagged in `propdata/MAPPING_NOTES.md`, not guessed. See
+[`importers/README.md`](importers/README.md).
+
 ## Merge gates
 
 Every one of these must pass before a branch merges. They mirror the standard's

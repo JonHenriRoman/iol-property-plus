@@ -1,0 +1,30 @@
+{
+  "id": 26388,
+  "email": "apiuser@example.test",
+  "clients": [
+    {
+      "site": {
+        "id": 1,
+        "domain": "propdata.net",
+        "default_currency": "ZAR"
+      },
+      "token": "__REDACTED_TOKEN__"
+    },
+    {
+      "site": {
+        "id": 20,
+        "domain": "harcourts.co.za",
+        "default_currency": "ZAR"
+      },
+      "token": "__REDACTED_TOKEN__"
+    },
+    {
+      "site": {
+        "id": 22,
+        "domain": "jawitz.co.za",
+        "default_currency": "ZAR"
+      },
+      "token": "__REDACTED_TOKEN__"
+    }
+  ]
+}

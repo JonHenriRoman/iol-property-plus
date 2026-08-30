@@ -1,0 +1,42 @@
+{
+  "10760": {
+    "id": 10760,
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "full_name": "Jane Doe",
+    "active": true,
+    "site": 20
+  },
+  "10912": {
+    "id": 10912,
+    "first_name": "John",
+    "last_name": "Smith",
+    "full_name": "John Smith",
+    "active": true,
+    "site": 20
+  },
+  "11222": {
+    "id": 11222,
+    "first_name": "Alex",
+    "last_name": "Brown",
+    "full_name": "Alex Brown",
+    "active": true,
+    "site": 20
+  },
+  "11246": {
+    "id": 11246,
+    "first_name": "Sam",
+    "last_name": "Jones",
+    "full_name": "Sam Jones",
+    "active": true,
+    "site": 20
+  },
+  "11268": {
+    "id": 11268,
+    "first_name": "Chris",
+    "last_name": "Lee",
+    "full_name": "Chris Lee",
+    "active": true,
+    "site": 20
+  }
+}

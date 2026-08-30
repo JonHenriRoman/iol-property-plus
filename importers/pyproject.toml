@@ -12,6 +12,7 @@ dependencies = [
 [project.scripts]
 p24-suburbs = "iol_importers.cli:main"
 iol-expire-listings = "iol_importers.lifecycle.cli:main"
+propdata-import = "iol_importers.propdata.cli:main"
 
 [dependency-groups]
 dev = [
@@ -30,8 +31,9 @@ packages = ["src/iol_importers"]
 testpaths = ["tests"]
 markers = [
     "dbtest: touches a real PostgreSQL database; opt-in, needs TEST_DATABASE_URL",
+    "live: calls a real external API; opt-in, needs credentials in .env.local",
 ]
-addopts = "-m 'not dbtest'"
+addopts = "-m 'not dbtest and not live'"
 
 [tool.ruff]
 line-length = 100
