@@ -6,5 +6,6 @@ rows whose ``expires_at`` has passed.
 """
 
 from .expire import ExpiryResult, expire_listings
+from .withdraw import WithdrawResult, withdraw_listings
 
-__all__ = ["ExpiryResult", "expire_listings"]
+__all__ = ["ExpiryResult", "expire_listings", "WithdrawResult", "withdraw_listings"]

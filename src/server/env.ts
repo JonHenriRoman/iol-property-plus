@@ -28,6 +28,11 @@ const serverEnvSchema = z.object({
   PROPCTRL_API_USERNAME: z.string().min(1).optional(),
   PROPCTRL_API_PASSWORD: z.string().min(1).optional(),
   PROPCTRL_API_BASE_URL: z.url().optional(),
+  // RE/MAX feed adapter (Python importer) — AWS SigV4 + usage-plan key; optional.
+  REMAX_ACCESS_KEY: z.string().min(1).optional(),
+  REMAX_SECRET_KEY: z.string().min(1).optional(),
+  REMAX_API_KEY: z.string().min(1).optional(),
+  REMAX_API_BASE_URL: z.url().optional(),
 });
 
 const parsed = serverEnvSchema.safeParse(process.env);

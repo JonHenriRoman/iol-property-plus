@@ -229,6 +229,22 @@ in `.env.local`; `.env.example` and `src/server/env.ts` carry them as optional.
 Uncertain mappings are flagged in `propctrl/MAPPING_NOTES.md`. See
 [`importers/README.md`](importers/README.md).
 
+### RE/MAX feed adapter
+
+`importers/src/iol_importers/remax/` — the third vendor feed. An AWS API Gateway
+deployment: every request is **AWS SigV4-signed** (`execute-api`, `eu-west-1` —
+hand-rolled in `remax/signing.py`, stdlib only) **and** carries an `x-api-key`
+header; responses are double-encoded (`data` is a JSON string). Three sync paths:
+**full** (`/agents-page` per agent), **incremental** (`/lists-pagenate` since the
+`data/remax/checkpoint.json` cursor, then `/listing` per change — the doc's
+`/lists` endpoint is HTTP 500), and **deleted** (`/lists_deleted` →
+`lifecycle.withdraw_listings`, a soft-delete to `status='Withdrawn'`, never a row
+removal). `date_last_updated` skips unchanged listings; `504`s are retried.
+Credentials (`REMAX_ACCESS_KEY` / `REMAX_SECRET_KEY` / `REMAX_API_KEY` /
+`REMAX_API_BASE_URL`) live in `.env.local`; `.env.example` and `src/server/env.ts`
+carry them as optional. Deviations and unmapped fields are in
+`remax/MAPPING_NOTES.md`. See [`importers/README.md`](importers/README.md).
+
 ## Merge gates
 
 Every one of these must pass before a branch merges. They mirror the standard's
