@@ -157,6 +157,12 @@ never expired.
 Needs no migration — `listing_status` already has `Expired` and `listings` already
 has `expired_at`.
 
+`iol_importers.lifecycle.withdraw_listings(feed_source_code, vendor_listing_ids)`
+is the counterpart for feeds that send **explicit** deletions (RE/MAX's
+`/lists_deleted`): one `UPDATE listings SET status = 'Withdrawn', expired_at =
+now() WHERE … AND status <> 'Withdrawn'`. Never deletes a row, only touches
+listings that exist, idempotent. Also no migration.
+
 ```sh
 uv run --project importers iol-expire-listings            # run the sweep
 uv run --project importers iol-expire-listings --dry-run  # report only, no writes
@@ -284,6 +290,64 @@ bases, suburb disambiguation, `internalRemarks` — excluded by design) is recor
 in [`propctrl/MAPPING_NOTES.md`](src/iol_importers/propctrl/MAPPING_NOTES.md).
 `pytest -m live` (opt-in) exercises a real echo → changes → one bounded batch.
 
+## RE/MAX feed adapter (`iol_importers.remax`)
+
+RE/MAX of Southern Africa — an AWS API Gateway deployment, so the auth is at the
+**IAM layer**, not the application layer.
+
+**Auth — both.** Every request is `POST` + JSON body, **AWS SigV4-signed**
+(`service=execute-api`, `region=eu-west-1`; hand-rolled in
+[`remax/signing.py`](src/iol_importers/remax/signing.py), stdlib only — no
+`botocore`) **and** carries an `x-api-key` header (usage-plan key). SigV4 alone →
+`403 Missing Authentication Token`; `x-api-key` alone → `403 Forbidden`.
+
+**Envelope.** Responses are `{"Success": true, "data": "<JSON string>"}` — `data`
+is decoded a second time.
+
+**Three sync paths:**
+
+- **full** (`--mode full`) — `/lists {agents:true}` → `/agents-page` per agent,
+  following `properties.hasNextPage`. The only paginated path that returns the
+  full listing shape (with `features`).
+- **incremental** (default) — `/lists-pagenate {listings:true, start_date}`
+  (resumes from `data/remax/checkpoint.json`), then `/listing {id}` per changed
+  listing. **Deviation:** the doc says use `/lists` + `start_date`, but that
+  endpoint returns HTTP 500 — `/lists-pagenate` is used instead.
+- **deleted** (every run unless `--no-deleted`) — `/lists_deleted` →
+  `lifecycle.withdraw_listings` (soft-delete: `status='Withdrawn'`, never a row
+  removal).
+
+`date_last_updated` is compared against `listings.last_updated_by_vendor_at`, so an
+unchanged listing is **skipped**, not re-upserted. `504`s (Lambda cold starts) are
+retried with backoff.
+
+**Credentials** — `.env.local` (empty placeholders in `.env.example`):
+
+```ini
+REMAX_ACCESS_KEY=...
+REMAX_SECRET_KEY=...
+REMAX_API_KEY=...
+REMAX_API_BASE_URL=https://ahcjbl9nbb.execute-api.eu-west-1.amazonaws.com/feeds_default
+```
+
+(The objective names the AWS vars `REMAX_AWS_ACCESS_KEY_ID` /
+`REMAX_AWS_SECRET_ACCESS_KEY`; the deployed `.env.local` uses `REMAX_ACCESS_KEY` /
+`REMAX_SECRET_KEY` — the real env file wins, as with Propdata.)
+
+```sh
+uv run --project importers remax-import --mode incremental --max-pages 2
+uv run --project importers remax-import --deleted-only
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.remax.demo
+```
+
+Mapping covers only what the live API confirms; deviations and unmapped fields
+(`geo_location`/`address` always empty, `listing_state`, agent soft-delete,
+`rental_details`, …) are in
+[`remax/MAPPING_NOTES.md`](src/iol_importers/remax/MAPPING_NOTES.md).
+`pytest -m live` (opt-in) exercises real signed calls to all four endpoints.
+
 ## Development
 
 ```sh
@@ -291,7 +355,7 @@ uv run --project importers ruff check .
 uv run --project importers pytest                                  # no DB, no network
 TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
     uv run --project importers pytest -m dbtest                    # opt-in
-uv run --project importers pytest -m live                          # opt-in, real Propdata API
+uv run --project importers pytest -m live                          # opt-in, real Propdata / PropCtrl / RE/MAX APIs
 ```
 
 The `dbtest` suite leaves the target database untouched: the `p24-suburbs` tests
