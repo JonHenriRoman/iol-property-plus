@@ -1,0 +1,146 @@
+[
+ {
+  "city": "Centurion",
+  "country": "South Africa",
+  "postalCode": "0157",
+  "province": "Gauteng",
+  "suburbId": 433,
+  "suburbName": "Die Hoewes"
+ },
+ {
+  "city": "Pretoria",
+  "country": "South Africa",
+  "postalCode": "0181",
+  "province": "Gauteng",
+  "suburbId": 614,
+  "suburbName": "Brooklyn"
+ },
+ {
+  "city": "Edenvale",
+  "country": "South Africa",
+  "postalCode": "1609",
+  "province": "Gauteng",
+  "suburbId": 1246,
+  "suburbName": "Eastleigh Ridge, Eastleigh"
+ },
+ {
+  "city": "Boksburg",
+  "country": "South Africa",
+  "postalCode": "1459",
+  "province": "Gauteng",
+  "suburbId": 1915,
+  "suburbName": "Beyers Park"
+ },
+ {
+  "city": "Benoni",
+  "country": "South Africa",
+  "postalCode": "1501",
+  "province": "Gauteng",
+  "suburbId": 2169,
+  "suburbName": "Rynfield"
+ },
+ {
+  "city": "Machadodorp",
+  "country": "South Africa",
+  "postalCode": "1170",
+  "province": "Mpumalanga",
+  "suburbId": 2662,
+  "suburbName": "Machadodorp"
+ },
+ {
+  "city": "Pretoria",
+  "country": "South Africa",
+  "postalCode": "0183",
+  "province": "Gauteng",
+  "suburbId": 2916,
+  "suburbName": "Erasmuskloof"
+ },
+ {
+  "city": "Pretoria",
+  "country": "South Africa",
+  "postalCode": "0184",
+  "province": "Gauteng",
+  "suburbId": 2943,
+  "suburbName": "La Montagne"
+ },
+ {
+  "city": "Akasia",
+  "country": "South Africa",
+  "postalCode": "0182",
+  "province": "Gauteng",
+  "suburbId": 3983,
+  "suburbName": "Ninapark"
+ },
+ {
+  "city": "Johannesburg",
+  "country": "South Africa",
+  "postalCode": "2094",
+  "province": "Gauteng",
+  "suburbId": 4217,
+  "suburbName": "Kensington"
+ },
+ {
+  "city": "Randburg",
+  "country": "South Africa",
+  "postalCode": "2194",
+  "province": "Gauteng",
+  "suburbId": 4457,
+  "suburbName": "Northgate"
+ },
+ {
+  "city": "Scottburgh",
+  "country": "South Africa",
+  "postalCode": "4180",
+  "province": "Kwazulu Natal",
+  "suburbId": 6304,
+  "suburbName": "Scottburgh Central"
+ },
+ {
+  "city": "Bloemhof",
+  "country": "South Africa",
+  "postalCode": "2660",
+  "province": "North West",
+  "suburbId": 6536,
+  "suburbName": "Bloemhof"
+ },
+ {
+  "city": "Bloemfontein",
+  "country": "South Africa",
+  "postalCode": "9301",
+  "province": "Free State",
+  "suburbId": 9670,
+  "suburbName": "Heuwelsig"
+ },
+ {
+  "city": "Pretoria",
+  "country": "South Africa",
+  "postalCode": "0044",
+  "province": "Gauteng",
+  "suburbId": 10622,
+  "suburbName": "Moreleta Park"
+ },
+ {
+  "city": "Sedgefield",
+  "country": "South Africa",
+  "postalCode": "6573",
+  "province": "Western Cape",
+  "suburbId": 11600,
+  "suburbName": "The Island"
+ },
+ {
+  "city": "Alberton",
+  "country": "South Africa",
+  "postalCode": "1450",
+  "province": "Gauteng",
+  "suburbId": 17552,
+  "suburbName": "Sky City"
+ },
+ {
+  "city": "Bloemhof",
+  "country": "South Africa",
+  "postalCode": "2660",
+  "province": "North West",
+  "suburbId": 25366,
+  "suburbName": "Bloemhof Rural"
+ }
+]

@@ -229,6 +229,61 @@ guessed.
 `pytest -m live` (opt-in, needs the credentials + `PROP_DATA_API_SITE`) exercises
 a real login → renew → one page per category.
 
+## PropCtrl feed adapter (`iol_importers.propctrl`)
+
+The second real vendor feed. PropCtrl is the agency CRM behind `iolproperty.co.za`
+itself, exposed as **PropCtrl Listing Service v1** — an OpenAPI 3.0.4 service. The
+contract was discovered from the spec, not assumed:
+
+```sh
+curl -s https://api.propctrl.com/index.html            # Swagger UI; names the spec URLs
+curl -s https://api.propctrl.com/v1-listing/swagger.json
+```
+
+**Model — a delta feed, not a paginated one:**
+
+- **Auth** — HTTP Basic on every request (`base64(username:password)`, or a blank
+  username with an API key as the password). No token, nothing to renew.
+  `GET /listing/v1/admin/echo-authenticated` is the credential probe.
+- `GET /listing/v1/listings/changes?fromDate=<ISO-8601>` →
+  `{ items: [ { id, changeType: New|Modified|Removed, … } ], nextFromDate }`.
+  `nextFromDate` is the cursor for the next run.
+- `GET /listing/v1/listings?listingIds=…` → full listings, **at most 10 ids per
+  call**. `suburbs` / `agencies` / `branches` / `agents` are fetched by id too.
+
+The adapter resumes from `data/propctrl/checkpoint.json` (git-ignored, mode 0600,
+holds only `next_from_date`). `Removed` change items and any listing whose
+`listingStatus` is not `Active` are skipped and counted — the importer has no
+withdraw path; the `iol-expire-listings` sweep handles listings that stop being
+refreshed.
+
+**Read-only.** `PUT /listing/v1/listings/{listingId}` (the status write-back half
+of the PropCtrl partner protocol) is deliberately not implemented.
+
+**Credentials** — set in `.env.local` (never committed; `.env.example` carries
+empty placeholders):
+
+```ini
+PROPCTRL_API_USERNAME=...
+PROPCTRL_API_PASSWORD=...
+PROPCTRL_API_BASE_URL=https://api.propctrl.com
+```
+
+**Run:**
+
+```sh
+uv run --project importers propctrl-import --from-date 2026-08-25T00:00:00Z --max-listings 100
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.propctrl.demo
+```
+
+Field mapping covers only what the spec documents and real responses confirm;
+everything uncertain (`commercialInfo` / `farmInfo` detail, non-monthly pricing
+bases, suburb disambiguation, `internalRemarks` — excluded by design) is recorded
+in [`propctrl/MAPPING_NOTES.md`](src/iol_importers/propctrl/MAPPING_NOTES.md).
+`pytest -m live` (opt-in) exercises a real echo → changes → one bounded batch.
+
 ## Development
 
 ```sh

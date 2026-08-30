@@ -264,7 +264,8 @@ INSERT INTO property_types (name, slug) VALUES
     ('Vacant Land', 'vacant-land'), ('Cluster', 'cluster'), ('Farm', 'farm'),
     ('Apartment Block', 'apartment-block'), ('Office', 'office'),
     ('Workshop', 'workshop'), ('Residential Estate', 'residential-estate'),
-    ('Development', 'development');
+    ('Development', 'development'), ('Flat Apartment', 'flat-apartment'),
+    ('Commercial', 'commercial'), ('Industrial', 'industrial');
 """
 
 

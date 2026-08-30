@@ -24,6 +24,10 @@ const serverEnvSchema = z.object({
   PROP_DATA_API_USERNAME: z.string().min(1).optional(),
   PROP_DATA_API_PASSWORD: z.string().min(1).optional(),
   PROP_DATA_API_LOGIN_URL: z.url().optional(),
+  // PropCtrl feed adapter (Python importer) — optional; the web app never needs them.
+  PROPCTRL_API_USERNAME: z.string().min(1).optional(),
+  PROPCTRL_API_PASSWORD: z.string().min(1).optional(),
+  PROPCTRL_API_BASE_URL: z.url().optional(),
 });
 
 const parsed = serverEnvSchema.safeParse(process.env);

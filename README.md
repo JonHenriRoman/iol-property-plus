@@ -213,6 +213,22 @@ pagination and feeds each through the listing importer, tagged by
 the live API are flagged in `propdata/MAPPING_NOTES.md`, not guessed. See
 [`importers/README.md`](importers/README.md).
 
+### PropCtrl feed adapter
+
+`importers/src/iol_importers/propctrl/` — the second real vendor feed, and the
+CRM behind `iolproperty.co.za` itself (PropCtrl Listing Service v1, an OpenAPI
+service whose contract was discovered from `https://api.propctrl.com/v1-listing/swagger.json`,
+not assumed). HTTP Basic on every request — no token. A **delta feed**:
+`GET /listing/v1/listings/changes?fromDate=` yields change items and a
+`nextFromDate` cursor (checkpointed to `data/propctrl/checkpoint.json`), then
+listings are fetched **10 ids at a time**. `Removed` items and non-`Active`
+listings are skipped and counted. **Read-only** — the `PUT` status write-back
+half of the partner protocol is deliberately not implemented. Credentials
+(`PROPCTRL_API_USERNAME` / `PROPCTRL_API_PASSWORD` / `PROPCTRL_API_BASE_URL`) live
+in `.env.local`; `.env.example` and `src/server/env.ts` carry them as optional.
+Uncertain mappings are flagged in `propctrl/MAPPING_NOTES.md`. See
+[`importers/README.md`](importers/README.md).
+
 ## Merge gates
 
 Every one of these must pass before a branch merges. They mirror the standard's
