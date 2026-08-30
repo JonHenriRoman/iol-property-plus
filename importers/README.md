@@ -45,6 +45,52 @@ guard).
 downloads and re-runs are idempotent — it upserts on Property24's `Id`
 (`external_id`).
 
+## Feed infrastructure (`iol_importers.feeds`)
+
+Shared scaffolding for the vendor feed importers still to be written
+(`canonical-database-design.md` Domain 6). No vendor-specific parsing — just the
+run/error bookkeeping every importer needs:
+
+```python
+from iol_importers.feeds import import_run
+
+with import_run("allsa", file_reference=path.name) as run:
+    for record in records:
+        run.seen()
+        try:
+            ...                       # vendor parsing + upsert (importer's own connection)
+            run.inserted()
+        except ValidationError as exc:
+            run.record_error(
+                vendor_listing_id=record.get("id"),
+                error_type="validation",
+                error_message=str(exc),
+                raw_payload=record,     # the untransformed payload
+            )
+```
+
+- Opens one `import_jobs` row (`status='Running'`, `started_at`) and closes it:
+  `Success` (no failures), `PartialSuccess` (some `record_error` calls), or
+  `Failed` (the block raised — `error_message` set, exception re-raised).
+- `record_error` writes one `import_errors` row and does **not** raise, so one bad
+  record never stops the run. `raw_payload` is stored exactly as received.
+- Tracking uses its own autocommit connection, so a rollback or crash in the
+  importer's data transaction still leaves a closed job row — never one stuck at
+  `Running`.
+- Prerequisite: apply `../db/migrations/002_feed_infrastructure.sql` in DataGrip,
+  then `pnpm db:pull`. `import_run` refuses to start until `feed_sources.ttl_days`
+  and `import_jobs.records_skipped` / `error_message` exist.
+
+Proof:
+
+```sh
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.feeds.demo
+```
+
+builds the Domain 6 tables in a throwaway schema, runs one `PartialSuccess` and
+one `Failed` run, and prints the resulting rows.
+
 ## Development
 
 ```sh
@@ -54,6 +100,8 @@ TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
     uv run --project importers pytest -m dbtest                    # opt-in
 ```
 
-The `dbtest` suite creates its own tables inside one transaction and rolls back,
-so it leaves the target database untouched. Point `TEST_DATABASE_URL` at a
-scratch database, never the production one.
+The `dbtest` suite leaves the target database untouched: the `p24-suburbs` tests
+create their tables inside one transaction and roll back; the `feeds` tests use a
+dedicated `feeds_scratch_<pid>` schema dropped `CASCADE` at teardown (they can't
+roll back — the point of the scaffolding is that tracking rows commit). Point
+`TEST_DATABASE_URL` at a scratch database, never the production one.
