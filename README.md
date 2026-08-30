@@ -191,6 +191,15 @@ Prerequisite: apply `db/migrations/003_listings_importer.sql` in DataGrip **afte
 `property_type_vendor_mappings`, and rewrites `trg_listings_set_expiry` for
 `ttl_days` — 002 breaks it otherwise), then `pnpm db:pull`.
 
+### Listing-expiry sweep
+
+`importers/src/iol_importers/lifecycle/` — the expiry-first lifecycle. One atomic
+`UPDATE listings SET status = 'Expired', expired_at = now() WHERE status =
+'Active' AND expires_at < now()`: touches only `status` + `expired_at`, never
+deletes, idempotent, reads live `expires_at`. Needs no migration. Run it with
+`uv run --project importers iol-expire-listings`; intended to run nightly (cron
+`15 2 * * *`) after the feed imports — see [`importers/README.md`](importers/README.md).
+
 ## Merge gates
 
 Every one of these must pass before a branch merges. They mirror the standard's

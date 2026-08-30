@@ -138,6 +138,46 @@ builds the Domain 4 tables in a throwaway schema, imports a batch, re-imports it
 unchanged, then re-imports with one price dropped — printing the counts and the
 single price-history row the change produces.
 
+## Listing-expiry sweep (`iol_importers.lifecycle`)
+
+The counterpart to the importer's `last_seen_at` refresh — the expiry-first
+lifecycle. One atomic statement:
+
+```sql
+UPDATE listings SET status = 'Expired', expired_at = now()
+WHERE status = 'Active' AND expires_at < now();
+```
+
+It touches only `status` and `expired_at` (`updated_at` bumps via the existing
+trigger), never deletes, never writes `expires_at`. Idempotent — the
+`status = 'Active'` filter means a second run changes zero rows. It reads live
+`expires_at`, so a listing whose `expires_at` an import run just refreshed is
+never expired.
+
+Needs no migration — `listing_status` already has `Expired` and `listings` already
+has `expired_at`.
+
+```sh
+uv run --project importers iol-expire-listings            # run the sweep
+uv run --project importers iol-expire-listings --dry-run  # report only, no writes
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.lifecycle.demo   # before/after by status
+```
+
+**Scheduling** (nothing in this repo wires it — see the root README's "Not yet
+implemented"). Intended cadence: nightly, after the feed imports refresh
+`expires_at`.
+
+```cron
+15 2 * * *  cd /srv/iol-property-plus && \
+    uv run --project importers iol-expire-listings >> /var/log/iol/expire.log 2>&1
+```
+
+Equivalents: a GitLab scheduled pipeline running the same command; a Kubernetes
+`CronJob` with `schedule: "15 2 * * *"`; an ECS scheduled task via an EventBridge
+rule.
+
 ## Development
 
 ```sh
