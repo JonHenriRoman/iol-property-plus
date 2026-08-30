@@ -3,12 +3,12 @@
 Corporate website built on Next.js (App Router) and TypeScript, following the
 organisation's Corporate Web Architecture Standard (`../Architecture.md`).
 
-This repository is currently a **scaffold**: it satisfies sections 2–7 of the
-standard (baseline technology, dependency policy, repository layout, application
-rules, lint/format, TypeScript & environment safety, multi-stage Docker) plus
-the metadata surface from section 4.2 and a Drizzle client introspected from the
-live database. AWS/ECS (section 8), the GitLab pipeline (section 9) and the test
-suites (section 10) are not yet in place.
+This repository is currently a **scaffold**: it satisfies sections 2–7 and 10 of
+the standard (baseline technology, dependency policy, repository layout,
+application rules, lint/format, TypeScript & environment safety, multi-stage
+Docker, deterministic test suites) plus the metadata surface from section 4.2
+and a Drizzle client introspected from the live database. AWS/ECS (section 8) and
+the GitLab pipeline (section 9) are not yet in place.
 
 ## Requirements
 
@@ -29,20 +29,20 @@ pnpm install --frozen-lockfile
 pnpm dev                 # http://localhost:3000  (Turbopack)
 ```
 
-| Script              | Purpose                                |
-| ------------------- | -------------------------------------- |
-| `pnpm dev`          | Development server                     |
-| `pnpm build`        | Production build (standalone output)   |
-| `pnpm start`        | Serve the production build             |
-| `pnpm lint`         | ESLint, `--max-warnings=0`             |
-| `pnpm lint:fix`     | ESLint with autofix                    |
-| `pnpm typecheck`    | `tsc --noEmit`                         |
-| `pnpm format`       | Prettier write                         |
-| `pnpm format:check` | Prettier check (CI gate)               |
-| `pnpm test`         | `vitest run` — pending section 10      |
-| `pnpm test:e2e`     | `playwright test` — pending section 10 |
-| `pnpm db:pull`      | Re-introspect the database schema      |
-| `pnpm db:check`     | Read-only DB connectivity probe        |
+| Script              | Purpose                              |
+| ------------------- | ------------------------------------ |
+| `pnpm dev`          | Development server                   |
+| `pnpm build`        | Production build (standalone output) |
+| `pnpm start`        | Serve the production build           |
+| `pnpm lint`         | ESLint, `--max-warnings=0`           |
+| `pnpm lint:fix`     | ESLint with autofix                  |
+| `pnpm typecheck`    | `tsc --noEmit`                       |
+| `pnpm format`       | Prettier write                       |
+| `pnpm format:check` | Prettier check (CI gate)             |
+| `pnpm test`         | `vitest run` (unit + integration)    |
+| `pnpm test:e2e`     | `playwright test` (desktop + mobile) |
+| `pnpm db:pull`      | Re-introspect the database schema    |
+| `pnpm db:check`     | Read-only DB connectivity probe      |
 
 ## Environment variables
 
@@ -94,6 +94,49 @@ URL from ECS secrets via `.env.local` / the pipeline, never `.env.example`.
 `GET /api/health` → `{ "status": "ok" }`. Unauthenticated, no external
 dependency. `dynamic = 'force-dynamic'` so it is never served from a
 prerendered cache. Intended as the ALB target-group health check.
+
+## Testing
+
+| Suite                | Runner                                     | Scope                                                                                                                                                                                                      |
+| -------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tests/unit/`        | vitest (node)                              | env schemas, `siteConfig`, `getReleaseInfo`, the `sitemap`/`robots`/`manifest` route functions, `instrumentation.register()`                                                                               |
+| `tests/integration/` | vitest (node)                              | `/api/health` handler; the generated Drizzle schema run against an **in-process** Postgres (`@electric-sql/pglite`) seeded with a curated subset of the reference tables                                   |
+| `tests/e2e/`         | Playwright — `desktop` + `mobile` projects | home render (console-clean), `/api/health`, `robots.txt` / `sitemap.xml` / `manifest.webmanifest`, generated icon / OG images, 404 page, canonical + OG/Twitter tags, `@axe-core` a11y scan on `/` and 404 |
+
+```sh
+pnpm test          # vitest — deterministic, in-process, no network
+pnpm test:e2e      # Playwright — builds and serves locally on :3100
+pnpm exec playwright install chromium   # one-time browser download
+```
+
+Both default runs are fully offline: `tests/helpers/no-network.ts` throws on any
+non-loopback `fetch`, and the e2e fixture fails a test whose page contacts an
+external origin. **No test touches a real third-party service or the production
+database by default.**
+
+`tests/integration/db.live.test.ts` is opt-in — it runs only when
+`TEST_DATABASE_URL` is set, and checks the live schema still matches the
+generated one:
+
+```sh
+TEST_DATABASE_URL=postgresql://localhost:5432/iol_property_plus pnpm test
+```
+
+### Journeys covered vs. out of scope
+
+**Covered:** home render + responsive + console-clean; `/api/health`; `robots.txt`
+/ `sitemap.xml` / `manifest.webmanifest`; generated icon / OG images; 404 page;
+canonical + OG/Twitter tags; both env schemas; `siteConfig`; `getReleaseInfo`;
+`instrumentation` runtime guard; generated Drizzle schema vs. a seeded Postgres;
+a11y (axe) on `/` and 404.
+
+**Out of scope — the feature does not exist yet:** contact forms, authentication,
+payments, file downloads, CMS-backed routes, DB-backed page/API routes,
+consent-gated scripts, analytics, email delivery. Each lands with its own tests.
+
+**Out of scope — manual pre-production checklist (§10):** DNS / TLS / redirects /
+caching, real ECS health-check + rollback, dependency / container vuln scans,
+live consent / analytics / error-monitoring.
 
 ## Docker
 

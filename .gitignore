@@ -33,6 +33,9 @@ next-env.d.ts
 
 # testing
 /coverage
+/test-results
+/playwright-report
+/playwright/.cache
 
 # drizzle-kit migration snapshot — DataGrip owns DDL, we only introspect
 /src/server/db/meta/

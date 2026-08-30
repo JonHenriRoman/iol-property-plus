@@ -10,7 +10,7 @@ const Hero = () => {
       <p className="text-base text-neutral-600 dark:text-neutral-400">
         Project skeleton scaffolded per the Corporate Web Architecture Standard.
       </p>
-      <p className="text-xs text-neutral-400 dark:text-neutral-600">
+      <p className="text-xs text-neutral-600 dark:text-neutral-400">
         {release.environment} · {release.commitSha}
       </p>
     </main>

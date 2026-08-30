@@ -87,6 +87,15 @@ export default defineConfig([
       'import-x/exports-last': 'off',
     },
   },
+  {
+    // Test files and their configs: helpers export setup functions after code,
+    // and Playwright's fixture callback parameter is named `use` (not a React hook).
+    files: ['tests/**/*.ts', '*.config.ts'],
+    rules: {
+      'import-x/exports-last': 'off',
+      'react-hooks/rules-of-hooks': 'off',
+    },
+  },
   prettier,
   globalIgnores([
     '.next/**',
