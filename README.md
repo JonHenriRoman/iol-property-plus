@@ -1,32 +1,32 @@
 # IOL Property Plus
 
 Corporate website built on Next.js (App Router) and TypeScript, following the
-organisation's Corporate Web Architecture Standard (`../Architecture.md`).
+organisation's Corporate Web Architecture Standard.
 
-This repository is currently a **scaffold**: it satisfies sections 2–7 and 10 of
-the standard (baseline technology, dependency policy, repository layout,
-application rules, lint/format, TypeScript & environment safety, multi-stage
-Docker, deterministic test suites) plus the metadata surface from section 4.2
-and a Drizzle client introspected from the live database. AWS/ECS (section 8) and
-the GitLab pipeline (section 9) are not yet in place.
+This repository is currently a **scaffold**. In place: baseline technology and
+dependency policy, the repository layout, the application rules, lint/format,
+strict TypeScript and Zod environment validation, a multi-stage Docker image,
+deterministic test suites, the metadata surface (`robots`/`sitemap`/`manifest`,
+Open Graph), and a Drizzle client introspected from the live database. **Not yet
+in place:** the ECS service, AWS authentication, and the CI/CD pipeline — see
+[Not yet implemented](#not-yet-implemented).
 
 ## Requirements
 
-| Tool    | Version               | Enforced by                           |
-| ------- | --------------------- | ------------------------------------- |
-| Node.js | 24.19.0 (Node 24 LTS) | `.nvmrc`, `engines.node` (`>=24.0.0`) |
-| pnpm    | 11.24.0               | `packageManager`, Corepack            |
-
-```sh
-corepack enable          # activates the pinned pnpm
-nvm use                  # or: fnm use / asdf — reads .nvmrc
-pnpm install --frozen-lockfile
-```
+| Tool     | Version               | Enforced by                                                          |
+| -------- | --------------------- | -------------------------------------------------------------------- |
+| Node.js  | 24.19.0 (Node 24 LTS) | `.nvmrc`, `engines.node` (`>=24.0.0`)                                |
+| pnpm     | 11.24.0               | `packageManager`, Corepack                                           |
+| Docker   | any recent engine     | local image build only                                               |
+| Postgres | 16 (local)            | the app connects to an existing database — see [Database](#database) |
 
 ## Local development
 
 ```sh
-pnpm dev                 # http://localhost:3000  (Turbopack)
+corepack enable                        # activates the pinned pnpm
+source ~/.nvm/nvm.sh && nvm use         # or: fnm use / asdf install — all read .nvmrc
+pnpm install --frozen-lockfile
+pnpm dev                               # http://localhost:3000  (Turbopack)
 ```
 
 | Script              | Purpose                              |
@@ -46,97 +46,115 @@ pnpm dev                 # http://localhost:3000  (Turbopack)
 
 ## Environment variables
 
-Copy `.env.example` to `.env.local` (git-ignored) and fill in real values.
-`.env`, `.env.local` and `.env.*.local` are ignored by `.gitignore` and must
-never be committed.
+```sh
+cp .env.example .env.local             # .env.local is git-ignored
+```
 
-Two Zod schemas validate the environment, each once on module load:
+`.env`, `.env.local` and `.env.*.local` are all ignored by `.gitignore` and must
+never be committed. Deployed environments inject configuration at runtime — never
+from a committed file.
 
-| File                | Scope                                                                              | Contents                                                |
-| ------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| `src/config/env.ts` | public — safe to import from a Client Component                                    | `NEXT_PUBLIC_SITE_URL`                                  |
-| `src/server/env.ts` | server-only — `import 'server-only'`, build fails if a Client Component imports it | `NODE_ENV`, `APP_ENV`, `GIT_COMMIT_SHA`, `DATABASE_URL` |
+`.env.example` (reproduced here) has three blocks:
 
-`src/instrumentation.ts` imports `src/server/env.ts` at server start, so an
-invalid server environment is caught at boot: `register()` throws, every route
-(including `/api/health`) returns 500, the ALB marks the task unhealthy and the
-deployment rolls back.
+```ini
+# Public — inlined into the browser bundle by Next.js. Never a secret.
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-Server-only values are read only from `src/server/*`. Secrets are injected at
-runtime through ECS Secrets Manager / SSM references — never committed, never
-placed in `NEXT_PUBLIC_*`, never baked into the image. `.env.example` holds
-variable names and safe placeholder values only.
+# Server-only — read only from src/server/*. Validated in src/server/env.ts.
+APP_ENV=development
+GIT_COMMIT_SHA=dev
+
+# Local dev uses trust auth — no credentials. Deployed environments inject a full
+# URL via ECS Secrets Manager / SSM; never commit real credentials.
+DATABASE_URL=postgresql://localhost:5432/iol_property_plus
+```
+
+| Variable               | Scope                                                 | Validated in        | Default                                         |
+| ---------------------- | ----------------------------------------------------- | ------------------- | ----------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | public — inlined into the client bundle at build time | `src/config/env.ts` | `http://localhost:3000`                         |
+| `NODE_ENV`             | server-only                                           | `src/server/env.ts` | set by Next / tooling                           |
+| `APP_ENV`              | server-only                                           | `src/server/env.ts` | `development`                                   |
+| `GIT_COMMIT_SHA`       | server-only                                           | `src/server/env.ts` | `dev`                                           |
+| `DATABASE_URL`         | server-only                                           | `src/server/env.ts` | `postgresql://localhost:5432/iol_property_plus` |
+
+Every variable has a safe default, so **nothing is required for local dev**. The
+two Zod schemas each validate once on module load. `src/server/env.ts` opens with
+`import 'server-only'`, so `next build` fails if a Client Component pulls it in.
+`src/instrumentation.ts` re-validates the server env when the server process
+starts; an invalid value makes `register()` throw and every route — including
+`/api/health` — return 500 (in ECS the ALB then marks the task unhealthy and the
+deployment rolls back).
+
+Server-only values are read only from `src/server/*`; secrets never appear in
+`NEXT_PUBLIC_*`, in `.env.example`, or baked into the Docker image.
 
 ## Database
 
-The PostgreSQL schema (`iol_property_plus`, 24 tables) is **owned in DataGrip**.
-This repo never creates, alters or migrates it — it only introspects.
+The PostgreSQL database `iol_property_plus` (24 tables) **already exists and is
+owned in DataGrip**. This repository never creates, alters, or migrates it — it
+only introspects.
 
-| Path                                      | Notes                                                                                                                                                         |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/server/db/schema.ts`, `relations.ts` | **Generated** by `pnpm db:pull` (`drizzle-kit pull` + `scripts/fix-generated-schema.mjs`). Do not edit. Excluded from ESLint/Prettier, type-checked by `tsc`. |
-| `src/server/db/custom-types.ts`           | Hand-written `citext` / `tsvector` column types that `drizzle-kit` can't map.                                                                                 |
-| `src/server/db/index.ts`                  | Hand-written `server-only` client. Import **`@/server/db`**, never `@/server/db/schema` directly.                                                             |
-| `drizzle.config.ts`                       | `drizzle-kit` config — reads `process.env.DATABASE_URL` (it runs outside Next and can't load the `server-only` env schema).                                   |
+**How the app connects:**
 
-`drizzle-kit`'s migration snapshot (`src/server/db/meta/`, `*.sql`) is
-git-ignored — DataGrip owns DDL.
+- `pnpm db:pull` runs `drizzle-kit pull` (read-only `information_schema` /
+  `pg_catalog` queries) plus `scripts/fix-generated-schema.mjs`, regenerating
+  `src/server/db/schema.ts` and `src/server/db/relations.ts`. Those files are
+  generated — do not edit them; they are excluded from ESLint/Prettier but
+  type-checked by `tsc`.
+- At runtime, `src/server/db/index.ts` (`server-only`) reads
+  `serverEnv.DATABASE_URL`, opens a **lazy** `postgres()` connection (postgres.js
+  — no connection until the first query) and wraps it with Drizzle. Application
+  code imports `@/server/db`, never `@/server/db/schema` directly.
+- `drizzle.config.ts` reads `process.env.DATABASE_URL` directly — `drizzle-kit`
+  runs outside Next and cannot load the `server-only` env schema.
+- `drizzle-kit`'s migration snapshot (`src/server/db/meta/`, `*.sql`) is
+  git-ignored; DataGrip owns the DDL.
 
-`DATABASE_URL` defaults to `postgresql://localhost:5432/iol_property_plus`. The
-local instance uses trust auth (no credentials); a deployed instance gets a full
-URL from ECS secrets via `.env.local` / the pipeline, never `.env.example`.
-
-- `pnpm db:pull` — re-introspect after a DataGrip schema change.
-- `pnpm db:check` — read-only connectivity + schema-match probe against the real database.
-
-## Health endpoint
-
-`GET /api/health` → `{ "status": "ok" }`. Unauthenticated, no external
-dependency. `dynamic = 'force-dynamic'` so it is never served from a
-prerendered cache. Intended as the ALB target-group health check.
-
-## Testing
-
-| Suite                | Runner                                     | Scope                                                                                                                                                                                                      |
-| -------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tests/unit/`        | vitest (node)                              | env schemas, `siteConfig`, `getReleaseInfo`, the `sitemap`/`robots`/`manifest` route functions, `instrumentation.register()`                                                                               |
-| `tests/integration/` | vitest (node)                              | `/api/health` handler; the generated Drizzle schema run against an **in-process** Postgres (`@electric-sql/pglite`) seeded with a curated subset of the reference tables                                   |
-| `tests/e2e/`         | Playwright — `desktop` + `mobile` projects | home render (console-clean), `/api/health`, `robots.txt` / `sitemap.xml` / `manifest.webmanifest`, generated icon / OG images, 404 page, canonical + OG/Twitter tags, `@axe-core` a11y scan on `/` and 404 |
+The local Postgres uses trust auth, so `DATABASE_URL` carries no credentials.
+Verify the connection:
 
 ```sh
-pnpm test          # vitest — deterministic, in-process, no network
-pnpm test:e2e      # Playwright — builds and serves locally on :3100
-pnpm exec playwright install chromium   # one-time browser download
+psql "postgresql://localhost:5432/iol_property_plus" -c "\conninfo"
+# You are connected to database "iol_property_plus" as user "..." on host "localhost" ... at port "5432".
+
+pnpm db:check
+# ok — provinces reachable via generated schema, rows returned: 0
 ```
 
-Both default runs are fully offline: `tests/helpers/no-network.ts` throws on any
-non-loopback `fetch`, and the e2e fixture fails a test whose page contacts an
-external origin. **No test touches a real third-party service or the production
-database by default.**
+Deployed environments receive a full `DATABASE_URL` (with credentials) from ECS
+Secrets Manager / SSM at runtime — never `.env.example`, never the image.
 
-`tests/integration/db.live.test.ts` is opt-in — it runs only when
-`TEST_DATABASE_URL` is set, and checks the live schema still matches the
-generated one:
+## Merge gates
+
+Every one of these must pass before a branch merges. They mirror the standard's
+section 10 list and are all run locally with no external network calls.
 
 ```sh
-TEST_DATABASE_URL=postgresql://localhost:5432/iol_property_plus pnpm test
+pnpm install --frozen-lockfile
+pnpm run format:check
+pnpm run lint
+pnpm run typecheck
+pnpm test
+pnpm run build
+pnpm test:e2e
 ```
 
-### Journeys covered vs. out of scope
+Notes:
 
-**Covered:** home render + responsive + console-clean; `/api/health`; `robots.txt`
-/ `sitemap.xml` / `manifest.webmanifest`; generated icon / OG images; 404 page;
-canonical + OG/Twitter tags; both env schemas; `siteConfig`; `getReleaseInfo`;
-`instrumentation` runtime guard; generated Drizzle schema vs. a seeded Postgres;
-a11y (axe) on `/` and 404.
+- `pnpm exec playwright install chromium` once, before the first `pnpm test:e2e`.
+- `pnpm test` (vitest) is fully in-process: `tests/helpers/no-network.ts` throws
+  on any non-loopback `fetch`, and the integration DB is `@electric-sql/pglite`
+  (in-process Postgres), not the real one. `tests/integration/db.live.test.ts` is
+  skipped unless you opt in:
 
-**Out of scope — the feature does not exist yet:** contact forms, authentication,
-payments, file downloads, CMS-backed routes, DB-backed page/API routes,
-consent-gated scripts, analytics, email delivery. Each lands with its own tests.
+  ```sh
+  TEST_DATABASE_URL=postgresql://localhost:5432/iol_property_plus pnpm test
+  # → 9 test files, 22 passed (db.live now runs: the live DB still has the 24 generated tables)
+  ```
 
-**Out of scope — manual pre-production checklist (§10):** DNS / TLS / redirects /
-caching, real ECS health-check + rollback, dependency / container vuln scans,
-live consent / analytics / error-monitoring.
+- `pnpm test:e2e` (Playwright) builds the app and serves it locally on `:3100`;
+  an e2e fixture fails any test whose page contacts an external origin.
+- The container smoke check below is part of the same gate.
 
 ## Docker
 
@@ -146,53 +164,47 @@ Multi-stage `Dockerfile` on `node:24.19.0-bookworm-slim` (matches `.nvmrc`):
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `base`    | `corepack enable` — pnpm resolves to the pinned `11.24.0` from `packageManager`. Never `pnpm@latest`.                                                                     |
 | `deps`    | `pnpm install --frozen-lockfile` (all deps — `next build` needs the dev ones).                                                                                            |
-| `builder` | `pnpm run build` → `.next/standalone`. `NEXT_PUBLIC_SITE_URL` is a build `ARG` (inlined at build time; the pipeline passes the real value).                               |
+| `builder` | `pnpm run build` → `.next/standalone`. `NEXT_PUBLIC_SITE_URL` is a build `ARG` because it is inlined at build time.                                                       |
 | `runner`  | Copies only `.next/standalone`, `.next/static`, `public`. No source, no pnpm, no dev dependencies. Runs as non-root `nextjs` (uid/gid 1001). `CMD ["node", "server.js"]`. |
 
+Build and run it locally:
+
 ```sh
-docker build --pull \
-  --build-arg NEXT_PUBLIC_SITE_URL=https://your-domain \
-  -t iol-property-plus .
-docker run -d -p 3000:3000 iol-property-plus
-curl http://localhost:3000/api/health          # {"status":"ok"}
+docker build --pull -t iol-property-plus:local .
+docker run -d --name ipp -p 3000:3000 iol-property-plus:local
+curl -fsS http://localhost:3000/api/health      # {"status":"ok"}
+docker exec ipp id                              # uid=1001(nextjs) gid=1001(nodejs)
+docker rm -f ipp && docker rmi iol-property-plus:local
 ```
 
-Runtime config (`APP_ENV`, `GIT_COMMIT_SHA`, `DATABASE_URL`, secrets) is injected
-by ECS at run time, never baked in — `.dockerignore` excludes every `.env*`.
-`postgres` / `drizzle-orm` are absent from the standalone bundle until a route
-imports `@/server/db`; `next build` traces them in at that point.
+Runtime configuration (`APP_ENV`, `GIT_COMMIT_SHA`, `DATABASE_URL`, secrets) is
+passed at run time with `docker run -e …` or `--env-file`, never baked in;
+`.dockerignore` excludes every `.env*`. To bake a non-default public site URL,
+pass `--build-arg NEXT_PUBLIC_SITE_URL=https://your-domain` to `docker build`.
 
-Base-image digest pin and the pipeline `--build-arg`s are section 9.
+## Not yet implemented
 
-## Metadata and SEO
+Deployment does not exist in this repository. There is no deploy script, no
+infrastructure code, and **no AWS credentials of any kind** — static or
+federated. The following are deferred follow-ups:
 
-All metadata is driven from `src/config/site.ts` — no URL or name is hardcoded
-elsewhere.
+- **ECS / Fargate service behind an ALB** (standard section 8) — task definition,
+  target group health-checking `/api/health`, HTTPS listener, autoscaling, and a
+  deployment circuit breaker with automatic rollback. None of it is here.
+- **AWS authentication via GitLab OIDC and short-lived STS credentials**
+  (standard section 9) — the IAM OIDC identity provider, the narrowly-scoped
+  build and deploy roles, and the `assume-role-with-web-identity` exchange. Not
+  configured.
+- **GitLab CI/CD pipeline** (`.gitlab-ci.yml`, standard section 9) —
+  `verify → image → deploy`: run the merge gates, build and push
+  `image:${CI_COMMIT_SHA}` to Amazon ECR, register an ECS task-definition
+  revision, update the service, and wait for stability. Not present.
+- **Base-image digest pin** for the `Dockerfile` (standard section 7) — currently
+  the readable tag `node:24.19.0-bookworm-slim`; the digest is recorded in a
+  Dockerfile comment for when the pipeline lands.
 
-| Route                   | Source                                       | Notes                                                                                          |
-| ----------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `/robots.txt`           | `src/app/robots.ts`                          | Allows `/`, disallows `/api/`, names the sitemap.                                              |
-| `/sitemap.xml`          | `src/app/sitemap.ts`                         | Lists `/` only; add routes as pages are added.                                                 |
-| `/manifest.webmanifest` | `src/app/manifest.ts`                        | Name, colours, `display: standalone`, icons.                                                   |
-| `/icon`, `/apple-icon`  | `src/app/icon.tsx`, `src/app/apple-icon.tsx` | **Placeholder** monograms rendered by `next/og` at build time. Replace with real brand assets. |
-| `/opengraph-image`      | `src/app/opengraph-image.tsx`                | 1200×630 **placeholder**; also used for the Twitter card.                                      |
-
-Canonical URL, Open Graph and Twitter tags are set in `src/app/layout.tsx`.
-
-External images are denied by policy: `next.config.ts` sets
-`images.remotePatterns: []`. Add a specific `{ protocol, hostname, pathname }`
-entry when an external image is genuinely required — never a wildcard hostname.
-
-## Client Components
-
-Server Components are the default. The only Client Component is:
-
-| File                | Why                                                                                                                                                                                                                           |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/app/error.tsx` | Next.js requires `error.tsx` to be a Client Component: it runs a browser error boundary and receives a `reset()` callback. Also uses `useEffect` to log. It is a leaf route file — the boundary is already as low as it goes. |
-
-`global-error.tsx` (a second Client Component) is deferred until root-layout
-failure handling is actually needed.
+Until these exist, any deployment is manual and out of band, and this README
+documents only what runs locally.
 
 ## Project layout
 
@@ -218,17 +230,13 @@ relative paths.
 | `tests/integration/`           | —                | Several modules together. Still deterministic and offline.                                                                     |
 | `tests/e2e/`                   | —                | Playwright browser journeys against a locally built app.                                                                       |
 
-The `src/app` → `src/features` → `src/config` / `src/server` boundary is enforced,
-not just documented:
+The `src/app` → `src/features` → `src/config` / `src/server` boundary is
+enforced, not just documented:
 
 - **Build-time:** `src/server/*` imports the `server-only` package. If a Client
   Component pulls a server module into its graph, `next build` fails.
 - **Lint-time:** `import-x/no-restricted-paths` zones in `eslint.config.js` fail
   `pnpm lint` on the disallowed edges in the table above.
-
-`src/server/release-info.ts` is a scaffold-time affordance (deploy identity from
-env). It can be folded into the section 6 env schema once the section 9 pipeline
-injects `GIT_COMMIT_SHA` / `APP_ENV`.
 
 Styling is **Tailwind CSS 4** (`src/app/globals.css` → `@import "tailwindcss"`,
 `postcss.config.mjs`). Do not introduce a second styling system.
@@ -243,20 +251,36 @@ Standard section 5 prescribes:
 3. project rules — `import-x/*` (including the section 3 `no-restricted-paths`
    zones), `perfectionist/*`, `sort-vars`, `unused-imports/*`, `no-debugger`,
    `prefer-const`
-4. one file-scoped override: `import-x/exports-last` is **off** for
-   `src/app/**/*.{ts,tsx}` because Next.js route files co-locate segment config
-   (`export const metadata`, `size`, `dynamic`) with the default export
+4. file-scoped overrides: `import-x/exports-last` is **off** for
+   `src/app/**/*.{ts,tsx}` (Next.js route files co-locate segment config with the
+   default export) and for `tests/**` + `*.config.ts`
 5. `eslint-config-prettier/flat` — **last**, so it wins every formatting conflict
-6. `globalIgnores` for generated output
+6. `globalIgnores` for generated output (the Drizzle schema files)
 
 No `.eslintrc`, no `next lint`, no rule disabled globally to paper over a single
 file, no `eslint-disable` comments in source. Prettier uses the corporate-sites
 profile (`.prettierrc`); `.prettierignore` covers generated output but **not**
 `.ts`/`.tsx` — those are format-checked.
 
+## Application notes
+
+- **Server Components by default.** The only Client Component is
+  `src/app/error.tsx` — Next.js requires `error.tsx` to be one (browser error
+  boundary + `reset()` callback). `global-error.tsx` is deferred.
+- **Metadata is driven from `src/config/site.ts`** — no URL or name hardcoded
+  elsewhere. Routes: `/robots.txt`, `/sitemap.xml`, `/manifest.webmanifest`, and
+  the `next/og`-generated `/icon`, `/apple-icon`, `/opengraph-image` (placeholder
+  monograms — replace with real brand assets). Canonical, Open Graph and Twitter
+  tags are set in `src/app/layout.tsx`.
+- **External images are denied by policy:** `next.config.ts` sets
+  `images.remotePatterns: []`. Add a specific `{ protocol, hostname, pathname }`
+  entry when genuinely required — never a wildcard hostname.
+- `next.config.ts` sets `agentRules: false` so `next build` does not write
+  `AGENTS.md` / `CLAUDE.md` into the repository root.
+
 ## Selected dependency versions
 
-Resolved and reviewed against the npm registry on 2026-08-29. `@latest` was used
+Resolved and reviewed against the npm registry in August 2026. `@latest` was used
 to _select_ these; only the resolved versions are committed.
 
 | Package                                | Version          | Reason                                                                                                      |
@@ -269,6 +293,10 @@ to _select_ these; only the resolved versions are committed.
 | `postgres`                             | 3.4.9            | PostgreSQL driver (postgres.js) — pure JS, no native build.                                                 |
 | `drizzle-kit` (dev)                    | 0.31.10          | `drizzle-kit pull` introspection.                                                                           |
 | `tsx` (dev)                            | 4.22.5           | Runs `scripts/*.ts` (`pnpm db:check`). Held ~2 months back from latest.                                     |
+| `vitest` (dev)                         | 4.1.10           | Unit + integration runner.                                                                                  |
+| `@playwright/test` (dev)               | 1.62.1           | E2E runner (desktop + mobile projects).                                                                     |
+| `@electric-sql/pglite` (dev)           | 0.5.4            | In-process Postgres for the integration DB.                                                                 |
+| `@axe-core/playwright` (dev)           | 4.12.1           | Accessibility smoke check in e2e.                                                                           |
 | `@eslint/js`                           | 9.39.5           | ESLint recommended config; pinned to the `eslint` version.                                                  |
 | `eslint-config-next`                   | 16.3.3           | Same release line as `next` (standard section 2.2).                                                         |
 | `typescript`                           | 6.0.3            | See deviation below.                                                                                        |
@@ -284,29 +312,26 @@ to _select_ these; only the resolved versions are committed.
 
 ### Approved deviations from the standard
 
-The standard's section 2.2 reference table (snapshot 2026-08-24) lists
-TypeScript "latest" and ESLint 10.9.0. Both were validated against the actual
+The standard's section 2.2 reference table (snapshot 2026-08-24) lists TypeScript
+"latest" and ESLint 10.9.0. Both were validated against the actual
 `eslint-config-next@16.3.3` dependency graph and rolled back one major line:
 
 1. **TypeScript 6.0.3, not 7.0.2.** `eslint-config-next@16.3.3` depends on
-   `typescript-eslint@8.x`, whose peer range is `typescript >=4.8.4 <6.1.0`.
-   No `typescript-eslint` release yet supports TS 7. 6.0.3 is the highest
-   stable release inside the supported range. This is exactly section 2.2's
-   rule: "latest stable **compatible** with the selected Next.js release".
+   `typescript-eslint@8.x`, whose peer range is `typescript >=4.8.4 <6.1.0`. No
+   `typescript-eslint` release yet supports TS 7. 6.0.3 is the highest stable
+   release inside the supported range. This is exactly section 2.2's rule:
+   "latest stable **compatible** with the selected Next.js release".
 
-2. **ESLint 9.39.5, not 10.9.x.** ESLint 10 removed deprecated rule-context
-   APIs that `eslint-plugin-react@7.37.5` (bundled by `eslint-config-next@16.3.3`)
+2. **ESLint 9.39.5, not 10.9.x.** ESLint 10 removed deprecated rule-context APIs
+   that `eslint-plugin-react@7.37.5` (bundled by `eslint-config-next@16.3.3`)
    still calls; linting crashes outright with
-   `contextOrFilename.getFilename is not a function`. 9.39.5 is the latest
-   ESLint 9 and resolves every peer in the `eslint-config-next` tree cleanly.
+   `contextOrFilename.getFilename is not a function`. 9.39.5 is the latest ESLint
+   9 and resolves every peer in the `eslint-config-next` tree cleanly.
 
 Both should be revisited when `eslint-config-next` ships a release built against
 `typescript-eslint` 9 / ESLint 10.
 
-`next.config.ts` sets `agentRules: false` so `next build` does not write
-`AGENTS.md` / `CLAUDE.md` into the repository root.
-
 ## Ownership
 
-Engineering owns this repository. Deviations from the Corporate Web
-Architecture Standard must be recorded here and justified in the merge request.
+Engineering owns this repository. Deviations from the Corporate Web Architecture
+Standard must be recorded here and justified in the merge request.
