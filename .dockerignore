@@ -28,6 +28,11 @@ test-results
 playwright-report
 *.md
 
+# seed-data importers + downloads — not part of the runtime image
+importers
+data
+db
+
 # docker
 Dockerfile*
 .dockerignore
