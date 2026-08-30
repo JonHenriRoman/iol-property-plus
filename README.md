@@ -161,6 +161,21 @@ Re-runs are idempotent — rows are upserted on Property24's `Id` (`external_id`
 so a refreshed download updates in place instead of duplicating. `data/` is
 git-ignored. Add `--dry-run` to resolve and diff without writing.
 
+### Feed infrastructure
+
+`importers/src/iol_importers/feeds/` is the shared bookkeeping every vendor feed
+importer will use (Domain 6): it opens an `import_jobs` row when a run starts,
+closes it as `Success` / `PartialSuccess` / `Failed` with accurate counts, and
+writes one `import_errors` row per failed record without a bad record stopping the
+run. Tracking runs on its own autocommit connection, so a rolled-back or crashed
+importer still leaves a closed job row. No vendor parsing yet — that lands with
+each feed.
+
+Prerequisite: apply `db/migrations/002_feed_infrastructure.sql` in DataGrip (it
+replaces `feed_sources.ttl_minutes` with `ttl_days`, and adds
+`import_jobs.records_skipped` / `error_message`), then `pnpm db:pull`. See
+[`importers/README.md`](importers/README.md) for the API and a runnable demo.
+
 ## Merge gates
 
 Every one of these must pass before a branch merges. They mirror the standard's
