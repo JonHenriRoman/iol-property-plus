@@ -91,6 +91,53 @@ TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
 builds the Domain 6 tables in a throwaway schema, runs one `PartialSuccess` and
 one `Failed` run, and prints the resulting rows.
 
+## Core listing importer (`iol_importers.listings`)
+
+Turns already-parsed vendor listing records (plain dicts — a feed-format adapter
+is a later task) into `listings` rows (`canonical-database-design.md` Domain 4).
+
+```python
+from iol_importers.listings import import_listings
+
+counts = import_listings(records, feed_source_code="allsa", file_reference=path.name)
+```
+
+Per record: `vendor_listing_id` + `title` required (else `validation`); scalars
+coerced (junk → `parse`); then resolution —
+
+| Ref | How it resolves |
+| --- | --- |
+| `listing_type` | normalised in-importer to the `('Sale','Rental','Unknown')` enum — `For Sale` / `4 Rent` / `TO LET` variants included |
+| `property_type_id` | `property_type_vendor_mappings (feed_source_id, vendor_value)` → on a `property_types.name` hit the mapping row is written; a true miss is a `mapping` error |
+| `suburb_id` | exact `suburbs.name`, then `alternate_names`; unresolved → **NULL, the listing still imports** |
+| `agency_id` / `agent_id` | `agency_vendor_ids` / `agent_vendor_ids` keyed on `(feed_source_id, vendor_id)`; a new canonical agency/agent is created only when no mapping exists |
+
+The listing is upserted on `UNIQUE (feed_source_id, vendor_listing_id)` — the same
+key always resolves to an update, never a duplicate. Unpromoted vendor fields go
+verbatim into `raw_data`. Price-history rows and `expires_at` are written by the
+database triggers (`trg_listings_log_price_change` reads `ttl_days`, stamps the
+job id from `app.current_import_job`); the importer only sets `price` and
+`last_seen_at`.
+
+A failed record is written to `import_errors` with the right `error_type`, counted
+in `records_failed`, and the batch continues.
+
+- Prerequisite: apply `../db/migrations/001`, `002`, then `003_listings_importer.sql`
+  in DataGrip, then `pnpm db:pull`. The importer refuses to start until
+  `property_type_vendor_mappings` exists, `listings.suburb_id` is nullable, and
+  `suburbs.alternate_names` exists.
+
+Proof:
+
+```sh
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.listings.demo
+```
+
+builds the Domain 4 tables in a throwaway schema, imports a batch, re-imports it
+unchanged, then re-imports with one price dropped — printing the counts and the
+single price-history row the change produces.
+
 ## Development
 
 ```sh
@@ -101,7 +148,8 @@ TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
 ```
 
 The `dbtest` suite leaves the target database untouched: the `p24-suburbs` tests
-create their tables inside one transaction and roll back; the `feeds` tests use a
-dedicated `feeds_scratch_<pid>` schema dropped `CASCADE` at teardown (they can't
-roll back — the point of the scaffolding is that tracking rows commit). Point
-`TEST_DATABASE_URL` at a scratch database, never the production one.
+create their tables inside one transaction and roll back; the `feeds` and
+`listings` tests use a dedicated `*_scratch_<pid>` schema dropped `CASCADE` at
+teardown (they can't roll back — the point of the scaffolding is that rows
+commit). Point `TEST_DATABASE_URL` at a scratch database, never the production
+one.

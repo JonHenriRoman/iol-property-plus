@@ -176,6 +176,21 @@ replaces `feed_sources.ttl_minutes` with `ttl_days`, and adds
 `import_jobs.records_skipped` / `error_message`), then `pnpm db:pull`. See
 [`importers/README.md`](importers/README.md) for the API and a runnable demo.
 
+### Listing importer
+
+`importers/src/iol_importers/listings/` turns already-parsed vendor listing
+records into `listings` rows (Domain 4): normalises `listing_type` to the enum,
+resolves `property_type` (via a per-feed `property_type_vendor_mappings` table),
+`suburb` (NULL when unresolved), `agency` / `agent` (via the `*_vendor_ids`
+tables), and upserts on `UNIQUE (feed_source_id, vendor_listing_id)`. Price history
+and `expires_at` stay with the existing DB triggers. Failed records go to
+`import_errors` and the batch continues. Feed-format parsing is a later task.
+
+Prerequisite: apply `db/migrations/003_listings_importer.sql` in DataGrip **after
+002** (003 makes `listings.suburb_id` nullable, adds
+`property_type_vendor_mappings`, and rewrites `trg_listings_set_expiry` for
+`ttl_days` — 002 breaks it otherwise), then `pnpm db:pull`.
+
 ## Merge gates
 
 Every one of these must pass before a branch merges. They mirror the standard's
