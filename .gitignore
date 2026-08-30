@@ -41,5 +41,13 @@ next-env.d.ts
 /src/server/db/meta/
 /src/server/db/*.sql
 
+# seed-data importers (Python subproject)
+/data/
+/importers/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
 # editor
 .idea

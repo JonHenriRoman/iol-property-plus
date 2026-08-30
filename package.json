@@ -19,7 +19,9 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "db:pull": "drizzle-kit pull && node scripts/fix-generated-schema.mjs",
-    "db:check": "tsx scripts/check-db.ts"
+    "db:check": "tsx scripts/check-db.ts",
+    "seed:suburbs:download": "uv run --project importers p24-suburbs download",
+    "seed:suburbs": "uv run --project importers p24-suburbs load"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

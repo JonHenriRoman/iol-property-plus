@@ -91,8 +91,10 @@ Server-only values are read only from `src/server/*`; secrets never appear in
 ## Database
 
 The PostgreSQL database `iol_property_plus` (24 tables) **already exists and is
-owned in DataGrip**. This repository never creates, alters, or migrates it — it
-only introspects.
+owned in DataGrip**. This repository does not run migrations against it — it
+introspects the live schema. The one exception is reviewed DDL checked in under
+`db/migrations/`, which a maintainer applies by hand in DataGrip (see
+[Seed data](#seed-data)); the app still only reads the introspected result.
 
 **How the app connects:**
 
@@ -123,6 +125,41 @@ pnpm db:check
 
 Deployed environments receive a full `DATABASE_URL` (with credentials) from ECS
 Secrets Manager / SSM at runtime — never `.env.example`, never the image.
+
+## Seed data
+
+The geography spine (`provinces`, `cities`, `suburbs` — Domain 1 of
+`canonical-database-design.md`) is seeded from Property24's public, unauthenticated
+suburb CSV. **This project covers South Africa only**: every other country in the
+feed is counted for visibility and dropped before any row reaches the database.
+
+The importer is a self-contained Python subproject under [`importers/`](importers/)
+(uv + psycopg 3 + pytest — the main app is TypeScript, and there was no prior
+Python importer to match). It has its own [README](importers/README.md).
+
+**One-time prerequisite** — the feed carries an `Extension`, a stable `Id`, and an
+`Alternate Names` value that the current `suburbs` table has nowhere to store.
+Apply the reviewed migration, then re-introspect:
+
+```sh
+# in DataGrip, run:
+db/migrations/001_suburbs_property24_columns.sql
+# then, from the repo root:
+pnpm db:pull
+```
+
+**Seed:**
+
+```sh
+uv sync --project importers            # once
+
+pnpm run seed:suburbs:download         # -> data/property24/suburbs-<UTC>.csv (the only network call)
+pnpm run seed:suburbs                  # parse newest download, upsert South African rows
+```
+
+Re-runs are idempotent — rows are upserted on Property24's `Id` (`external_id`),
+so a refreshed download updates in place instead of duplicating. `data/` is
+git-ignored. Add `--dry-run` to resolve and diff without writing.
 
 ## Merge gates
 
@@ -155,6 +192,9 @@ Notes:
 - `pnpm test:e2e` (Playwright) builds the app and serves it locally on `:3100`;
   an e2e fixture fails any test whose page contacts an external origin.
 - The container smoke check below is part of the same gate.
+- The `importers/` subproject has its own checks (`uv run --project importers
+ruff check .` and `uv run --project importers pytest` — offline, no DB). Its
+  `pytest -m dbtest` suite is opt-in and needs `TEST_DATABASE_URL`.
 
 ## Docker
 
@@ -229,6 +269,9 @@ relative paths.
 | `tests/unit/`                  | —                | Fast, isolated. No network, no database.                                                                                       |
 | `tests/integration/`           | —                | Several modules together. Still deterministic and offline.                                                                     |
 | `tests/e2e/`                   | —                | Playwright browser journeys against a locally built app.                                                                       |
+| `db/migrations/`               | —                | Reviewed DDL a maintainer applies by hand in DataGrip. Not run by the app or CI.                                               |
+| `importers/`                   | —                | Python seed-data importers (uv + psycopg 3). Self-contained; see `importers/README.md`.                                        |
+| `data/`                        | —                | Git-ignored. Timestamped feed downloads written by `pnpm run seed:suburbs:download`.                                           |
 
 The `src/app` → `src/features` → `src/config` / `src/server` boundary is
 enforced, not just documented:
