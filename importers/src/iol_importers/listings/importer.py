@@ -55,6 +55,7 @@ class SchemaNotReadyError(RuntimeError):
 PROMOTED_KEYS: frozenset[str] = frozenset(
     {
         "vendor_listing_id",
+        "vendor_listing_type",
         "listing_type",
         "property_type",
         "suburb",
@@ -186,7 +187,9 @@ def _row_from_record(
     if title is None:
         raise ListingValidationError("title is required")
 
-    property_type_id = resolve_property_type(cur, feed_source_id, record.get("property_type"))
+    property_type_id = resolve_property_type(
+        cur, feed_source_id, record.get("property_type"), record.get("vendor_listing_type")
+    )
     suburb_id = resolve_suburb(cur, record.get("suburb"), record.get("suburb_extension"))
     agency_id = resolve_agency(
         cur, feed_source_id, record.get("agency_vendor_id"), record.get("agency_name")

@@ -16,16 +16,28 @@ class MappingError(RuntimeError):
     """A vendor value could not be mapped to a canonical row — error_type='mapping'."""
 
 
-def resolve_property_type(cur: psycopg.Cursor, feed_source_id: int, vendor_value: object) -> int:
+def resolve_property_type(
+    cur: psycopg.Cursor,
+    feed_source_id: int,
+    vendor_value: object,
+    vendor_listing_type: object = None,
+) -> int:
     """Resolve a vendor property-type string to a property_types.id.
 
     Order: existing per-feed mapping row -> case-insensitive property_types.name
     match (persisting the mapping) -> MappingError. Never creates a property_types
     row; the canonical list is curated.
+
+    ``vendor_listing_type`` (e.g. "residential", "commercial") namespaces the
+    mapping key, so a feed that sends the same property-type word in different
+    listing categories can map each to a different canonical type explicitly. The
+    name-match fallback still uses the bare value.
     """
     value = clean_str(vendor_value)
     if value is None:
         raise MappingError("property_type is missing")
+    namespace = clean_str(vendor_listing_type)
+    mapping_key = f"{namespace}:{value}" if namespace else value
 
     cur.execute(
         """
@@ -33,7 +45,7 @@ def resolve_property_type(cur: psycopg.Cursor, feed_source_id: int, vendor_value
         FROM property_type_vendor_mappings
         WHERE feed_source_id = %s AND vendor_value = %s
         """,
-        (feed_source_id, value),
+        (feed_source_id, mapping_key),
     )
     row = cur.fetchone()
     if row is not None:
@@ -45,6 +57,7 @@ def resolve_property_type(cur: psycopg.Cursor, feed_source_id: int, vendor_value
         raise MappingError(
             f"no property_types row matches {value!r} and no mapping exists for "
             f"feed_source_id={feed_source_id}"
+            + (f" (listing type {namespace!r})" if namespace else "")
         )
 
     property_type_id = row["id"]
@@ -54,7 +67,7 @@ def resolve_property_type(cur: psycopg.Cursor, feed_source_id: int, vendor_value
         VALUES (%s, %s, %s)
         ON CONFLICT (feed_source_id, vendor_value) DO NOTHING
         """,
-        (feed_source_id, value, property_type_id),
+        (feed_source_id, mapping_key, property_type_id),
     )
     return property_type_id
 

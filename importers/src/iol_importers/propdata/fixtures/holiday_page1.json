@@ -1,0 +1,38 @@
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "_note": "Hand-built. Zero holiday listings exist in the vendor account; shaped from the residential response. Field mapping for holiday is unverified against live data (see MAPPING_NOTES.md). location/branch/agent ids match the residential fixtures so lookups resolve.",
+  "results": [
+    {
+      "id": 900001,
+      "web_ref": "HL900001",
+      "listing_type": "To Let",
+      "status": "Active",
+      "price": "3500.00",
+      "poa": false,
+      "bedrooms": "2.0",
+      "bathrooms": "1.0",
+      "garages": "0.0",
+      "carports": "1.0",
+      "floor_size": "68.00",
+      "land_size": "0.00",
+      "property_type": "Apartment",
+      "marketing_heading": "Beachfront holiday apartment, sleeps 4",
+      "description": "Fully equipped self-catering apartment a short walk from the beach. Rates are per night in season.",
+      "location": 4607,
+      "area": 630,
+      "branch": 1259,
+      "agent": 10760,
+      "street_number": "12",
+      "street_name": "Beach Road",
+      "complex_name": "The Sands",
+      "building_name": null,
+      "unit_number": "4B",
+      "on_market_since": "2025-11-01",
+      "created": "2025-11-01T09:00:00.000000+02:00",
+      "modified": "2026-08-01T09:00:00.000000+02:00",
+      "listing_images": [900101, 900102]
+    }
+  ]
+}

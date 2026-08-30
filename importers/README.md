@@ -178,6 +178,57 @@ Equivalents: a GitLab scheduled pipeline running the same command; a Kubernetes
 `CronJob` with `schedule: "15 2 * * *"`; an ECS scheduled task via an EventBridge
 rule.
 
+## Propdata feed adapter (`iol_importers.propdata`)
+
+The first real vendor feed. Pulls residential / commercial / holiday / project
+listings from the Propdata API and feeds each record through the core listing
+importer, tagged with `vendor_listing_type` so property-type / listing-type
+mapping branches per category.
+
+**Auth / renewal flow:**
+
+- **Login** — `GET <PROP_DATA_API_LOGIN_URL>` with `Authorization: Basic
+  base64(user:pass)` → `{ clients: [ { site: { domain }, token }, … ] }`. One
+  bearer token **per client** (the test account has 138). The adapter picks the
+  client whose `site.domain` matches `PROP_DATA_API_SITE`.
+- **Renew** — `GET https://api-gw.propdata.net/users/api/v1/renew-token/` with
+  `Authorization: Bearer <token>`; the **new token comes back in the `token`
+  response header**. A run renews the stored token instead of re-doing Basic
+  auth; it falls back to Basic login only if renewal fails.
+- The token is held in memory and persisted (mode 0600) to
+  `data/propdata/token-<site>.json` (git-ignored). It is never logged and never
+  written to `import_errors`.
+- Pagination: DRF `{ count, next, previous, results }`; `next` is followed to the
+  end before a category's import job closes.
+
+**Credentials** — set in `.env.local` (never committed; `.env.example` carries
+empty placeholders):
+
+```ini
+PROP_DATA_API_USERNAME=...
+PROP_DATA_API_PASSWORD=...
+PROP_DATA_API_LOGIN_URL=https://api-gw.propdata.net/users/public-api/login/
+```
+
+**Run:**
+
+```sh
+PROP_DATA_API_SITE=harcourts.co.za \
+    uv run --project importers propdata-import --page-limit 1
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.propdata.demo
+```
+
+Field mapping covers only what was verified against real API responses;
+everything uncertain (coordinates, image URLs, `features`, commercial rental
+price semantics, holiday) is left unmapped and recorded in
+[`propdata/MAPPING_NOTES.md`](src/iol_importers/propdata/MAPPING_NOTES.md), not
+guessed.
+
+`pytest -m live` (opt-in, needs the credentials + `PROP_DATA_API_SITE`) exercises
+a real login → renew → one page per category.
+
 ## Development
 
 ```sh
@@ -185,6 +236,7 @@ uv run --project importers ruff check .
 uv run --project importers pytest                                  # no DB, no network
 TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
     uv run --project importers pytest -m dbtest                    # opt-in
+uv run --project importers pytest -m live                          # opt-in, real Propdata API
 ```
 
 The `dbtest` suite leaves the target database untouched: the `p24-suburbs` tests
