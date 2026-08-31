@@ -32,6 +32,9 @@ _DEFAULT_ENTEGRAL_BASE_URL = "https://sync.entegral.net/api"
 # Fusion FeedStore — production sync host. Point FUSION_API_BASE_URL at the doc's
 # QA host (plaintext http) for testing.
 _DEFAULT_FUSION_BASE_URL = "https://za-feedstore.fusionagency.net/v1/sync"
+# AllSA Property — one public, unauthenticated XML endpoint. The per-agency
+# `agencyid` query parameter is config on the feed_sources row, never here.
+_DEFAULT_ALLSA_BASE_URL = "https://www.allsaproperty.co.za/feeds/iol.ashx"
 _REMAX_URL_ENV_NAMES = (
     "REMAX_API_BASE_URL",
     "REMAX_LIST_API_URL",
@@ -255,3 +258,14 @@ def resolve_fusion_credentials() -> FusionCredentials | None:
         return None
     base_url = _from_env_or_local("FUSION_API_BASE_URL") or _DEFAULT_FUSION_BASE_URL
     return FusionCredentials(client_id=client_id, password=password, base_url=base_url.rstrip("/"))
+
+
+def resolve_allsa_base_url() -> str:
+    """The AllSA feed endpoint, from ALLSA_FEED_BASE_URL (process env or .env.local)
+    else the public default.
+
+    There are no credentials — the endpoint is unauthenticated. The per-agency
+    ``agencyid`` is not resolved here; it lives on the ``feed_sources`` row (see
+    ``iol_importers.allsa.source``).
+    """
+    return (_from_env_or_local("ALLSA_FEED_BASE_URL") or _DEFAULT_ALLSA_BASE_URL).strip()

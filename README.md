@@ -81,9 +81,12 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 `MEDIA_ROOT_DIR` is the directory `src/app/media/[...path]/route.ts` serves
 re-hosted listing photos from; the feed importers write there. The feed-adapter
 credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`,
-`PROPERTYENGINE_FEED_*`, `FUSION_*`) are also server-only and optional — the web
-app never reads them; only the Python importers do. `FUSION_PASSWORD` feeds the
-per-call Fusion SecurityToken digest but is still a raw credential. `PROPERTYENGINE_FEED_URL` is still
+`PROPERTYENGINE_FEED_*`, `FUSION_*`, `ALLSA_FEED_BASE_URL`) are also server-only
+and optional — the web app never reads them; only the Python importers do.
+`FUSION_PASSWORD` feeds the per-call Fusion SecurityToken digest but is still a
+raw credential. AllSA needs no credentials (the feed is public); each agency's
+`agencyid` is on its `feed_sources` row, and `ALLSA_FEED_BASE_URL` only overrides
+the default endpoint host. `PROPERTYENGINE_FEED_URL` is still
 blank pending the URL from PropertyEngine (the Gumtree Pro schema doc specifies
 the file format only); `PROPERTYENGINE_FEED_AUTH_TOKEN` /
 `PROPERTYENGINE_FEED_AUTH_SCHEME` (`bearer` | `basic`) are only used if that URL
@@ -317,6 +320,23 @@ canonical `developments` sync are follow-ups — see
 [Not yet implemented](#not-yet-implemented) and `fusion/MAPPING_NOTES.md`. See
 [`importers/README.md`](importers/README.md).
 
+### AllSA Property feed adapter
+
+`importers/src/iol_importers/allsa/` — the seventh vendor feed. The public,
+unauthenticated `iol.ashx` XML feed: one HTTP GET returns an agency's whole book
+as `<Listings><Property>…</Property></Listings>` (flat, no office grouping). Full
+resend on every pull, like PropertyEngine — parse, map, `import_listings`, then
+`lifecycle.withdraw_missing` for absences. **Each agency is its own `feed_sources`
+row** with the `agencyid` in `auth_config->>'agency_id'` — no agency id in the
+source. One agency's feed spans several offices, keyed on `BranchId` (not
+`Agency_Location`), which upsert `agencies`/`agents`. `<Features>` is a free-form
+bag parsed by iterating the actual child elements against a registry (known →
+typed columns/labels, unknown → `raw_data` + a per-run tally), de-duplicating
+tags the real feed repeats hundreds of times. `Heading` is the title; `Title` is
+tenure. Photos hotlinked. `ALLSA_FEED_BASE_URL` (optional, override only) is in
+`.env.example` and `src/server/env.ts`. See `allsa/MAPPING_NOTES.md` and
+[`importers/README.md`](importers/README.md).
+
 ### Re-hosted listing media
 
 `importers/src/iol_importers/media/` — a shared, feed-agnostic layer that
@@ -420,8 +440,12 @@ federated. The following are deferred follow-ups:
   `entegral-import` (Entegral needs ≤ 24 h; run every 12 h),
   `propertyengine-import` (nightly; schedule unconfirmed with PropertyEngine),
   `fusion-import` (poll every ~15 min, or drive it from the notification webhook
-  below) or `iol-expire-listings`. Each command's docstring carries the intended
-  cadence.
+  below), `allsa-import` (nightly per agency; full resend) or
+  `iol-expire-listings`. Each command's docstring carries the intended cadence.
+- **AllSA `feed_sources` rows.** Each AllSA agency needs a seeded
+  `feed_sources` row (`code='allsa-<agencyid>'`, `auth_config->>'agency_id'`);
+  feed sources are configuration and are never created by an import run. See
+  `importers/src/iol_importers/allsa/MAPPING_NOTES.md`.
 - **Fusion `NotifyChangesAvailable` webhook.** The Fusion adapter implements the
   polling side (`RequestSnapshot` / `GetChanges`) only. Fusion can also call
   **into** us to signal "the queue has data" — an inbound endpoint that verifies
