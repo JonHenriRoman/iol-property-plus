@@ -76,6 +76,13 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 | `APP_ENV`              | server-only                                           | `src/server/env.ts` | `development`                                   |
 | `GIT_COMMIT_SHA`       | server-only                                           | `src/server/env.ts` | `dev`                                           |
 | `DATABASE_URL`         | server-only                                           | `src/server/env.ts` | `postgresql://localhost:5432/iol_property_plus` |
+| `MEDIA_ROOT_DIR`       | server-only                                           | `src/server/env.ts` | `<repo>/data/media`                             |
+
+`MEDIA_ROOT_DIR` is the directory `src/app/media/[...path]/route.ts` serves
+re-hosted listing photos from; the feed importers write there. The feed-adapter
+credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`) are also
+server-only and optional — the web app never reads them; only the Python
+importers do. See each feed-adapter subsection under [Seed data](#seed-data).
 
 Every variable has a safe default, so **nothing is required for local dev**. The
 two Zod schemas each validate once on module load. `src/server/env.ts` opens with
@@ -245,6 +252,36 @@ Credentials (`REMAX_ACCESS_KEY` / `REMAX_SECRET_KEY` / `REMAX_API_KEY` /
 carry them as optional. Deviations and unmapped fields are in
 `remax/MAPPING_NOTES.md`. See [`importers/README.md`](importers/README.md).
 
+### Entegral feed adapter
+
+`importers/src/iol_importers/entegral/` — the fourth vendor feed, and a **pull**
+feed (not the push Sync API in Entegral's public docs — confirmed with Entegral
+directly). Two HTTP Basic-auth `GET` endpoints on `sync.entegral.net`:
+`/api/officeslist` lists the syndicating offices, then
+`/api/listings?type=officelistings&ref=…` returns each office's full active set.
+There is no deletions endpoint, so removals are caught by **per-office
+reconciliation** (`lifecycle.withdraw_missing`, a soft-delete scoped by
+`raw_data ->> 'entegral_office_reference'`, guarded against empty responses).
+Credentials (`ENTEGRAL_USERNAME` / `ENTEGRAL_PASSWORD`) live in `.env.local`;
+`.env.example` and `src/server/env.ts` carry them as optional. Every rendered
+Entegral listing must show the agent and office name — the mapper enforces it.
+Deviations, unmapped fields, and the **out-of-scope obligations** (lead emails to
+the agent **and** `support@entegral.net`; no third-party data handoff; the open
+decision on a listing deep-link pattern) are in `entegral/MAPPING_NOTES.md`. See
+[`importers/README.md`](importers/README.md).
+
+### Re-hosted listing media
+
+`importers/src/iol_importers/media/` — a shared, feed-agnostic layer that
+downloads a listing's photos, validates them by magic bytes, content-addresses
+them under `data/media/` and records `listing_media` rows with site-relative
+URLs. Built for Entegral (whose terms forbid hotlinking their images) as the
+first consumer. The Next.js route handler `src/app/media/[...path]/route.ts`
+serves the files from `MEDIA_ROOT_DIR` (default `<repo>/data/media`) with
+traversal + extension guards and an immutable cache. `data/` is git- and
+Docker-ignored, so a container needs a volume mounted at `data/media` — see
+[Not yet implemented](#not-yet-implemented).
+
 ## Merge gates
 
 Every one of these must pass before a branch merges. They mirror the standard's
@@ -326,6 +363,21 @@ federated. The following are deferred follow-ups:
 - **Base-image digest pin** for the `Dockerfile` (standard section 7) — currently
   the readable tag `node:24.19.0-bookworm-slim`; the digest is recorded in a
   Dockerfile comment for when the pipeline lands.
+- **A persistent volume for re-hosted listing media.** The Entegral importer
+  writes downloaded photos to `data/media/` and `src/app/media/[...path]/route.ts`
+  serves them from `MEDIA_ROOT_DIR` (default `<repo>/data/media`). `data/` is
+  excluded from the image, so a container must mount a volume there (and share it
+  between the importer job and the web service) — not wired.
+- **Feed importer scheduling.** No cron/CronJob/EventBridge wiring for
+  `p24-suburbs`, `propdata-import`, `propctrl-import`, `remax-import`,
+  `entegral-import` (Entegral needs ≤ 24 h; run every 12 h) or
+  `iol-expire-listings`. Each command's docstring carries the intended cadence.
+- **Lead / enquiry emails, with the Entegral copy rule.** No email-sending code
+  exists. When enquiry notifications are built, an enquiry on an
+  **Entegral-sourced** listing must be emailed to the listing's agent(s) **and
+  copied to `support@entegral.net`** for Entegral's CRM, and Entegral-sourced
+  listing/lead data must not be sold or handed to any third party. See
+  `importers/src/iol_importers/entegral/MAPPING_NOTES.md`.
 
 Until these exist, any deployment is manual and out of band, and this README
 documents only what runs locally.

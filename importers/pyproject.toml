@@ -15,6 +15,7 @@ iol-expire-listings = "iol_importers.lifecycle.cli:main"
 propdata-import = "iol_importers.propdata.cli:main"
 propctrl-import = "iol_importers.propctrl.cli:main"
 remax-import = "iol_importers.remax.cli:main"
+entegral-import = "iol_importers.entegral.cli:main"
 
 [dependency-groups]
 dev = [

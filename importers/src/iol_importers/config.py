@@ -14,11 +14,16 @@ DOWNLOAD_DIR = REPO_ROOT / "data" / "property24"
 PROPDATA_DIR = REPO_ROOT / "data" / "propdata"
 PROPCTRL_DIR = REPO_ROOT / "data" / "propctrl"
 REMAX_DIR = REPO_ROOT / "data" / "remax"
+ENTEGRAL_DIR = REPO_ROOT / "data" / "entegral"
+MEDIA_DIR = REPO_ROOT / "data" / "media"
 
 _DEFAULT_DATABASE_URL = "postgresql://localhost:5432/iol_property_plus"
 _DEFAULT_PROPDATA_LOGIN_URL = "https://api-gw.propdata.net/users/public-api/login/"
 _DEFAULT_PROPCTRL_BASE_URL = "https://api.propctrl.com"
 _DEFAULT_REMAX_BASE_URL = "https://ahcjbl9nbb.execute-api.eu-west-1.amazonaws.com/feeds_default"
+# Entegral gave us http:// endpoints; the client tries https:// first and only
+# falls back to http:// when TLS is unreachable (see entegral/client.py).
+_DEFAULT_ENTEGRAL_BASE_URL = "https://sync.entegral.net/api"
 _REMAX_URL_ENV_NAMES = (
     "REMAX_API_BASE_URL",
     "REMAX_LIST_API_URL",
@@ -147,3 +152,26 @@ def resolve_remax_credentials() -> RemaxCredentials | None:
         api_key=api_key,
         base_url=_resolve_remax_base_url(),
     )
+
+
+@dataclass(frozen=True, slots=True)
+class EntegralCredentials:
+    username: str
+    password: str
+    base_url: str
+
+
+def resolve_entegral_credentials() -> EntegralCredentials | None:
+    """Entegral Sync-API HTTP Basic credentials from the environment or .env.local.
+
+    Entegral confirmed (Dillon Gray, 2026-08-13) this is a pull feed: two Basic-auth
+    GET endpoints on ``sync.entegral.net``. Reads ``ENTEGRAL_USERNAME`` /
+    ``ENTEGRAL_PASSWORD``; returns None (not an error) when unset, so the offline
+    suite and the Next.js side never need them. Nothing here is logged.
+    """
+    username = _from_env_or_local("ENTEGRAL_USERNAME")
+    password = _from_env_or_local("ENTEGRAL_PASSWORD")
+    if not username or not password:
+        return None
+    base_url = _from_env_or_local("ENTEGRAL_API_BASE_URL") or _DEFAULT_ENTEGRAL_BASE_URL
+    return EntegralCredentials(username=username, password=password, base_url=base_url.rstrip("/"))
