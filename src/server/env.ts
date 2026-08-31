@@ -33,6 +33,13 @@ const serverEnvSchema = z.object({
   REMAX_SECRET_KEY: z.string().min(1).optional(),
   REMAX_API_KEY: z.string().min(1).optional(),
   REMAX_API_BASE_URL: z.url().optional(),
+  // Entegral feed adapter (Python importer) — HTTP Basic; optional.
+  ENTEGRAL_USERNAME: z.string().min(1).optional(),
+  ENTEGRAL_PASSWORD: z.string().min(1).optional(),
+  ENTEGRAL_API_BASE_URL: z.url().optional(),
+  // Re-hosted listing media: directory the /media route handler serves from.
+  // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
+  MEDIA_ROOT_DIR: z.string().min(1).optional(),
 });
 
 const parsed = serverEnvSchema.safeParse(process.env);

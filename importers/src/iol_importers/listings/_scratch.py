@@ -23,6 +23,8 @@ CREATE TYPE listing_type AS ENUM ('Sale', 'Rental', 'Unknown');
 CREATE TYPE listing_status AS ENUM
     ('Active', 'UnderOffer', 'Sold', 'Rented', 'Expired', 'Withdrawn', 'Draft');
 CREATE TYPE price_change_type AS ENUM ('Initial', 'Increase', 'Decrease', 'Relisted');
+CREATE TYPE listing_media_type AS ENUM
+    ('Photo', 'FloorPlan', 'VirtualTour', 'Video', 'Document');
 CREATE TYPE import_job_status AS ENUM
     ('Pending', 'Running', 'Success', 'PartialSuccess', 'Failed');
 
@@ -190,6 +192,19 @@ CREATE TABLE listings (
     updated_at timestamptz NOT NULL DEFAULT now(),
     CONSTRAINT uq_listings_feed_vendor UNIQUE (feed_source_id, vendor_listing_id),
     CONSTRAINT listings_price_check CHECK (price IS NULL OR price >= 0)
+);
+
+CREATE TABLE listing_media (
+    id bigserial PRIMARY KEY,
+    listing_id uuid NOT NULL REFERENCES listings(id) ON DELETE CASCADE,
+    media_type listing_media_type NOT NULL DEFAULT 'Photo',
+    url text NOT NULL,
+    caption text,
+    display_order smallint NOT NULL DEFAULT 0,
+    width_px integer,
+    height_px integer,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    CONSTRAINT uq_listing_media_listing_url UNIQUE (listing_id, url)
 );
 
 CREATE TABLE listing_price_history (

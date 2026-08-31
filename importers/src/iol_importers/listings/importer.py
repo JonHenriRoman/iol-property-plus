@@ -183,6 +183,14 @@ def _row_from_record(
     if vendor_listing_id is None:
         raise ListingValidationError("vendor_listing_id is required")
 
+    # Feed-specific required-field checks run in the adapter's mapper, which can't
+    # reach import_errors itself. It sets __validation_error__ on a record it has
+    # already judged unimportable; the importer turns that into a counted
+    # validation error with the mapper's message and the raw payload preserved.
+    forced = clean_str(record.get("__validation_error__"))
+    if forced is not None:
+        raise ListingValidationError(forced)
+
     title = clean_str(record.get("title"))
     if title is None:
         raise ListingValidationError("title is required")

@@ -58,14 +58,14 @@ with import_run("allsa", file_reference=path.name) as run:
     for record in records:
         run.seen()
         try:
-            ...                       # vendor parsing + upsert (importer's own connection)
+            ...  # vendor parsing + upsert (importer's own connection)
             run.inserted()
         except ValidationError as exc:
             run.record_error(
                 vendor_listing_id=record.get("id"),
                 error_type="validation",
                 error_message=str(exc),
-                raw_payload=record,     # the untransformed payload
+                raw_payload=record,  # the untransformed payload
             )
 ```
 
@@ -162,6 +162,13 @@ is the counterpart for feeds that send **explicit** deletions (RE/MAX's
 `/lists_deleted`): one `UPDATE listings SET status = 'Withdrawn', expired_at =
 now() WHERE … AND status <> 'Withdrawn'`. Never deletes a row, only touches
 listings that exist, idempotent. Also no migration.
+
+`iol_importers.lifecycle.withdraw_missing(feed_source_code, seen_vendor_listing_ids,
+*, raw_scope=None)` is for feeds that send a full **snapshot** of a scope
+(Entegral's per-office `officelistings`): it withdraws every non-withdrawn
+listing in the scope — optionally narrowed by `raw_data ->> raw_scope[0] =
+raw_scope[1]` — whose id is not in the snapshot. Refuses an empty `seen` set so
+an empty snapshot can't withdraw everything. Same soft-delete, no migration.
 
 ```sh
 uv run --project importers iol-expire-listings            # run the sweep
@@ -347,6 +354,101 @@ Mapping covers only what the live API confirms; deviations and unmapped fields
 `rental_details`, …) are in
 [`remax/MAPPING_NOTES.md`](src/iol_importers/remax/MAPPING_NOTES.md).
 `pytest -m live` (opt-in) exercises real signed calls to all four endpoints.
+
+## Entegral feed adapter (`iol_importers.entegral`)
+
+A **pull** feed — not the push-oriented Sync API in Entegral's public docs
+(confirmed with Entegral directly, 2026-08-13). Two HTTP Basic-auth `GET`
+endpoints on `sync.entegral.net`:
+
+- `GET /api/officeslist` — the offices that opted into syndication to us, each
+  with an `officereference`.
+- `GET /api/listings?type=officelistings&ref={officereference}` — one office's
+  **complete active** listing set, agent + office contact inline (a shape like
+  the Sync API `CreateOrUpdateListing` object).
+
+A run calls `officeslist` first, then `officelistings` once per office, and feeds
+each office's listings through the core importer as its own `import_listings`
+call.
+
+**No deletions endpoint.** `officelistings` is a full snapshot, so a listing that
+disappears is caught by **per-office reconciliation**:
+`lifecycle.withdraw_missing` soft-deletes (`status='Withdrawn'`) every listing
+scoped to that `officereference` — via `raw_data ->> 'entegral_office_reference'`
+— whose id was absent from the response. Skipped entirely when an office's
+response is empty or its import had a failure, so a transient empty response
+never withdraws an office's book.
+
+**Photos are re-hosted, not hotlinked.** Entegral's terms forbid hyperlinking
+their images (and `next.config.ts` denies all remote image hosts). Every
+`photos[].imgUrl` is downloaded, validated by magic bytes, content-addressed
+under `data/media/entegral/…` by the shared [media store](#media-store), and
+recorded in `listing_media` with a site-relative `/media/entegral/…` URL;
+`primary_image_url` points at the first re-hosted asset. A source-URL index means
+re-polls re-download nothing (`--refresh-media` forces it). One photo failing
+never fails its listing.
+
+**Agent + office name are required.** A listing missing either is recorded in
+`import_errors` (`error_type='validation'`) and not imported — never a silent
+import without attribution.
+
+**Credentials** — `.env.local` (empty placeholders in `.env.example`):
+
+```ini
+ENTEGRAL_USERNAME=...
+ENTEGRAL_PASSWORD=...
+```
+
+The client tries `https://sync.entegral.net` first and drops to the `http://`
+URLs Entegral gave only if TLS is unreachable (logging a warning).
+
+```sh
+uv run --project importers entegral-import --max-offices 2 --max-listings 5
+uv run --project importers entegral-import --dry-run
+uv run --project importers entegral-import -o OFF123 --no-media
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.entegral.demo
+```
+
+**Scheduling** (not wired — see the root README's "Not yet implemented"). The
+feed updates twice a day and Entegral requires a poll at least every 24 hours;
+run it every 12 hours to catch both:
+
+```cron
+0 */12 * * *  cd /srv/iol-property-plus && \
+    uv run --project importers entegral-import >> /var/log/iol/entegral.log 2>&1
+```
+
+Mapping, deviations, unmapped fields, and the **obligations that live outside
+this importer** (lead emails to the agent **and** `support@entegral.net`; no
+third-party data handoff; the open decision on a listing deep-link pattern) are
+in [`entegral/MAPPING_NOTES.md`](src/iol_importers/entegral/MAPPING_NOTES.md).
+`pytest -m live` (opt-in) exercises a real `officeslist` + one `officelistings` +
+one photo download.
+
+## Media store (`iol_importers.media`)
+
+Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the
+other feeds keep their hotlinked `primary_image_url` for now and can adopt it
+later.
+
+- `media.store.MediaStore` — a content-addressed directory tree
+  (`<root>/<feed>/<sha[:2]>/<sha>.<ext>`, default root `data/media`). Identical
+  bytes are stored once; a re-run produces the same URL.
+- `media.sniff` — magic-byte type detection (JPEG/PNG/WebP/GIF) and header-only
+  pixel dimensions, stdlib (no Pillow). The vendor `Content-Type` is not trusted.
+- `media.fetch.fetch_and_store` — streamed download with a 15 MB cap, an
+  allow-list check **after** sniffing, and a source-URL index so re-polls skip
+  the HTTP fetch.
+- `media.db.sync_listing_media` — upsert `listing_media` rows for a listing and
+  prune the ones whose URL is no longer present (photo removed vendor-side).
+
+Served to the browser by the Next.js route handler
+`src/app/media/[...path]/route.ts`, reading from `MEDIA_ROOT_DIR` (default
+`<repo>/data/media`) with path-traversal and extension guards and a one-year
+immutable cache. Under Docker that directory needs a mounted volume — see the
+root README's "Not yet implemented".
 
 ## Development
 

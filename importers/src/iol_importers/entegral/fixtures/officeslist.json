@@ -1,0 +1,18 @@
+{
+  "offices": [
+    {
+      "officereference": "OFF001",
+      "name": "Demo Property Group Claremont",
+      "officeTel": "0210000001",
+      "officeEmail": "claremont@example.test",
+      "logo": "https://img.entegral.net/logo/OFF001.png"
+    },
+    {
+      "officereference": "OFF002",
+      "name": "Demo Property Group Sandton",
+      "officeTel": "0110000002",
+      "officeEmail": "sandton@example.test",
+      "logo": "https://img.entegral.net/logo/OFF002.png"
+    }
+  ]
+}
