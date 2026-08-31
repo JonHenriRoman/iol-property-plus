@@ -1,0 +1,200 @@
+{
+  "Listings": {
+    "Property": [
+      {
+        "UniqueID": 900001,
+        "Reference": 55001,
+        "CreatedOn": "2025-11-04 12:00:00",
+        "UpdatedOn": "2026-08-14 08:00:30",
+        "Suburb": "Rondebosch",
+        "City": "Cape Town",
+        "Province": "Western Cape",
+        "Price": 2500000,
+        "PricePrefix": "Asking Price",
+        "Status": "For Sale",
+        "PropertySize": 180,
+        "ErfSize": 640,
+        "Type": "House",
+        "Bedrooms": 3,
+        "Bathrooms": 2,
+        "Garages": 2,
+        "Rates": 1200,
+        "Levy": 0,
+        "Parking": "Garage",
+        "MapXCoordinate": 18.476,
+        "MapYCoordinate": -33.963,
+        "Heading": "Family home in leafy Rondebosch",
+        "Description": "A spacious three bedroom home\n   with a large garden and a double garage.",
+        "Images": {
+          "Image": [
+            { "ImageURL": "https://images.example.test/900001/1.jpg" },
+            { "ImageURL": "https://images.example.test/900001/2.jpg" }
+          ]
+        },
+        "Agents": [
+          {
+            "Agent": {
+              "AgentID": 70001,
+              "AgentName": "Alex Carter",
+              "AgentPhone": "0210000001",
+              "AgentEmail": "alex@example.test"
+            }
+          }
+        ],
+        "Office": {
+          "Name": "Demo Realty Rondebosch",
+          "ID": 8001,
+          "Email": "rondebosch@example.test",
+          "PhysicalAddress": "1 Main Road, Rondebosch, Cape Town, 7700",
+          "Province": "Western Cape"
+        }
+      },
+      {
+        "UniqueID": 900002,
+        "Reference": 55002,
+        "CreatedOn": "2025-11-04 12:00:00",
+        "UpdatedOn": "2026-08-14 08:05:00",
+        "Location": 3100047,
+        "Price": 2650000,
+        "Status": "For Sale",
+        "PropertySize": 175,
+        "Type": "House",
+        "Bedrooms": 3,
+        "Bathrooms": 2,
+        "Heading": "Renovated home near the common, Rondebosch",
+        "Description": "Move-in ready three bedroom home a short walk from the common.",
+        "Images": {
+          "Image": { "ImageURL": "https://images.example.test/900002/1.jpg" }
+        },
+        "Agents": [
+          {
+            "Agent": {
+              "AgentID": 70001,
+              "AgentName": "Alex Carter",
+              "AgentPhone": "0210000001",
+              "AgentEmail": "alex@example.test"
+            }
+          }
+        ],
+        "Office": {
+          "Name": "Demo Realty Rondebosch",
+          "ID": 8001,
+          "Email": "rondebosch@example.test",
+          "PhysicalAddress": "1 Main Road, Rondebosch, Cape Town, 7700",
+          "Province": "Western Cape"
+        }
+      },
+      {
+        "UniqueID": 900003,
+        "Reference": 55003,
+        "CreatedOn": "2026-01-10 09:30:00",
+        "UpdatedOn": "2026-08-01 10:00:00",
+        "Suburb": "Sandton",
+        "City": "Johannesburg",
+        "Province": "Gauteng",
+        "Price": 15000,
+        "Status": "To Let",
+        "PropertySize": 42,
+        "Type": "Studio Apartment",
+        "Bathrooms": 1,
+        "AvailableFrom": "2026-09-01",
+        "Heading": "Studio apartment in Sandton",
+        "Description": "Compact studio with a Juliet balcony, walk to Gautrain.",
+        "Images": {
+          "Image": [{ "ImageURL": "https://images.example.test/900003/1.jpg" }]
+        },
+        "Agents": [
+          {
+            "Agent": {
+              "AgentID": 70002,
+              "AgentName": "Bongi Ndlovu",
+              "AgentPhone": "0110000002",
+              "AgentEmail": "bongi@example.test"
+            }
+          }
+        ],
+        "Office": {
+          "Name": "Demo Realty Sandton",
+          "ID": 8002,
+          "Email": "sandton@example.test",
+          "PhysicalAddress": "5 Rivonia Road, Sandton, 2196",
+          "Province": "Gauteng"
+        }
+      },
+      {
+        "UniqueID": 900004,
+        "Reference": 55004,
+        "CreatedOn": "2026-02-15 14:00:00",
+        "UpdatedOn": "2026-07-20 16:00:00",
+        "Suburb": "Sandton",
+        "City": "Johannesburg",
+        "Province": "Gauteng",
+        "Price": 0,
+        "Status": "Holiday",
+        "PropertySize": 95,
+        "Type": "Apartment",
+        "Bedrooms": 2,
+        "Bathrooms": 2,
+        "Heading": "Holiday apartment, contact for rates",
+        "Description": "Two bedroom holiday let, minimum stay applies.",
+        "Images": {
+          "Image": [{ "ImageURL": "https://images.example.test/900004/1.jpg" }]
+        },
+        "Agents": [
+          {
+            "Agent": {
+              "AgentID": 70002,
+              "AgentName": "Bongi Ndlovu",
+              "AgentPhone": "0110000002",
+              "AgentEmail": "bongi@example.test"
+            }
+          }
+        ],
+        "Office": {
+          "Name": "Demo Realty Sandton",
+          "ID": 8002,
+          "Email": "sandton@example.test",
+          "PhysicalAddress": "5 Rivonia Road, Sandton, 2196",
+          "Province": "Gauteng"
+        }
+      },
+      {
+        "UniqueID": 900005,
+        "Reference": 55005,
+        "CreatedOn": "2026-03-01 08:00:00",
+        "UpdatedOn": "2026-06-01 08:00:00",
+        "Suburb": "Rondebosch",
+        "City": "Cape Town",
+        "Province": "Western Cape",
+        "Price": 8900000,
+        "Status": "For Sale",
+        "PropertySize": 520,
+        "Type": "Mansion",
+        "Bedrooms": 6,
+        "Bathrooms": 5,
+        "Heading": "Large property with an out-of-vocabulary Type",
+        "Description": "This record uses a Type value outside Appendix B and must be quarantined.",
+        "Images": {
+          "Image": [{ "ImageURL": "https://images.example.test/900005/1.jpg" }]
+        },
+        "Agents": [
+          {
+            "Agent": {
+              "AgentID": 70001,
+              "AgentName": "Alex Carter",
+              "AgentPhone": "0210000001",
+              "AgentEmail": "alex@example.test"
+            }
+          }
+        ],
+        "Office": {
+          "Name": "Demo Realty Rondebosch",
+          "ID": 8001,
+          "Email": "rondebosch@example.test",
+          "PhysicalAddress": "1 Main Road, Rondebosch, Cape Town, 7700",
+          "Province": "Western Cape"
+        }
+      }
+    ]
+  }
+}

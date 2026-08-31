@@ -427,6 +427,78 @@ in [`entegral/MAPPING_NOTES.md`](src/iol_importers/entegral/MAPPING_NOTES.md).
 `pytest -m live` (opt-in) exercises a real `officeslist` + one `officelistings` +
 one photo download.
 
+## PropertyEngine feed adapter (`iol_importers.propertyengine`)
+
+The fifth real vendor feed. PropertyEngine syndicates listings to us using
+**Gumtree Pro's "Real Estate Standard Template Feed" v1.0.1** — Gumtree's own
+prescribed outbound schema, which PropertyEngine implements. The schema doc
+(`~/Documents/setup-guides/2RealEstate_StandardTemplate_GumtreePro (1) (2).pdf`)
+specifies the **file format only** — never a URL, an auth scheme, or a schedule.
+
+**Format — both, auto-detected.** Root is `{ Listings: { Property: [ … ] } }`. The
+doc says JSON; the only PropertyEngine feed anyone has observed (sibling repo
+`iol-property/packs/propertyengine`, 1084 live listings) is **XML** with the same
+field names, just lowercased in places (`status`, `agent`, `email`, `CityTown`,
+`AgentId`). `decode.py` sniffs the first non-whitespace byte and normalises both
+into one nested-dict shape with case-insensitive, alias-tolerant field lookup.
+
+**`Location` → suburb.** Appendix A is a `LocationID → SA -> Province -> [Area ->]
+Locality` gazetteer with a lat/long centroid, transcribed once into
+`propertyengine/locations.csv` (verified: unique ids, the nine SA provinces,
+coordinates inside the SA bounding box). It is **not** suburb-level in general and
+has no link to our Property24-derived `suburbs` ids. When `Location` is present,
+its locality name is the suburb candidate (resolves for metro suburb rows, lands
+`suburb_id` NULL for city rows — the listing still imports), and its
+province/area/centroid go into `raw_data`. When `Location` is absent, the
+documented free-text `Suburb` / `City`(`CityTown`) / `Province` are used. In the
+observed feed, `Location` was never populated.
+
+**`Type` → property type.** All 41 Appendix B values are mapped explicitly in
+`map.py::_PROPERTY_TYPE`; nothing in-vocabulary errors. A `Type` **outside**
+Appendix B is quarantined (`error_type='validation'`), never defaulted.
+
+**Validation, two tiers.** `validate.py` rejects a record (`error_type='validation'`)
+on a value breach — bad date format, malformed email, a space in `AgentPhone`,
+an unknown `Type` or `Status`, no geography at all. The doc's Pascal-case /
+no-underscore **tag-name** conventions are counted per run and logged, never
+rejected — the real feed sends lowercase tags and rejecting on that would
+quarantine 100% of it.
+
+**Other semantics.** `Status` (For Sale / To Let / Holiday) is the market type,
+not a lifecycle state — it maps to `listing_type` (`Holiday` → `Rental`; there is
+no Holiday enum value). `Price == 0` means "Contact for Price" per the doc
+(`price` NULL, `price_on_application` true); a missing `Price` tag is not `0`.
+`Bedrooms` is *removed* for a studio, so its absence stays `None`. `Office` maps
+onto `agencies` — there is no agency level above it. Photos are hotlinked
+(`listing_media` rows), not re-hosted.
+
+**Config** — `.env.local` (empty placeholders in `.env.example`; optional entries
+in `src/server/env.ts`):
+
+```ini
+PROPERTYENGINE_FEED_URL=            # still pending from PropertyEngine
+PROPERTYENGINE_FEED_AUTH_TOKEN=     # optional ("Authorization may be implemented")
+PROPERTYENGINE_FEED_AUTH_SCHEME=    # bearer (default) | basic
+```
+
+**Run:**
+
+```sh
+# until the real URL lands, run against a local feed file:
+uv run --project importers propertyengine-import --file data/propertyengine/feed.xml --dry-run
+uv run --project importers propertyengine-import --file data/propertyengine/feed.xml
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.propertyengine.demo
+```
+
+Field mapping, judgement calls, and the full list of what still needs to come
+from PropertyEngine directly (the URL, whether auth is enabled, the pull
+schedule, one-agency vs multi-agency scope) are in
+[`propertyengine/MAPPING_NOTES.md`](src/iol_importers/propertyengine/MAPPING_NOTES.md).
+`pytest -m live` (opt-in) fetches the real feed and checks shapes only — it skips
+until `PROPERTYENGINE_FEED_URL` is set.
+
 ## Media store (`iol_importers.media`)
 
 Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the
@@ -457,7 +529,7 @@ uv run --project importers ruff check .
 uv run --project importers pytest                                  # no DB, no network
 TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
     uv run --project importers pytest -m dbtest                    # opt-in
-uv run --project importers pytest -m live                          # opt-in, real Propdata / PropCtrl / RE/MAX APIs
+uv run --project importers pytest -m live                          # opt-in, real Propdata / PropCtrl / RE/MAX / Entegral / PropertyEngine feeds
 ```
 
 The `dbtest` suite leaves the target database untouched: the `p24-suburbs` tests

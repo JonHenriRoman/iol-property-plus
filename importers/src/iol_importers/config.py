@@ -15,6 +15,7 @@ PROPDATA_DIR = REPO_ROOT / "data" / "propdata"
 PROPCTRL_DIR = REPO_ROOT / "data" / "propctrl"
 REMAX_DIR = REPO_ROOT / "data" / "remax"
 ENTEGRAL_DIR = REPO_ROOT / "data" / "entegral"
+PROPERTYENGINE_DIR = REPO_ROOT / "data" / "propertyengine"
 MEDIA_DIR = REPO_ROOT / "data" / "media"
 
 _DEFAULT_DATABASE_URL = "postgresql://localhost:5432/iol_property_plus"
@@ -175,3 +176,43 @@ def resolve_entegral_credentials() -> EntegralCredentials | None:
         return None
     base_url = _from_env_or_local("ENTEGRAL_API_BASE_URL") or _DEFAULT_ENTEGRAL_BASE_URL
     return EntegralCredentials(username=username, password=password, base_url=base_url.rstrip("/"))
+
+
+_PROPERTYENGINE_AUTH_SCHEMES = ("bearer", "basic")
+
+
+@dataclass(frozen=True, slots=True)
+class PropertyengineFeed:
+    """Where the PropertyEngine feed file lives, and how (if at all) to authenticate.
+
+    The Gumtree Pro "Real Estate Standard Template Feed" doc specifies the JSON/XML
+    format only — never a hosting URL, a schedule, or an auth scheme. It does say
+    "Authorization may be implemented" at the hosting URL, so ``auth_token`` is
+    optional and, when present, ``auth_scheme`` decides the header.
+    """
+
+    feed_url: str
+    auth_token: str | None
+    auth_scheme: str  # "bearer" | "basic"
+
+
+def resolve_propertyengine_feed() -> PropertyengineFeed | None:
+    """PropertyEngine feed location + optional auth from the environment or .env.local.
+
+    Returns None (not an error) when ``PROPERTYENGINE_FEED_URL`` is unset — the
+    URL is still pending from PropertyEngine, the offline suite never needs it, and
+    ``--file`` runs bypass this entirely. ``PROPERTYENGINE_FEED_AUTH_TOKEN`` is
+    optional; ``PROPERTYENGINE_FEED_AUTH_SCHEME`` is ``bearer`` (default) or
+    ``basic``. The token is never logged or persisted.
+    """
+    feed_url = _from_env_or_local("PROPERTYENGINE_FEED_URL")
+    if not feed_url:
+        return None
+    scheme = (_from_env_or_local("PROPERTYENGINE_FEED_AUTH_SCHEME") or "bearer").strip().lower()
+    if scheme not in _PROPERTYENGINE_AUTH_SCHEMES:
+        scheme = "bearer"
+    return PropertyengineFeed(
+        feed_url=feed_url.strip(),
+        auth_token=_from_env_or_local("PROPERTYENGINE_FEED_AUTH_TOKEN"),
+        auth_scheme=scheme,
+    )

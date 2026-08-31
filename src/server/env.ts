@@ -37,6 +37,11 @@ const serverEnvSchema = z.object({
   ENTEGRAL_USERNAME: z.string().min(1).optional(),
   ENTEGRAL_PASSWORD: z.string().min(1).optional(),
   ENTEGRAL_API_BASE_URL: z.url().optional(),
+  // PropertyEngine feed adapter (Python importer) — Gumtree Pro standard template.
+  // URL pending from PropertyEngine; auth optional ("Authorization may be implemented").
+  PROPERTYENGINE_FEED_URL: z.url().optional(),
+  PROPERTYENGINE_FEED_AUTH_TOKEN: z.string().min(1).optional(),
+  PROPERTYENGINE_FEED_AUTH_SCHEME: z.enum(['bearer', 'basic']).optional(),
   // Re-hosted listing media: directory the /media route handler serves from.
   // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
   MEDIA_ROOT_DIR: z.string().min(1).optional(),

@@ -80,9 +80,14 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 
 `MEDIA_ROOT_DIR` is the directory `src/app/media/[...path]/route.ts` serves
 re-hosted listing photos from; the feed importers write there. The feed-adapter
-credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`) are also
-server-only and optional — the web app never reads them; only the Python
-importers do. See each feed-adapter subsection under [Seed data](#seed-data).
+credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`,
+`PROPERTYENGINE_FEED_*`) are also server-only and optional — the web app never
+reads them; only the Python importers do. `PROPERTYENGINE_FEED_URL` is still
+blank pending the URL from PropertyEngine (the Gumtree Pro schema doc specifies
+the file format only); `PROPERTYENGINE_FEED_AUTH_TOKEN` /
+`PROPERTYENGINE_FEED_AUTH_SCHEME` (`bearer` | `basic`) are only used if that URL
+turns out to need authentication. See each feed-adapter subsection under
+[Seed data](#seed-data).
 
 Every variable has a safe default, so **nothing is required for local dev**. The
 two Zod schemas each validate once on module load. `src/server/env.ts` opens with
@@ -270,6 +275,25 @@ the agent **and** `support@entegral.net`; no third-party data handoff; the open
 decision on a listing deep-link pattern) are in `entegral/MAPPING_NOTES.md`. See
 [`importers/README.md`](importers/README.md).
 
+### PropertyEngine feed adapter
+
+`importers/src/iol_importers/propertyengine/` — the fifth vendor feed.
+PropertyEngine syndicates to us using **Gumtree Pro's "Real Estate Standard
+Template Feed" v1.0.1** schema (a single full-resend file). The doc specifies
+JSON; the only PropertyEngine feed observed in practice is XML with the same
+field semantics, so `decode.py` auto-detects and normalises both. `Location`
+values (the doc's Appendix A gazetteer) resolve through a checked-in
+`locations.csv` (transcribed from the PDF, verified against the SA bounding box);
+`Type` values map through the full Appendix B vocabulary, and a value outside it
+is quarantined (`error_type='validation'`) rather than defaulted. Removals are
+caught by reconciliation (`lifecycle.withdraw_missing`) plus the expiry sweep.
+The feed **URL is still pending from PropertyEngine** — `PROPERTYENGINE_FEED_URL`
+is blank; run `propertyengine-import --file <path>` against a local file until it
+lands. Optional auth (`PROPERTYENGINE_FEED_AUTH_TOKEN` /
+`PROPERTYENGINE_FEED_AUTH_SCHEME`) is off unless set. Details and the full list of
+what still needs to come from PropertyEngine are in
+`propertyengine/MAPPING_NOTES.md`. See [`importers/README.md`](importers/README.md).
+
 ### Re-hosted listing media
 
 `importers/src/iol_importers/media/` — a shared, feed-agnostic layer that
@@ -370,8 +394,15 @@ federated. The following are deferred follow-ups:
   between the importer job and the web service) — not wired.
 - **Feed importer scheduling.** No cron/CronJob/EventBridge wiring for
   `p24-suburbs`, `propdata-import`, `propctrl-import`, `remax-import`,
-  `entegral-import` (Entegral needs ≤ 24 h; run every 12 h) or
+  `entegral-import` (Entegral needs ≤ 24 h; run every 12 h),
+  `propertyengine-import` (nightly; schedule unconfirmed with PropertyEngine) or
   `iol-expire-listings`. Each command's docstring carries the intended cadence.
+- **The PropertyEngine feed URL.** `PROPERTYENGINE_FEED_URL` is blank — the
+  Gumtree Pro schema doc specifies the file format only, so the hosting URL,
+  whether it needs authentication, the pull schedule, and one-agency vs
+  multi-agency scope all still need to come from PropertyEngine directly. The
+  adapter runs today against a local file (`propertyengine-import --file …`);
+  `propertyengine/MAPPING_NOTES.md` lists what is outstanding.
 - **Lead / enquiry emails, with the Entegral copy rule.** No email-sending code
   exists. When enquiry notifications are built, an enquiry on an
   **Entegral-sourced** listing must be emailed to the listing's agent(s) **and
