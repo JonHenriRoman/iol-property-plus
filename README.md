@@ -81,8 +81,9 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 `MEDIA_ROOT_DIR` is the directory `src/app/media/[...path]/route.ts` serves
 re-hosted listing photos from; the feed importers write there. The feed-adapter
 credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`,
-`PROPERTYENGINE_FEED_*`) are also server-only and optional — the web app never
-reads them; only the Python importers do. `PROPERTYENGINE_FEED_URL` is still
+`PROPERTYENGINE_FEED_*`, `FUSION_*`) are also server-only and optional — the web
+app never reads them; only the Python importers do. `FUSION_PASSWORD` feeds the
+per-call Fusion SecurityToken digest but is still a raw credential. `PROPERTYENGINE_FEED_URL` is still
 blank pending the URL from PropertyEngine (the Gumtree Pro schema doc specifies
 the file format only); `PROPERTYENGINE_FEED_AUTH_TOKEN` /
 `PROPERTYENGINE_FEED_AUTH_SCHEME` (`bearer` | `basic`) are only used if that URL
@@ -294,6 +295,28 @@ lands. Optional auth (`PROPERTYENGINE_FEED_AUTH_TOKEN` /
 what still needs to come from PropertyEngine are in
 `propertyengine/MAPPING_NOTES.md`. See [`importers/README.md`](importers/README.md).
 
+### Fusion FeedStore feed adapter
+
+`importers/src/iol_importers/fusion/` — the sixth vendor feed, and the first
+that is **not** a REST pull. Private Property SA's Fusion FeedStore is an
+**event-sourced XML sync**: four POST methods on `…/v1/sync/`, each signed with a
+fresh per-call SecurityToken (`base64(sha1(f"{timeStamp}*{password}*{salt}"))`).
+A first run issues `RequestSnapshot` then drains `GetChanges` across however many
+calls the snapshot takes; later runs resume from the saved `commitToken`, which
+is persisted only after a batch is fully applied (the doc's "omit the token to
+replay the last batch" recovery). `<Listing>` events feed `import_listings`
+(keyed on the Fusion id, never `fusionRef`); `<Delete>` soft-deletes
+(`withdraw_listings` for listings, `status='Inactive'` for offices/agents);
+`<Office>`/`<Agent>` upsert `agencies`/`agents`; `<AreaTree>` builds a
+`data/fusion/area_tree.json` suburb crosswalk fed to `resolve_suburb` (no
+parallel geography table); `<Development>` is deferred to a sidecar + `raw_data`.
+Photos are hotlinked. Credentials (`FUSION_CLIENT_ID` / `FUSION_PASSWORD` /
+`FUSION_API_BASE_URL`) live in `.env.local`; `.env.example` and `src/server/env.ts`
+carry them as optional. `NotifyChangesAvailable` (Fusion's inbound webhook) and
+canonical `developments` sync are follow-ups — see
+[Not yet implemented](#not-yet-implemented) and `fusion/MAPPING_NOTES.md`. See
+[`importers/README.md`](importers/README.md).
+
 ### Re-hosted listing media
 
 `importers/src/iol_importers/media/` — a shared, feed-agnostic layer that
@@ -395,8 +418,20 @@ federated. The following are deferred follow-ups:
 - **Feed importer scheduling.** No cron/CronJob/EventBridge wiring for
   `p24-suburbs`, `propdata-import`, `propctrl-import`, `remax-import`,
   `entegral-import` (Entegral needs ≤ 24 h; run every 12 h),
-  `propertyengine-import` (nightly; schedule unconfirmed with PropertyEngine) or
-  `iol-expire-listings`. Each command's docstring carries the intended cadence.
+  `propertyengine-import` (nightly; schedule unconfirmed with PropertyEngine),
+  `fusion-import` (poll every ~15 min, or drive it from the notification webhook
+  below) or `iol-expire-listings`. Each command's docstring carries the intended
+  cadence.
+- **Fusion `NotifyChangesAvailable` webhook.** The Fusion adapter implements the
+  polling side (`RequestSnapshot` / `GetChanges`) only. Fusion can also call
+  **into** us to signal "the queue has data" — an inbound endpoint that verifies
+  the request's SecurityToken, replies `<RequestCompleted/>` within a minute, and
+  does not itself call `GetChanges`. Not built.
+- **Canonical `developments` sync for Fusion.** `<Development>` events are kept
+  in `data/fusion/developments.json` + `raw_data`; `listings.development_id` is
+  left NULL. Persisting a canonical `developments` row per Fusion development
+  needs a `004` migration (`development_vendor_ids` + a soft-delete state on that
+  table). See `importers/src/iol_importers/fusion/MAPPING_NOTES.md`.
 - **The PropertyEngine feed URL.** `PROPERTYENGINE_FEED_URL` is blank — the
   Gumtree Pro schema doc specifies the file format only, so the hosting URL,
   whether it needs authentication, the pull schedule, and one-agency vs

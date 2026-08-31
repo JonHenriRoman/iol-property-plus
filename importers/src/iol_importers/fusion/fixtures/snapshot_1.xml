@@ -1,0 +1,53 @@
+<Changes clientId="458" commitToken="snap-token-1" syncEventsCount="3">
+  <BeginSnapshot types="Offices,Agents,AreaTree,Developments,Listings" />
+  <Snapshot>
+    <Office id="4" agency="Demo Realty" branch="Cape Town South"
+      address="1 Grove Avenue, Claremont, 7708" tel="0210000004"
+      email="southoffice@example.test" accountStatus="Paying"
+      latitude="-33.9820" longitude="18.4650">
+      <Agents>
+        <AgentRef id="441" title="Principal" />
+      </Agents>
+    </Office>
+  </Snapshot>
+  <Snapshot>
+    <Agent id="441" firstName="Jordan" surname="Adams" role="Manager"
+      tel="0210000004" cell="0820000441" email="jordan@example.test"
+      profilePicUrl2="https://img.example.test/agents/441-hi.jpg"
+      title="Principal" team="Southern Suburbs" allOfficeIds="4"
+      blurb="Sells homes across the southern suburbs." />
+  </Snapshot>
+  <Snapshot>
+    <Listing id="100" officeId="4" agencyName="Demo Realty" branchName="Cape Town South"
+      fusionRef="DR-100" agencyRef="26 65423" publishedDateTime="2026-06-17 10:34"
+      featured="true">
+      <Type listingType="Sale" listingZone="Residential" propertyType="House" />
+      <SaleDetails saleState="ForSale" mandateType="Sole" mandateExpiry="2027-06-17"
+        sellingPrice="2650000" rates="1850" levy="0" priceSuffix="" />
+      <Address streetNumber="12" streetName="Grove" streetType="Avenue"
+        suburbId="8" latitude="-33.9820" longitude="18.4650" addressHidden="false" />
+      <Agents>
+        <AgentRef id="441" />
+      </Agents>
+      <MainFeatures numBedrooms="4" numBathrooms="2.5" numGarages="2"
+        numCoveredParkings="0" numOpenParkings="2" landArea="620" landAreaUnits="sqm"
+        floorArea="210" floorAreaUnits="sqm" />
+      <SecondaryFeatures numEnsuites="1" numStoreys="2" hasStudy="true" hasPool="true"
+        arePetsAllowed="true" hasSolarPanels="true" hasAlarm="true" />
+      <CustomFeatures>
+        <CustomFeature name="Koi Pond" value="yes" />
+      </CustomFeatures>
+      <Photos>
+        <Photo url="https://img.example.test/100/pic1.jpg" />
+        <Photo url="https://img.example.test/100/pic2.jpg" alternativeSizes="med,lrg" />
+      </Photos>
+      <Description>A renovated family home in Claremont.<br/><br/>Walking distance to schools.</Description>
+      <Marketing>
+        <MarketingHeader>Renovated Family Home in Claremont</MarketingHeader>
+      </Marketing>
+      <SellersAndLandlords>
+        <SellerOrLandlord name="Redacted Seller" idnumber="" email="" mobile="" tel="" />
+      </SellersAndLandlords>
+    </Listing>
+  </Snapshot>
+</Changes>

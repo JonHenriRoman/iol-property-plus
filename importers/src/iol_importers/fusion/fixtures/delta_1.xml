@@ -1,0 +1,35 @@
+<Changes clientId="458" commitToken="delta-token-1" syncEventsCount="4">
+  <CreateOrUpdate sequenceId="500" timestamp="2026-08-30T10:00:00.00Z">
+    <Listing id="100" officeId="4" agencyName="Demo Realty" branchName="Cape Town South"
+      fusionRef="DR-100" publishedDateTime="2026-06-17 10:34" featured="true">
+      <Type listingType="Sale" listingZone="Residential" propertyType="House" />
+      <SaleDetails saleState="PriceReduced" mandateType="Sole" sellingPrice="2495000"
+        rates="1850" levy="0" priceSuffix="" />
+      <Address streetNumber="12" streetName="Grove" streetType="Avenue"
+        suburbId="8" latitude="-33.9820" longitude="18.4650" addressHidden="false" />
+      <Agents>
+        <AgentRef id="441" />
+      </Agents>
+      <MainFeatures numBedrooms="4" numBathrooms="2.5" numGarages="2"
+        numCoveredParkings="0" numOpenParkings="2" landArea="620" landAreaUnits="sqm"
+        floorArea="210" floorAreaUnits="sqm" />
+      <SecondaryFeatures hasStudy="true" hasPool="true" arePetsAllowed="true" />
+      <Photos>
+        <Photo url="https://img.example.test/100/pic1.jpg" />
+      </Photos>
+      <Description>Price reduced. A renovated family home in Claremont.</Description>
+      <Marketing>
+        <MarketingHeader>Reduced: Renovated Family Home in Claremont</MarketingHeader>
+      </Marketing>
+    </Listing>
+  </CreateOrUpdate>
+  <Delete sequenceId="501" timestamp="2026-08-30T11:15:00.00Z">
+    <ListingRef id="101" />
+  </Delete>
+  <Delete sequenceId="502" timestamp="2026-08-30T11:16:00.00Z">
+    <OfficeRef id="4" />
+  </Delete>
+  <Delete sequenceId="503" timestamp="2026-08-30T11:17:00.00Z">
+    <AgentRef id="441" />
+  </Delete>
+</Changes>

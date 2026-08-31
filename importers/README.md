@@ -499,6 +499,75 @@ schedule, one-agency vs multi-agency scope) are in
 `pytest -m live` (opt-in) fetches the real feed and checks shapes only — it skips
 until `PROPERTYENGINE_FEED_URL` is set.
 
+## Fusion FeedStore feed adapter (`iol_importers.fusion`)
+
+Private Property SA's **event-sourced XML sync** — not a REST pull. Four POST
+methods on `…/v1/sync/` (`RequestSnapshot`, `GetChanges`, `RequestRollback`,
+`GetClientState`), each signed with a **fresh** SecurityToken in the query string
+(`digest = base64(sha1(f"{timeStamp}*{password}*{salt}"))`, `timeStamp` =
+`YYYY-MM-DD-HH-MM` UTC — tokens are never reused). `GetChanges` also sends a
+`commitToken=` form body.
+
+**The drain loop:**
+
+- First run for a client (no `data/fusion/state.json`, no snapshot in progress) →
+  `RequestSnapshot`, then drain `GetChanges` (no token on the first call).
+- `<BeginSnapshot>` … `<Snapshot>` … `<EndSnapshot/>` **may span many
+  `GetChanges` calls** — the adapter accumulates across batches.
+- **commitToken**: send the previous token to acknowledge a batch and get the
+  next; **omit** it to replay the last. The token is persisted **only after a
+  batch is fully applied**, so a crash replays it — every event is an idempotent
+  upsert / soft-delete.
+- `<Exception>` handling: `HousekeepingInProgress` / `ServiceOffline` /
+  `InternalError` / `SecurityTokenExpired` → back off and retry (client);
+  `InvalidCommitToken` → restart from the token the error supplies;
+  `CommitTokenExpired` → restart with a blank token.
+
+**Object routing:**
+
+- `<Listing>` → `import_listings` (upsert on the Fusion `@id`, **never**
+  `fusionRef`); `<Delete><ListingRef>` → `lifecycle.withdraw_listings`
+  (`status='Withdrawn'`).
+- `<Office>` → `agencies` + `agency_vendor_ids`; `<Agent>` → `agents` +
+  `agent_vendor_ids`; `<Delete>` → `status='Inactive'` (`fusion/reference.py`).
+- `<AreaTree>` → `data/fusion/area_tree.json`, a `suburbId` → name crosswalk fed
+  to the existing `resolve_suburb` (**no parallel geography table**). Unresolved
+  → `suburb_id` NULL; a post-`EndSnapshot` pass backfills listings whose AreaTree
+  node arrived in a later batch.
+- `<Development>` → **deferred** to `data/fusion/developments.json` + `raw_data`;
+  canonical `developments` sync needs a `004` migration (no feed key / no
+  soft-delete state on that table).
+
+Photos are **hotlinked** (operator's choice — `primary_image_url` + `listing_media`
+rows are Fusion CDN URLs). `NotifyChangesAvailable` (Fusion calling into us) is
+out of scope. See
+[`fusion/MAPPING_NOTES.md`](src/iol_importers/fusion/MAPPING_NOTES.md).
+
+**Credentials** — `.env.local` (empty placeholders in `.env.example`):
+
+```ini
+FUSION_CLIENT_ID=...
+FUSION_PASSWORD=...
+FUSION_API_BASE_URL=        # blank = production; set the doc's QA host to test
+```
+
+```sh
+uv run --project importers fusion-import                 # first run: snapshot, then drain
+uv run --project importers fusion-import --state         # local + remote GetClientState, no changes
+uv run --project importers fusion-import --dry-run --max-batches 1
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.fusion.demo
+```
+
+`pytest -m live` (opt-in, needs `FUSION_*`) does a real `GetClientState` and one
+non-acknowledging `GetChanges` — it never moves the real cursor and never issues
+`RequestSnapshot` against a non-QA host.
+
+**Scheduling** (not wired — see the root README's "Not yet implemented"): poll
+every ~15 minutes, or drive it from the `NotifyChangesAvailable` webhook once
+that half is built.
+
 ## Media store (`iol_importers.media`)
 
 Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the

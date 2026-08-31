@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import logging
 import os
 from dataclasses import dataclass
 from pathlib import Path
 
 from dotenv import dotenv_values
+
+logger = logging.getLogger("iol_importers.config")
 
 # importers/ lives one level below the repo root.
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -16,6 +19,7 @@ PROPCTRL_DIR = REPO_ROOT / "data" / "propctrl"
 REMAX_DIR = REPO_ROOT / "data" / "remax"
 ENTEGRAL_DIR = REPO_ROOT / "data" / "entegral"
 PROPERTYENGINE_DIR = REPO_ROOT / "data" / "propertyengine"
+FUSION_DIR = REPO_ROOT / "data" / "fusion"
 MEDIA_DIR = REPO_ROOT / "data" / "media"
 
 _DEFAULT_DATABASE_URL = "postgresql://localhost:5432/iol_property_plus"
@@ -25,6 +29,9 @@ _DEFAULT_REMAX_BASE_URL = "https://ahcjbl9nbb.execute-api.eu-west-1.amazonaws.co
 # Entegral gave us http:// endpoints; the client tries https:// first and only
 # falls back to http:// when TLS is unreachable (see entegral/client.py).
 _DEFAULT_ENTEGRAL_BASE_URL = "https://sync.entegral.net/api"
+# Fusion FeedStore — production sync host. Point FUSION_API_BASE_URL at the doc's
+# QA host (plaintext http) for testing.
+_DEFAULT_FUSION_BASE_URL = "https://za-feedstore.fusionagency.net/v1/sync"
 _REMAX_URL_ENV_NAMES = (
     "REMAX_API_BASE_URL",
     "REMAX_LIST_API_URL",
@@ -216,3 +223,35 @@ def resolve_propertyengine_feed() -> PropertyengineFeed | None:
         auth_token=_from_env_or_local("PROPERTYENGINE_FEED_AUTH_TOKEN"),
         auth_scheme=scheme,
     )
+
+
+@dataclass(frozen=True, slots=True)
+class FusionCredentials:
+    client_id: int
+    password: str
+    base_url: str
+
+
+def resolve_fusion_credentials() -> FusionCredentials | None:
+    """Fusion FeedStore credentials from the environment or .env.local.
+
+    Fusion signs every call with a SecurityToken whose digest is
+    ``base64(sha1(f"{timestamp}*{password}*{salt}"))`` — the password is fed
+    straight into that digest but is still a raw credential and is never logged or
+    persisted here. ``FUSION_CLIENT_ID`` is a numeric id issued by Fusion; a
+    non-numeric value is treated as unset (with a warning). Returns None (not an
+    error) when either value is missing, so the offline suite and the Next.js side
+    never need them. ``FUSION_API_BASE_URL`` overrides the production host (use the
+    doc's QA host for testing).
+    """
+    client_id_raw = _from_env_or_local("FUSION_CLIENT_ID")
+    password = _from_env_or_local("FUSION_PASSWORD")
+    if not client_id_raw or not password:
+        return None
+    try:
+        client_id = int(client_id_raw.strip())
+    except ValueError:
+        logger.warning("FUSION_CLIENT_ID is not numeric — treating Fusion as unconfigured")
+        return None
+    base_url = _from_env_or_local("FUSION_API_BASE_URL") or _DEFAULT_FUSION_BASE_URL
+    return FusionCredentials(client_id=client_id, password=password, base_url=base_url.rstrip("/"))
