@@ -627,6 +627,62 @@ every listing — no database writes. See
 **Scheduling** (not wired — see the root README's "Not yet implemented"): a
 nightly pull per agency; the feed is a full resend (~3.5 MB), not a short poll.
 
+## MyRoof feed adapter (`iol_importers.myroof`)
+
+The per-franchise feed at `https://rat.myroof.co.za/{token}` — one HTTP GET
+returns a franchise's whole book (~7.6 MB / ~3,857 listings) as the bracketed
+key-value text format shared by RT3, MyRoof and PropertyPost. **Built on the
+shared parser `iol_importers.bracket_kv`** — it is not reimplemented. Full resend,
+no delta, no delete signal → parse, map, `import_listings`, then
+`lifecycle.withdraw_missing` (which refuses an empty seen set, so a broken fetch
+cannot withdraw the book).
+
+**One `feed_sources` row per franchise.** The opaque `{token}` path segment is the
+entire credential — it lives on the row, never in the source tree, an env var, a
+log line, or the run result:
+
+```sql
+INSERT INTO feed_sources (code, name, vendor_name, base_url, auth_config)
+VALUES ('myroof-acme', 'Acme Realty (MyRoof)', 'MyRoof',
+        'https://rat.myroof.co.za', '{"token": "<opaque feed token>"}');
+```
+
+**Vendor specifics** (from a real 3,857-record run):
+
+- the whole feed is **bank-repossessed stock** — every record gets a synthetic
+  `Repossession` feature, and `Agent_Name` is a lender/program label ("Standard
+  Bank Repossessed", …) used as the agent's name (also kept in
+  `raw_data.myroof_agent_program`); `Email` is the stable per-agent id;
+- `Description` carries literal `<p>` tags as paragraph breaks — converted to
+  newlines, entities unescaped, never passed through raw;
+- `GPS` is one `"lat,lng"` string with a bare-comma "not supplied" sentinel →
+  `latitude`/`longitude` NULL;
+- `Type` → seeded `property_types` (`Complex` → Townhouse, `Plot` → Vacant Land,
+  `Freehold Residence` → House, …); `Guest House` is left unmapped and quarantines
+  the record rather than guessing;
+- single brand — every record is `Branch_Name` `MyRoof.co.za` / `Branch_ID` `1`;
+- every unlisted key is captured under `raw_data.myroof_<Key>` (a list when it
+  repeats, e.g. `Video_URL`); `Kitchens` is a plain count here (not RT3's list).
+
+Photos hotlinked (`primary_image_url` + `listing_media`); MyRoof imposes no
+re-hosting term.
+
+```sh
+uv run --project importers myroof-import --feed-source myroof-acme
+uv run --project importers myroof-import --token <token> --dry-run   # skips the DB lookup
+uv run --project importers myroof-import --feed-source myroof-acme --file feed.txt
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.myroof.demo
+```
+
+`MYROOF_LIVE_TOKEN=<token> pytest -m live -k myroof` does a real fetch and maps
+every record — no database writes. See
+[`myroof/MAPPING_NOTES.md`](src/iol_importers/myroof/MAPPING_NOTES.md).
+
+**Scheduling** (not wired — see the root README's "Not yet implemented"): a
+nightly pull per franchise; the feed is a full resend, not a short poll.
+
 ## Media store (`iol_importers.media`)
 
 Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the
