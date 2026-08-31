@@ -35,6 +35,10 @@ _DEFAULT_FUSION_BASE_URL = "https://za-feedstore.fusionagency.net/v1/sync"
 # AllSA Property — one public, unauthenticated XML endpoint. The per-agency
 # `agencyid` query parameter is config on the feed_sources row, never here.
 _DEFAULT_ALLSA_BASE_URL = "https://www.allsaproperty.co.za/feeds/iol.ashx"
+# MyRoof — per-franchise bracket-KV feed at `{base_url}/{token}`. The opaque
+# `token` path segment is the credential and lives on the feed_sources row, not
+# here (see `iol_importers.myroof.source`).
+_DEFAULT_MYROOF_BASE_URL = "https://rat.myroof.co.za"
 _REMAX_URL_ENV_NAMES = (
     "REMAX_API_BASE_URL",
     "REMAX_LIST_API_URL",
@@ -109,9 +113,9 @@ def resolve_propctrl_credentials() -> PropctrlCredentials | None:
     return PropctrlCredentials(
         username=username,
         password=password,
-        base_url=(
-            _from_env_or_local("PROPCTRL_API_BASE_URL") or _DEFAULT_PROPCTRL_BASE_URL
-        ).rstrip("/"),
+        base_url=(_from_env_or_local("PROPCTRL_API_BASE_URL") or _DEFAULT_PROPCTRL_BASE_URL).rstrip(
+            "/"
+        ),
     )
 
 
@@ -269,3 +273,15 @@ def resolve_allsa_base_url() -> str:
     ``iol_importers.allsa.source``).
     """
     return (_from_env_or_local("ALLSA_FEED_BASE_URL") or _DEFAULT_ALLSA_BASE_URL).strip()
+
+
+def resolve_myroof_base_url() -> str:
+    """The MyRoof feed host, from MYROOF_FEED_BASE_URL (process env or .env.local)
+    else the default ``https://rat.myroof.co.za``.
+
+    Only the host is resolved here. The per-franchise ``token`` path segment is the
+    credential and lives on the ``feed_sources`` row (see
+    ``iol_importers.myroof.source``); it is never an env var and never logged.
+    """
+    raw = _from_env_or_local("MYROOF_FEED_BASE_URL") or _DEFAULT_MYROOF_BASE_URL
+    return raw.strip().rstrip("/")

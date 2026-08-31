@@ -60,6 +60,10 @@ const serverEnvSchema = z.object({
   // The per-agency `agencyid` is on the feed_sources row, not here; this only
   // overrides the default endpoint host.
   ALLSA_FEED_BASE_URL: optional(z.url()),
+  // MyRoof feed adapter (Python importer) — per-franchise bracket-KV feed. The
+  // opaque feed token is on the feed_sources row (auth_config->>'token'), not
+  // here; this only overrides the default host.
+  MYROOF_FEED_BASE_URL: optional(z.url()),
   // Re-hosted listing media: directory the /media route handler serves from.
   // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
   MEDIA_ROOT_DIR: optional(z.string().min(1)),

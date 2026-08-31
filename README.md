@@ -81,12 +81,13 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 `MEDIA_ROOT_DIR` is the directory `src/app/media/[...path]/route.ts` serves
 re-hosted listing photos from; the feed importers write there. The feed-adapter
 credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`,
-`PROPERTYENGINE_FEED_*`, `FUSION_*`, `ALLSA_FEED_BASE_URL`) are also server-only
-and optional — the web app never reads them; only the Python importers do.
-`FUSION_PASSWORD` feeds the per-call Fusion SecurityToken digest but is still a
-raw credential. AllSA needs no credentials (the feed is public); each agency's
-`agencyid` is on its `feed_sources` row, and `ALLSA_FEED_BASE_URL` only overrides
-the default endpoint host. `PROPERTYENGINE_FEED_URL` is still
+`PROPERTYENGINE_FEED_*`, `FUSION_*`, `ALLSA_FEED_BASE_URL`,
+`MYROOF_FEED_BASE_URL`) are also server-only and optional — the web app never
+reads them; only the Python importers do. `FUSION_PASSWORD` feeds the per-call
+Fusion SecurityToken digest but is still a raw credential. AllSA needs no
+credentials (the feed is public) and MyRoof's per-franchise feed token lives on
+its `feed_sources` row (`auth_config->>'token'`), not in an env var; the
+`*_FEED_BASE_URL` vars only override the default endpoint host. `PROPERTYENGINE_FEED_URL` is still
 blank pending the URL from PropertyEngine (the Gumtree Pro schema doc specifies
 the file format only); `PROPERTYENGINE_FEED_AUTH_TOKEN` /
 `PROPERTYENGINE_FEED_AUTH_SCHEME` (`bearer` | `basic`) are only used if that URL
@@ -337,6 +338,24 @@ tenure. Photos hotlinked. `ALLSA_FEED_BASE_URL` (optional, override only) is in
 `.env.example` and `src/server/env.ts`. See `allsa/MAPPING_NOTES.md` and
 [`importers/README.md`](importers/README.md).
 
+### MyRoof feed adapter
+
+`importers/src/iol_importers/myroof/` — the eighth vendor feed and the first built
+on the shared bracketed-KV parser (`iol_importers.bracket_kv`), not a
+reimplementation. Per-franchise feed at `https://rat.myroof.co.za/{token}`; one
+GET returns the franchise's whole book. Full resend → parse, map,
+`import_listings`, `lifecycle.withdraw_missing` for absences. **Each franchise is
+its own `feed_sources` row** with the opaque `{token}` in `auth_config->>'token'`
+— never in the source, an env var, or a log line. The whole feed is
+bank-repossessed stock: every record gets a synthetic `Repossession` feature and
+`Agent_Name` is a lender-program label (used as the agent name, `Email` is the id).
+`Description`'s literal `<p>` tags are converted to newlines; `GPS` `"lat,lng"`
+splits (bare-comma sentinel → NULL); `Type` crosswalks to `property_types`
+(`Guest House` unmapped → quarantine). Every unlisted key is kept under
+`raw_data.myroof_<Key>`. Photos hotlinked. `MYROOF_FEED_BASE_URL` (optional,
+override only) is in `.env.example` and `src/server/env.ts`. See
+`myroof/MAPPING_NOTES.md` and [`importers/README.md`](importers/README.md).
+
 ### Re-hosted listing media
 
 `importers/src/iol_importers/media/` — a shared, feed-agnostic layer that
@@ -440,12 +459,14 @@ federated. The following are deferred follow-ups:
   `entegral-import` (Entegral needs ≤ 24 h; run every 12 h),
   `propertyengine-import` (nightly; schedule unconfirmed with PropertyEngine),
   `fusion-import` (poll every ~15 min, or drive it from the notification webhook
-  below), `allsa-import` (nightly per agency; full resend) or
-  `iol-expire-listings`. Each command's docstring carries the intended cadence.
-- **AllSA `feed_sources` rows.** Each AllSA agency needs a seeded
-  `feed_sources` row (`code='allsa-<agencyid>'`, `auth_config->>'agency_id'`);
-  feed sources are configuration and are never created by an import run. See
-  `importers/src/iol_importers/allsa/MAPPING_NOTES.md`.
+  below), `allsa-import` (nightly per agency; full resend), `myroof-import`
+  (nightly per franchise; full resend) or `iol-expire-listings`. Each command's
+  docstring carries the intended cadence.
+- **AllSA / MyRoof `feed_sources` rows.** Each AllSA agency
+  (`code='allsa-<agencyid>'`, `auth_config->>'agency_id'`) and each MyRoof
+  franchise (`code='myroof-<franchise>'`, `auth_config->>'token'`) needs a seeded
+  `feed_sources` row; feed sources are configuration and are never created by an
+  import run. See `importers/src/iol_importers/{allsa,myroof}/MAPPING_NOTES.md`.
 - **Fusion `NotifyChangesAvailable` webhook.** The Fusion adapter implements the
   polling side (`RequestSnapshot` / `GetChanges`) only. Fusion can also call
   **into** us to signal "the queue has data" — an inbound endpoint that verifies
