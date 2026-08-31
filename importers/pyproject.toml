@@ -18,6 +18,7 @@ remax-import = "iol_importers.remax.cli:main"
 entegral-import = "iol_importers.entegral.cli:main"
 propertyengine-import = "iol_importers.propertyengine.cli:main"
 fusion-import = "iol_importers.fusion.cli:main"
+allsa-import = "iol_importers.allsa.cli:main"
 
 [dependency-groups]
 dev = [

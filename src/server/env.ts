@@ -56,6 +56,10 @@ const serverEnvSchema = z.object({
   FUSION_CLIENT_ID: optional(z.string().min(1)),
   FUSION_PASSWORD: optional(z.string().min(1)),
   FUSION_API_BASE_URL: optional(z.url()),
+  // AllSA Property feed adapter (Python importer) — public, unauthenticated.
+  // The per-agency `agencyid` is on the feed_sources row, not here; this only
+  // overrides the default endpoint host.
+  ALLSA_FEED_BASE_URL: optional(z.url()),
   // Re-hosted listing media: directory the /media route handler serves from.
   // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
   MEDIA_ROOT_DIR: optional(z.string().min(1)),

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Listings>
+  <Property>
+    <Reference>1604015</Reference>
+    <Heading>Office space for sale in Brandwag</Heading>
+    <Description>124 m&#178; office space in a secure park.</Description>
+    <Type>Office</Type>
+    <Status>For Sale</Status>
+    <Price>1630000.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Freehold</Title>
+    <Url>https://example.test/for-sale/brandwag/1604015</Url>
+    <Suburb>Claremont</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Bloemfontein</Agency>
+    <BranchId>90000</BranchId>
+    <Agency_Location>Bloemfontein</Agency_Location>
+    <Agency_Website>https://example.test</Agency_Website>
+    <Agent_Name>Alex Adams</Agent_Name>
+    <Agent_Title>Candidate Property Practitioner</Agent_Title>
+    <Agent_Cell>060 000 0001</Agent_Cell>
+    <Agent_Tel>051 000 0001</Agent_Tel>
+    <Agent_Email>alex@example.test</Agent_Email>
+    <Images>
+      <Image>https://img.example.test/90000/1604015-a.jpg</Image>
+      <Image>https://img.example.test/90000/1604015-b.jpg</Image>
+      <Image>https://img.example.test/90000/1604015-c.jpg</Image>
+    </Images>
+    <Features>
+      <Floor_Size>124</Floor_Size>
+      <Levies>645</Levies>
+    </Features>
+  </Property>
+  <Property>
+    <Reference>2103051</Reference>
+    <Heading>Family home for sale in Rondebosch</Heading>
+    <Description>Three-bedroom house with a big garden.</Description>
+    <Type>House</Type>
+    <Status>For Sale</Status>
+    <Price>2495000.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Freehold</Title>
+    <Url>https://example.test/for-sale/rondebosch/2103051</Url>
+    <Suburb>Rondebosch</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Bloemfontein</Agency>
+    <BranchId>90000</BranchId>
+    <Agency_Location>Kimberley</Agency_Location>
+    <Agency_Website>https://example.test</Agency_Website>
+    <Agent_Name>Alex Adams</Agent_Name>
+    <Agent_Title>Property Practitioner</Agent_Title>
+    <Agent_Cell>060 000 0001</Agent_Cell>
+    <Agent_Tel>051 000 0001</Agent_Tel>
+    <Agent_Email>Alex@example.test</Agent_Email>
+    <Images>
+      <Image>https://img.example.test/90000/2103051-a.jpg</Image>
+      <Image>https://img.example.test/90000/2103051-b.jpg</Image>
+    </Images>
+    <Features>
+      <Lounges>1</Lounges>
+      <Kitchen>Yes</Kitchen>
+      <Bedrooms>3</Bedrooms>
+      <Bathrooms>1</Bathrooms>
+      <Garden>Yes</Garden>
+    </Features>
+  </Property>
+  <Property>
+    <Reference>3001</Reference>
+    <Heading>Apartment to let in Rondebosch</Heading>
+    <Description>Modern two-bedroom apartment.</Description>
+    <Type>Apartment</Type>
+    <Status>To Rent</Status>
+    <Price>12500.00</Price>
+    <Rental_Period>Per Month</Rental_Period>
+    <Title>Sectional Title</Title>
+    <Url>https://example.test/to-let/rondebosch/3001</Url>
+    <Suburb>Rondebosch</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Bloemfontein</Agency>
+    <BranchId>90000</BranchId>
+    <Agency_Location>Bloemfontein</Agency_Location>
+    <Agency_Website>https://example.test</Agency_Website>
+    <Agent_Name>Bo Bennett</Agent_Name>
+    <Agent_Title>Intern Estate Agent</Agent_Title>
+    <Agent_Cell>060 000 0002</Agent_Cell>
+    <Agent_Tel>051 000 0002</Agent_Tel>
+    <Agent_Email>bo@example.test</Agent_Email>
+    <Images>
+      <Image>https://img.example.test/90000/3001-a.jpg</Image>
+    </Images>
+    <Features>
+      <Floor_Size>48</Floor_Size>
+      <Bedrooms>2</Bedrooms>
+      <Bathrooms>2</Bathrooms>
+      <Built-in_Cupboards>Yes</Built-in_Cupboards>
+      <Pets_Allowed>0</Pets_Allowed>
+    </Features>
+  </Property>
+  <Property>
+    <Reference>4002</Reference>
+    <Heading>Smallholding for sale near Sandton</Heading>
+    <Description>Productive farm with a borehole.</Description>
+    <Type>Farm</Type>
+    <Status>For Sale</Status>
+    <Price>8500000.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Freehold</Title>
+    <Url>https://example.test/for-sale/sandton/4002</Url>
+    <Suburb>Sandton</Suburb>
+    <CityTown>Johannesburg</CityTown>
+    <Province>Gauteng</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Bloemfontein</Agency>
+    <BranchId>90000</BranchId>
+    <Agency_Location>Bloemfontein</Agency_Location>
+    <Agency_Website>https://example.test</Agency_Website>
+    <Agent_Name>Bo Bennett</Agent_Name>
+    <Agent_Title>Intern Estate Agent</Agent_Title>
+    <Agent_Cell>060 000 0002</Agent_Cell>
+    <Agent_Tel>051 000 0002</Agent_Tel>
+    <Agent_Email>bo@example.test</Agent_Email>
+    <Features>
+      <Land_Size>4.28</Land_Size>
+      <Borehole>Yes</Borehole>
+    </Features>
+  </Property>
+  <Property>
+    <Reference>5003</Reference>
+    <Heading>Vacant land for sale in Rosebank</Heading>
+    <Description>Level stand, ready to build.</Description>
+    <Type>Vacant Land</Type>
+    <Status>For Sale</Status>
+    <Price>0.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Freehold</Title>
+    <Url>https://example.test/for-sale/rosebank/5003</Url>
+    <Suburb>Rosebank</Suburb>
+    <CityTown>Johannesburg</CityTown>
+    <Province>Gauteng</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Kimberley</Agency>
+    <BranchId>90250</BranchId>
+    <Agency_Location>Kimberley</Agency_Location>
+    <Agency_Website>https://example.test/kimberley</Agency_Website>
+    <Agent_Name>Cory Carter</Agent_Name>
+    <Agent_Title>Property Practitioner</Agent_Title>
+    <Agent_Cell>060 000 0003</Agent_Cell>
+    <Agent_Tel>053 000 0003</Agent_Tel>
+    <Agent_Email>cory@example.test</Agent_Email>
+    <Images>
+      <Image>https://img.example.test/90000/5003-a.jpg</Image>
+      <Image>https://img.example.test/90000/5003-b.jpg</Image>
+    </Images>
+    <Features>
+      <Erf_Size>450</Erf_Size>
+    </Features>
+  </Property>
+  <Property>
+    <Reference>6004</Reference>
+    <Heading>Double-storey house for sale in Claremont</Heading>
+    <Description>Spacious home with garaging and off-street parking.</Description>
+    <Type>House</Type>
+    <Status>For Sale</Status>
+    <Price>4750000.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Freehold</Title>
+    <Url>https://example.test/for-sale/claremont/6004</Url>
+    <Suburb>Claremont</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty George</Agency>
+    <BranchId>90244</BranchId>
+    <Agency_Location>Somerset West</Agency_Location>
+    <Agency_Website>https://example.test/george</Agency_Website>
+    <Agent_Name>Dana Dube</Agent_Name>
+    <Agent_Title>Director</Agent_Title>
+    <Agent_Cell>060 000 0004</Agent_Cell>
+    <Agent_Tel>044 000 0004</Agent_Tel>
+    <Agent_Email>dana@example.test</Agent_Email>
+    <Images>
+      <Image>https://img.example.test/90000/6004-a.jpg</Image>
+      <Image>https://img.example.test/90000/6004-b.jpg</Image>
+    </Images>
+    <Features>
+      <Bedrooms>4</Bedrooms>
+      <Bathrooms>3</Bathrooms>
+      <Bedrooms>4</Bedrooms>
+      <Bathrooms>3</Bathrooms>
+      <Erf_Size>300</Erf_Size>
+      <Land_Size>1</Land_Size>
+      <Carports>2</Carports>
+      <Parking>1</Parking>
+      <Bedrooms>4</Bedrooms>
+      <Swimming_Pool>Yes</Swimming_Pool>
+      <Swimming_Pool>Yes</Swimming_Pool>
+    </Features>
+  </Property>
+  <Property>
+    <Reference>7005</Reference>
+    <Heading>Townhouse for sale in Sandton</Heading>
+    <Description>Low-maintenance townhouse in a secure complex.</Description>
+    <Type>Townhouse</Type>
+    <Status>For Sale</Status>
+    <Price>1895000.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Sectional Title</Title>
+    <Url>https://example.test/for-sale/sandton/7005</Url>
+    <Suburb>Sandton</Suburb>
+    <CityTown>Johannesburg</CityTown>
+    <Province>Gauteng</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Pretoria</Agency>
+    <BranchId>90245</BranchId>
+    <Agency_Location>Midrand</Agency_Location>
+    <Agency_Website>https://example.test/pretoria</Agency_Website>
+    <Agent_Name>Eli Erasmus</Agent_Name>
+    <Agent_Title>Property Practitioner</Agent_Title>
+    <Agent_Cell>060 000 0005</Agent_Cell>
+    <Agent_Tel>012 000 0005</Agent_Tel>
+    <Agent_Email>eli@example.test</Agent_Email>
+    <Images>
+      <Image>https://img.example.test/90000/7005-a.jpg</Image>
+    </Images>
+    <Features>
+      <Bedrooms>3</Bedrooms>
+      <Solar_Geyser>Yes</Solar_Geyser>
+      <Fibre_Ready>Yes</Fibre_Ready>
+    </Features>
+  </Property>
+  <Property>
+    <Reference>8006</Reference>
+    <Heading>Retail premises to let in Claremont</Heading>
+    <Description>Prime retail space on a busy road.</Description>
+    <Type>Retail</Type>
+    <Status>For Sale</Status>
+    <Price>6200000.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Freehold</Title>
+    <Url>https://example.test/for-sale/claremont/8006</Url>
+    <Suburb>Claremont</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Bloemfontein</Agency>
+    <BranchId>90000</BranchId>
+    <Agency_Location>Bloemfontein</Agency_Location>
+    <Agency_Website>https://example.test</Agency_Website>
+    <Agent_Name>Alex Adams</Agent_Name>
+    <Agent_Title>Property Practitioner</Agent_Title>
+    <Agent_Cell>060 000 0001</Agent_Cell>
+    <Agent_Tel>051 000 0001</Agent_Tel>
+    <Agent_Email>alex@example.test</Agent_Email>
+    <Images>
+      <Image>https://img.example.test/90000/8006-a.jpg</Image>
+    </Images>
+  </Property>
+  <Property>
+    <Reference>9007</Reference>
+    <Heading></Heading>
+    <Description>Listing with no heading — should be quarantined.</Description>
+    <Type>House</Type>
+    <Status>For Sale</Status>
+    <Price>1000000.00</Price>
+    <Rental_Period></Rental_Period>
+    <Title>Freehold</Title>
+    <Url>https://example.test/for-sale/claremont/9007</Url>
+    <Suburb>Claremont</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <AgencyId>90000</AgencyId>
+    <Agency>Demo Realty Bloemfontein</Agency>
+    <BranchId>90000</BranchId>
+    <Agency_Location>Bloemfontein</Agency_Location>
+    <Agency_Website>https://example.test</Agency_Website>
+    <Agent_Name>Alex Adams</Agent_Name>
+    <Agent_Title>Property Practitioner</Agent_Title>
+    <Agent_Cell>060 000 0001</Agent_Cell>
+    <Agent_Tel>051 000 0001</Agent_Tel>
+    <Agent_Email>alex@example.test</Agent_Email>
+    <Features>
+      <Bedrooms>2</Bedrooms>
+    </Features>
+  </Property>
+</Listings>

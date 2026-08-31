@@ -568,6 +568,65 @@ non-acknowledging `GetChanges` — it never moves the real cursor and never issu
 every ~15 minutes, or drive it from the `NotifyChangesAvailable` webhook once
 that half is built.
 
+## AllSA Property feed adapter (`iol_importers.allsa`)
+
+The public, unauthenticated `iol.ashx` XML feed — one HTTP GET returns an agency's
+**whole book** (`<Listings><Property>…</Property></Listings>`, flat, no office
+grouping). A full resend on every pull, same shape as PropertyEngine: parse, map,
+`import_listings`, then reconcile absences with `lifecycle.withdraw_missing`
+(gated on a non-empty id set — an empty `<Listings/>` withdraws nothing).
+
+**One `feed_sources` row per agency.** The `agencyid` query parameter is *not* in
+the source tree — it lives on the row:
+
+```sql
+INSERT INTO feed_sources (code, name, vendor_name, format, base_url, auth_config)
+VALUES ('allsa-10173', 'National Real Estate', 'AllSA Property', 'XML',
+        'https://www.allsaproperty.co.za/feeds/iol.ashx',
+        '{"agency_id": "10173"}');
+```
+
+`vendor_listing_id` is the bare `Reference`, keyed by `feed_source_id` so a
+cross-agency collision cannot happen.
+
+**Object routing:**
+
+- `<Property>` → `import_listings`. `Heading` is the title; **`Title` is tenure**
+  (`Freehold` / `Sectional Title`) and goes to `raw_data.allsa_tenure`. `Price`
+  `0.00` → price-on-application.
+- **`BranchId`** → `agencies` + `agency_vendor_ids`; `lower(Agent_Email)` →
+  `agents` + `agent_vendor_ids` (`allsa/reference.py`). One agency's feed spans
+  several branches (the real 10173 feed has four); `Agency_Location` is the
+  listing's servicing town, not the office, and stays in `raw_data`.
+- Photos **hotlinked** — `primary_image_url` + `listing_media` rows on the AllSA
+  CDN. No re-hosting requirement.
+
+**`<Features>` parsing (`allsa/features.py`).** A free-form bag whose child set
+varies per listing (28 distinct tags observed, illustrative not exhaustive). The
+parser iterates the actual children against a registry: counts → typed columns
+(`Carports + Parking` → `parking_spaces`), `Erf_Size`/`Floor_Size` → m² columns,
+`Land_Size` → m² via a hectares-vs-m² heuristic (backfills `erf_size` only when
+absent and it fits `numeric(10,2)`), `Yes` flags → `listings.features` labels,
+**unknown tags** → `raw_data.allsa_features_extra` + a per-run tally. `<Features>`
+children repeat within one `<Property>` in the real feed (one listing carries
+each tag 1852×) — first occurrence wins, drops are counted.
+
+```sh
+uv run --project importers allsa-import --feed-source allsa-10173
+uv run --project importers allsa-import --agency-id 10173 --dry-run   # skips the DB lookup
+uv run --project importers allsa-import --feed-source allsa-10173 --file feed.xml
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.allsa.demo
+```
+
+`ALLSA_LIVE_AGENCY_ID=10173 pytest -m live -k allsa` does a real fetch and maps
+every listing — no database writes. See
+[`allsa/MAPPING_NOTES.md`](src/iol_importers/allsa/MAPPING_NOTES.md).
+
+**Scheduling** (not wired — see the root README's "Not yet implemented"): a
+nightly pull per agency; the feed is a full resend (~3.5 MB), not a short poll.
+
 ## Media store (`iol_importers.media`)
 
 Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the
