@@ -16,6 +16,7 @@ propdata-import = "iol_importers.propdata.cli:main"
 propctrl-import = "iol_importers.propctrl.cli:main"
 remax-import = "iol_importers.remax.cli:main"
 entegral-import = "iol_importers.entegral.cli:main"
+propertyengine-import = "iol_importers.propertyengine.cli:main"
 
 [dependency-groups]
 dev = [

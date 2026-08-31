@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Property>
+    <Reference>55001</Reference>
+    <ListingType>Houses and Flats For Sale</ListingType>
+    <status>For Sale</status>
+    <Type>House</Type>
+    <Suburb>Rondebosch</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <Bedrooms>3</Bedrooms>
+    <Bathrooms>2</Bathrooms>
+    <Garages>2</Garages>
+    <Rates>1200</Rates>
+    <Levy>0</Levy>
+    <Parking>Garage</Parking>
+    <CreatedOn>2025-11-04 12:00:00</CreatedOn>
+    <UpdatedOn>2026-08-14 08:00:30</UpdatedOn>
+    <Heading><![CDATA[Family home in leafy Rondebosch]]></Heading>
+    <Description><![CDATA[A spacious three bedroom home
+   with a large garden and a double garage.]]></Description>
+    <UniqueID>900001</UniqueID>
+    <ErfSize>640</ErfSize>
+    <PropertySize>180</PropertySize>
+    <MapXCoordinate>18.476</MapXCoordinate>
+    <MapYCoordinate>-33.963</MapYCoordinate>
+    <PricePrefix>Asking Price</PricePrefix>
+    <Agents>
+      <agent>
+        <AgentId>70001</AgentId>
+        <AgentName>Alex Carter</AgentName>
+        <AgentMobile>0210000001</AgentMobile>
+        <AgentPhone>0210000001</AgentPhone>
+        <AgentEmail>alex@example.test</AgentEmail>
+        <AgentPhoto>https://images.example.test/agents/70001.jpg</AgentPhoto>
+      </agent>
+    </Agents>
+    <Images>
+      <Image>
+        <ImageID>img900001a</ImageID>
+        <ImageURL>https://images.example.test/900001/1.jpg</ImageURL>
+      </Image>
+      <Image>
+        <ImageID>img900001b</ImageID>
+        <ImageURL>https://images.example.test/900001/2.jpg</ImageURL>
+      </Image>
+    </Images>
+    <Office>
+      <Name>Demo Realty Rondebosch</Name>
+      <ID>8001</ID>
+      <email>rondebosch@example.test</email>
+      <TelephoneNumber>021 000 0000</TelephoneNumber>
+      <FaxNumber />
+      <PhysicalAddress>1 Main Road, Rondebosch, Cape Town, 7700</PhysicalAddress>
+      <Province>Western Cape</Province>
+    </Office>
+    <Price>2500000</Price>
+  </Property>
+  <Property>
+    <Reference>55002</Reference>
+    <ListingType>Houses and Flats For Sale</ListingType>
+    <status>For Sale</status>
+    <Type>House</Type>
+    <Location>3100047</Location>
+    <Bedrooms>3</Bedrooms>
+    <Bathrooms>2</Bathrooms>
+    <CreatedOn>2025-11-04 12:00:00</CreatedOn>
+    <UpdatedOn>2026-08-14 08:05:00</UpdatedOn>
+    <Heading><![CDATA[Renovated home near the common, Rondebosch]]></Heading>
+    <Description><![CDATA[Move-in ready three bedroom home a short walk from the common.]]></Description>
+    <UniqueID>900002</UniqueID>
+    <PropertySize>175</PropertySize>
+    <Agents>
+      <agent>
+        <AgentId>70001</AgentId>
+        <AgentName>Alex Carter</AgentName>
+        <AgentPhone>0210000001</AgentPhone>
+        <AgentEmail>alex@example.test</AgentEmail>
+      </agent>
+    </Agents>
+    <Images>
+      <Image>
+        <ImageID>img900002a</ImageID>
+        <ImageURL>https://images.example.test/900002/1.jpg</ImageURL>
+      </Image>
+    </Images>
+    <Office>
+      <Name>Demo Realty Rondebosch</Name>
+      <ID>8001</ID>
+      <email>rondebosch@example.test</email>
+      <PhysicalAddress>1 Main Road, Rondebosch, Cape Town, 7700</PhysicalAddress>
+      <Province>Western Cape</Province>
+    </Office>
+    <Price>2650000</Price>
+  </Property>
+  <Property>
+    <Reference>55003</Reference>
+    <ListingType>Houses and Flats For Rent Offered</ListingType>
+    <status>To Let</status>
+    <Type>Studio Apartment</Type>
+    <Suburb>Sandton</Suburb>
+    <CityTown>Johannesburg</CityTown>
+    <Province>Gauteng</Province>
+    <Bathrooms>1</Bathrooms>
+    <CreatedOn>2026-01-10 09:30:00</CreatedOn>
+    <UpdatedOn>2026-08-01 10:00:00</UpdatedOn>
+    <AvailableFrom>2026-09-01</AvailableFrom>
+    <Heading><![CDATA[Studio apartment in Sandton]]></Heading>
+    <Description><![CDATA[Compact studio with a Juliet balcony, walk to Gautrain.]]></Description>
+    <UniqueID>900003</UniqueID>
+    <PropertySize>42</PropertySize>
+    <Agents>
+      <agent>
+        <AgentId>70002</AgentId>
+        <AgentName>Bongi Ndlovu</AgentName>
+        <AgentPhone>0110000002</AgentPhone>
+        <AgentEmail>bongi@example.test</AgentEmail>
+      </agent>
+    </Agents>
+    <Images>
+      <Image>
+        <ImageID>img900003a</ImageID>
+        <ImageURL>https://images.example.test/900003/1.jpg</ImageURL>
+      </Image>
+    </Images>
+    <Office>
+      <Name>Demo Realty Sandton</Name>
+      <ID>8002</ID>
+      <email>sandton@example.test</email>
+      <PhysicalAddress>5 Rivonia Road, Sandton, 2196</PhysicalAddress>
+      <Province>Gauteng</Province>
+    </Office>
+    <Price>15000</Price>
+  </Property>
+  <Property>
+    <Reference>55004</Reference>
+    <ListingType>Holiday Homes</ListingType>
+    <status>Holiday</status>
+    <Type>Apartment</Type>
+    <Suburb>Sandton</Suburb>
+    <CityTown>Johannesburg</CityTown>
+    <Province>Gauteng</Province>
+    <Bedrooms>2</Bedrooms>
+    <Bathrooms>2</Bathrooms>
+    <CreatedOn>2026-02-15 14:00:00</CreatedOn>
+    <UpdatedOn>2026-07-20 16:00:00</UpdatedOn>
+    <Heading><![CDATA[Holiday apartment, contact for rates]]></Heading>
+    <Description><![CDATA[Two bedroom holiday let, minimum stay applies.]]></Description>
+    <UniqueID>900004</UniqueID>
+    <PropertySize>95</PropertySize>
+    <Agents>
+      <agent>
+        <AgentId>70002</AgentId>
+        <AgentName>Bongi Ndlovu</AgentName>
+        <AgentPhone>0110000002</AgentPhone>
+        <AgentEmail>bongi@example.test</AgentEmail>
+      </agent>
+    </Agents>
+    <Images>
+      <Image>
+        <ImageID>img900004a</ImageID>
+        <ImageURL>https://images.example.test/900004/1.jpg</ImageURL>
+      </Image>
+    </Images>
+    <Office>
+      <Name>Demo Realty Sandton</Name>
+      <ID>8002</ID>
+      <email>sandton@example.test</email>
+      <PhysicalAddress>5 Rivonia Road, Sandton, 2196</PhysicalAddress>
+      <Province>Gauteng</Province>
+    </Office>
+    <Price>0</Price>
+  </Property>
+  <Property>
+    <Reference>55005</Reference>
+    <ListingType>Houses and Flats For Sale</ListingType>
+    <status>For Sale</status>
+    <Type>Mansion</Type>
+    <Suburb>Rondebosch</Suburb>
+    <CityTown>Cape Town</CityTown>
+    <Province>Western Cape</Province>
+    <Bedrooms>6</Bedrooms>
+    <Bathrooms>5</Bathrooms>
+    <CreatedOn>2026-03-01 08:00:00</CreatedOn>
+    <UpdatedOn>2026-06-01 08:00:00</UpdatedOn>
+    <Heading><![CDATA[Large property with an out-of-vocabulary Type]]></Heading>
+    <Description><![CDATA[This record uses a Type value outside Appendix B and must be quarantined.]]></Description>
+    <UniqueID>900005</UniqueID>
+    <PropertySize>520</PropertySize>
+    <Agents>
+      <agent>
+        <AgentId>70001</AgentId>
+        <AgentName>Alex Carter</AgentName>
+        <AgentPhone>0210000001</AgentPhone>
+        <AgentEmail>alex@example.test</AgentEmail>
+      </agent>
+    </Agents>
+    <Images>
+      <Image>
+        <ImageID>img900005a</ImageID>
+        <ImageURL>https://images.example.test/900005/1.jpg</ImageURL>
+      </Image>
+    </Images>
+    <Office>
+      <Name>Demo Realty Rondebosch</Name>
+      <ID>8001</ID>
+      <email>rondebosch@example.test</email>
+      <PhysicalAddress>1 Main Road, Rondebosch, Cape Town, 7700</PhysicalAddress>
+      <Province>Western Cape</Province>
+    </Office>
+    <Price>8900000</Price>
+  </Property>
+</listings>

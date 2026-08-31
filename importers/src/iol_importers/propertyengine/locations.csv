@@ -1,0 +1,514 @@
+location_id,province,area,locality,latitude,longitude
+3100611,Eastern Cape,,Adelaide,-32.5706558,26.3249435
+3100612,Eastern Cape,,Alice,-32.7901001,26.8329144
+3100610,Eastern Cape,,Aliwal North,-30.9211559,26.8910351
+3100613,Eastern Cape,,Barkly East,-30.9198589,27.6434841
+3100299,Eastern Cape,,Bhisho,-32.8498764,27.4409561
+3100614,Eastern Cape,,Bizana,-30.9361954,29.8352299
+3100615,Eastern Cape,,Burgersdorp,-30.8922863,25.8521767
+3100616,Eastern Cape,,Butterworth,-32.1774788,28.0186081
+3100474,Eastern Cape,,Coffee Bay,-31.9849033,29.1492405
+3100470,Eastern Cape,,Cradock,-31.9317036,25.3785725
+3100697,Eastern Cape,,Despatch,-33.8004837,25.4621277
+3100300,Eastern Cape,,East London,-32.9344406,27.6434841
+3100617,Eastern Cape,,Elliot,-31.3828259,27.8311424
+3100618,Eastern Cape,,Flagstaff,-31.2632294,29.6962681
+3100619,Eastern Cape,,Fort Beaufort,-32.7663345,26.6199589
+3100620,Eastern Cape,,Graaff-Reinet,-32.2346344,24.3341427
+3100471,Eastern Cape,,Grahamstown,-33.2415352,26.3249435
+3100698,Eastern Cape,,Hogsback,-32.5951729,26.9322548
+3100621,Eastern Cape,,Jansenville,-32.9404068,24.6192894
+3100301,Eastern Cape,,Jeffreys Bay,-34.0506706,24.9101543
+3100622,Eastern Cape,,Kareedouw,-33.9620056,24.2925415
+3100700,Eastern Cape,,King WilliamsTown,-32.8938103,27.4203968
+3100623,Eastern Cape,,Kirkwood,-33.4105911,25.5681076
+3100699,Eastern Cape,,Matatiele,-30.3621101,28.8014126
+3100302,Eastern Cape,,Mdantsane,-32.9459648,27.7256088
+3100624,Eastern Cape,,Middelburg,-31.4951134,25.0060673
+3100604,Eastern Cape,,Other Eastern Cape,-32.9845886,22.7748604
+3100625,Eastern Cape,,Port Alfred,-33.5192795,26.7496452
+3100306,Eastern Cape,,Port Elizabeth,-33.7452431,25.5681076
+3100475,Eastern Cape,,Port St Johns,-31.6287518,29.536871
+3100303,Eastern Cape,,Queenstown,-32.1058388,26.8910351
+3100626,Eastern Cape,,Somerset East,-33.0113678,25.4733562
+3100696,Eastern Cape,,St Francis Bay,-34.1605377,24.8241062
+3100627,Eastern Cape,,Stutterheim,-32.5885124,27.4321461
+3100472,Eastern Cape,,Uitenhage,-33.7687187,25.4141197
+3100473,Eastern Cape,,Umtata / Mthatha,-31.6066837,28.7780991
+3100628,Eastern Cape,,Willowmore,-33.3967934,24.0488014
+3100476,Eastern Cape,,Willowvale,-32.2631493,28.5039139
+3100456,Free State,,Bethlehem,-28.4052696,28.2058773
+3100460,Free State,,Bloemfontein,-29.1585674,26.3249435
+3100629,Free State,,Botshabelo,-29.2672729,26.7260704
+3100630,Free State,,Brandfort,-28.6882954,26.4547958
+3100695,Free State,,Bultfontein,-28.2750454,26.1477604
+3100631,Free State,,Clocolan,-28.9093361,27.5554543
+3100632,Free State,,Deneysville,-26.8988037,28.083004
+3100703,Free State,,Ficksburg,-28.8777885,27.8663082
+3100633,Free State,,Frankfort,-27.2912731,28.5797977
+3100457,Free State,,Harrismith,-28.2749996,29.1041698
+3100634,Free State,,Heilbron,-27.2819786,27.9834747
+3100635,Free State,,Hennenman,-27.9783916,27.0264454
+3100636,Free State,,Hoopstad,-28.0223255,25.9468002
+3100637,Free State,,Koffiefontein,-29.3245831,25.0940456
+3100638,Free State,,Koppies,-27.2290955,27.5877361
+3100464,Free State,,Kroonstad,-27.7487984,27.2676125
+3100639,Free State,,Ladybrand,-29.1282883,27.2676125
+3100704,Free State,,Memel,-27.6564598,29.5397701
+3100606,Free State,,Other Free State,-27.1925621,25.0562878
+3100465,Free State,,Parys,-27.3890362,27.7373371
+3100640,Free State,,Phuthaditjhaba,-28.5530281,28.8247223
+3100641,Free State,,Reitz,-27.800909,28.4318314
+3100466,Free State,,Sasolburg,-26.810133,27.8277874
+3100458,Free State,,Senekal,-28.5301762,27.6434841
+3100461,Free State,,Springfontein,-30.2557755,25.6924248
+3100462,Free State,,Thaba 'Nchu,-29.2039585,26.8203506
+3100642,Free State,,Theunissen,-28.6668701,26.6081657
+3100643,Free State,,Viljoenskroon,-26.9751205,26.7614307
+3100468,Free State,,Virginia,-28.1063862,26.8556957
+3100644,Free State,,Vrede,-27.7437859,29.2320786
+3100645,Free State,,Vredefort,-27.0007877,27.3733997
+3100469,Free State,,Welkom,-28.0015221,26.8910351
+3100646,Free State,,Wesselsbron,-27.8337288,26.3662682
+3100647,Free State,,Winburg,-28.5170078,27.0087872
+3100368,Gauteng,East Rand,Alberton,-26.3223934,28.1239719
+3100369,Gauteng,East Rand,Bedfordview,-26.17169,28.1327496
+3100370,Gauteng,East Rand,Benoni,-26.1510849,28.3695698
+3100371,Gauteng,East Rand,Boksburg,-26.2325897,28.2409668
+3100372,Gauteng,East Rand,Brakpan,-26.2908115,28.3228168
+3100373,Gauteng,East Rand,Edenvale,-26.1326275,28.17663
+3100374,Gauteng,East Rand,Germiston,-26.2258739,28.1707802
+3100375,Gauteng,East Rand,Kempton Park,-26.094408,28.2292709
+3100564,Gauteng,East Rand,Other,-26.0203152,28.3390884
+3100376,Gauteng,East Rand,Springs,-26.260725,28.4630375
+3100377,Gauteng,East Rand,Tembisa,-26.0092831,28.2181206
+3100334,Gauteng,Johannesburg,Alexandra,-26.103302,28.0976372
+3100753,Gauteng,Johannesburg,Bram Fischerville,-26.1939411,27.8565121
+3100335,Gauteng,Johannesburg,Bryanston,-26.0563984,28.0244637
+3100336,Gauteng,Johannesburg,Constantia Kloof,-26.1445122,27.9102135
+3100747,Gauteng,Johannesburg,Cosmo City,-26.0212631,27.9289989
+3100337,Gauteng,Johannesburg,Diepkloof,-26.2429276,27.9497166
+3100338,Gauteng,Johannesburg,Diepsloot,-25.9395981,28.0127525
+3100339,Gauteng,Johannesburg,Dobsonville,-26.223362,27.8487263
+3100340,Gauteng,Johannesburg,Douglasdale,-26.0395813,27.9947853
+3100341,Gauteng,Johannesburg,Emmarentia,-26.165144,28.0098248
+3100342,Gauteng,Johannesburg,Ennerdale,-26.4101353,27.8370037
+3100754,Gauteng,Johannesburg,Fairland,-26.1365547,27.9395447
+3100343,Gauteng,Johannesburg,Fourways,-26.0254688,28.0039692
+3100344,Gauteng,Johannesburg,Greenside,-26.1530743,28.0156803
+3100749,Gauteng,Johannesburg,Highlands North,-26.1426373,28.0844688
+3100751,Gauteng,Johannesburg,Illovo,-26.1279793,28.0496635
+3100105,Gauteng,Johannesburg,Inner City / CBD&Bruma,-26.2016315,28.04533
+3100345,Gauteng,Johannesburg,Ivory Park,-25.9956608,28.1971035
+3100346,Gauteng,Johannesburg,Johannesburg CBD,-26.2041035,28.0473042
+3100103,Gauteng,Johannesburg,Johannesburg South,-26.2738667,27.9951859
+3100347,Gauteng,Johannesburg,Katlehong,-26.312088,28.1560783
+3100759,Gauteng,Johannesburg,Kensington,-26.1954784,28.0966854
+3100348,Gauteng,Johannesburg,Lanseria,-25.9400177,27.9263649
+3100349,Gauteng,Johannesburg,Lenasia,-26.3335171,27.8663082
+3100350,Gauteng,Johannesburg,Meadowlands,-26.2026196,27.8765621
+3100351,Gauteng,Johannesburg,Melville,-26.1749325,28.0083618
+3100353,Gauteng,Johannesburg,Midrand,-25.9991798,28.1262932
+3100750,Gauteng,Johannesburg,North Riding,-26.0523205,27.961586
+3100355,Gauteng,Johannesburg,Northcliff,-26.1478996,27.9629745
+3100354,Gauteng,Johannesburg,Northgate,-26.0575466,27.9522419
+3100562,Gauteng,Johannesburg,Other,-26.0408077,28.0148201
+3100748,Gauteng,Johannesburg,Parkhurst,-26.1368198,28.0156803
+3100359,Gauteng,Johannesburg,Parktown,-26.180645,28.0391006
+3100360,Gauteng,Johannesburg,Protea Glen,-26.277401,27.8138657
+3100106,Gauteng,Johannesburg,Randburg,-26.1438408,27.9951859
+3100752,Gauteng,Johannesburg,Randpark Ridge,-26.1041489,27.9466991
+3100107,Gauteng,Johannesburg,Roodepoort,-26.1201363,27.9014645
+3100356,Gauteng,Johannesburg,Rosebank,-26.1437702,28.0405655
+3100108,Gauteng,Johannesburg,Sandton,-26.1075668,28.0566998
+3100361,Gauteng,Johannesburg,Southgate,-26.2666435,27.9812775
+3100104,Gauteng,Johannesburg,Soweto,-26.2485371,27.8540325
+3100362,Gauteng,Johannesburg,Sunninghill,-26.0323925,28.0742245
+3100363,Gauteng,Johannesburg,Walkerville,-26.4200115,27.9571171
+3100364,Gauteng,Johannesburg,Woodmead,-26.0474148,28.0800781
+3100365,Gauteng,Pretoria / Tshwane,Arcadia,-25.745266,28.2029514
+3100257,Gauteng,Pretoria / Tshwane,Bronkhorstspruit,-25.8714733,28.7664413
+3100133,Gauteng,Pretoria / Tshwane,Brooklyn,-25.7646236,28.2392635
+3100247,Gauteng,Pretoria / Tshwane,Centurion,-25.8640289,28.0888577
+3100131,Gauteng,Pretoria / Tshwane,City Centre,-25.7478676,28.2292709
+3100249,Gauteng,Pretoria / Tshwane,Eastern Pretoria,-25.8106289,28.3169708
+3100694,Gauteng,Pretoria / Tshwane,GaRankuwa,-25.5864162,27.9875813
+3100134,Gauteng,Pretoria / Tshwane,Hatfield,-25.7487335,28.2380428
+3100366,Gauteng,Pretoria / Tshwane,Mamelodi,-25.723444,28.4221516
+3100367,Gauteng,Pretoria / Tshwane,Menlyn Park,-25.7832813,28.2749538
+3100248,Gauteng,Pretoria / Tshwane,Northern Pretoria,-25.6793633,28.1941776
+3100563,Gauteng,Pretoria / Tshwane,Other,-25.5298252,28.1250725
+3100755,Gauteng,Pretoria / Tshwane,Pretoria West,-25.7502823,28.1549549
+3100135,Gauteng,Pretoria / Tshwane,Sunnyside & Arcadia,-25.7510433,28.1883297
+3100378,Gauteng,Sedibeng,Evaton,-26.5328178,27.8570843
+3100379,Gauteng,Sedibeng,Heidelberg,-26.4910011,28.3841782
+3100593,Gauteng,Sedibeng,Meyerton,-26.5853596,28.006897
+3100592,Gauteng,Sedibeng,Orange Farm,-26.459383,27.8604469
+3100565,Gauteng,Sedibeng,Other,-26.6841545,28.6020546
+3100380,Gauteng,Sedibeng,Vanderbijlpark,-26.7034206,27.8076954
+3100381,Gauteng,Sedibeng,Vereeniging,-26.6433926,27.7842464
+3100382,Gauteng,West Rand,Carletonville,-26.4011574,27.385149
+3100383,Gauteng,West Rand,Kagiso,-26.1629982,27.787178
+3100384,Gauteng,West Rand,Krugersdorp,-25.9879913,27.5965405
+3100566,Gauteng,West Rand,Other,-25.9368324,27.5621758
+3100385,Gauteng,West Rand,Randfontein,-26.1884613,27.5730648
+3100386,Gauteng,West Rand,Westonaria,-26.3861217,27.6669521
+3100268,KwaZulu-Natal,Drakensberg,Amajuba - Newcastle,-27.7138424,29.9971771
+3100554,KwaZulu-Natal,Drakensberg,Other,-27.9481926,31.8509674
+3100453,KwaZulu-Natal,Drakensberg,Ulundi,-28.1625996,31.3541622
+3100269,KwaZulu-Natal,Drakensberg,Umzinyathi - Dundee,-28.1649799,30.234314
+3100267,KwaZulu-Natal,Drakensberg,Uthukela - Ladysmith,-28.5596714,29.7807884
+3100454,KwaZulu-Natal,Drakensberg,Vryheid,-27.7489796,30.9876328
+3100270,KwaZulu-Natal,Drakensberg,Zululand,-27.8872261,31.4456177
+3100153,KwaZulu-Natal,Durban City,Berea & Musgrave,-29.8518467,30.9933681
+3100421,KwaZulu-Natal,Durban City,Chatsworth,-29.9270229,30.8843441
+3100150,KwaZulu-Natal,Durban City,City Centre,-29.8586807,31.021841
+3100756,KwaZulu-Natal,Durban City,Clare Hills,-29.8204784,30.9743729
+3100151,KwaZulu-Natal,Durban City,Golden Mile,-29.855629,31.0403194
+3100152,KwaZulu-Natal,Durban City,Greyville,-29.8475723,31.0148735
+3100424,KwaZulu-Natal,Durban City,Inanda,-29.698267,30.9540291
+3100425,KwaZulu-Natal,Durban City,KwaMashu,-29.7446136,30.9749126
+3100156,KwaZulu-Natal,Durban City,Morningside,-29.8243351,31.0085373
+3100542,KwaZulu-Natal,Durban City,Other,-30.1950645,30.8180847
+3100155,KwaZulu-Natal,Durban City,Point & Harbour,-29.8723392,31.02491
+3100757,KwaZulu-Natal,Durban City,Umbilo,-29.8842468,30.9790287
+3100428,KwaZulu-Natal,Durban City,Umlazi,-29.96875,30.8843441
+3100447,KwaZulu-Natal,Midlands,Estcourt,-28.8739414,30.0202961
+3100448,KwaZulu-Natal,Midlands,Greytown,-29.0204411,30.6199894
+3100449,KwaZulu-Natal,Midlands,Howick,-29.4415493,30.1127357
+3100450,KwaZulu-Natal,Midlands,Kokstad,-30.2975998,29.3714905
+3100553,KwaZulu-Natal,Midlands,Other,-29.8410492,30.0708656
+3100451,KwaZulu-Natal,Midlands,Pietermaritzburg,-29.6006069,30.3794117
+3100452,KwaZulu-Natal,Midlands,Richmond,-29.8992729,30.2974205
+3100437,KwaZulu-Natal,North Coast,Ballitoville,-29.4375782,31.2225704
+3100438,KwaZulu-Natal,North Coast,Empangeni,-28.7532196,31.8935127
+3100439,KwaZulu-Natal,North Coast,Eshowe,-28.9238682,31.4913177
+3100271,KwaZulu-Natal,North Coast,Ilembe (Dolphin Coast),-29.3830376,31.1710396
+3100551,KwaZulu-Natal,North Coast,Other,-26.8362389,32.182148
+3100440,KwaZulu-Natal,North Coast,Richards Bay,-28.7807274,32.0382843
+3100441,KwaZulu-Natal,North Coast,Stanger,-29.3669662,31.2660007
+3100272,KwaZulu-Natal,North Coast,Umkhanyakude,-27.2718582,32.5372734
+3100273,KwaZulu-Natal,North Coast,Uthungulu/Richards Bay,-28.619175,31.5370007
+3100159,KwaZulu-Natal,North Suburbs,Durban North,-29.7870388,31.0220413
+3100162,KwaZulu-Natal,North Suburbs,Mount Edgecombe,-29.7246208,31.0465622
+3100760,KwaZulu-Natal,North Suburbs,Newlands,-29.7877254,30.95895
+3100548,KwaZulu-Natal,North Suburbs,Other,-29.6282063,30.9805813
+3100426,KwaZulu-Natal,North Suburbs,Phoenix,-29.7027874,31.0048389
+3100429,KwaZulu-Natal,North Suburbs,Tongaat,-29.5880566,31.0851021
+3100163,KwaZulu-Natal,North Suburbs,Umdloti Beach,-29.6669273,31.1180515
+3100164,KwaZulu-Natal,North Suburbs,Umhlanga,-29.7330341,31.0592804
+3100430,KwaZulu-Natal,North Suburbs,Verulam,-29.6521282,31.0392437
+3100264,KwaZulu-Natal,South Coast (Ugu),Hibiscus Coast,-30.7915936,30.320488
+3100442,KwaZulu-Natal,South Coast (Ugu),Margate,-30.8458691,30.3723736
+3100552,KwaZulu-Natal,South Coast (Ugu),Other,-31.0522938,30.7248917
+3100444,KwaZulu-Natal,South Coast (Ugu),Port Edward,-31.0509033,30.2224236
+3100443,KwaZulu-Natal,South Coast (Ugu),Port Shepstone,-30.7276955,30.4472847
+3100445,KwaZulu-Natal,South Coast (Ugu),Scottburgh,-30.3216095,30.6890049
+3100265,KwaZulu-Natal,South Coast (Ugu),Umdoni,-30.916666,30.166666
+3100446,KwaZulu-Natal,South Coast (Ugu),Umzumbe,-30.484827,30.2974205
+3100262,KwaZulu-Natal,South Suburbs,Amanzimtoti,-30.0350418,30.8900833
+3100591,KwaZulu-Natal,South Suburbs,Bluff,-29.9205761,31.0033855
+3100538,KwaZulu-Natal,South Suburbs,Glenmore,-29.8769817,30.9718571
+3100537,KwaZulu-Natal,South Suburbs,Glenwood,-29.8708439,30.9904995
+3100170,KwaZulu-Natal,South Suburbs,Isipingo Beach,-29.9974442,30.9446049
+3100431,KwaZulu-Natal,South Suburbs,Kingsborough,-30.0567799,30.8820591
+3100549,KwaZulu-Natal,South Suburbs,Other,-29.9286919,30.9848499
+3100432,KwaZulu-Natal,South Suburbs,South Beach,-29.8578377,31.0341835
+3100433,KwaZulu-Natal,South Suburbs,Umkomaas,-30.2006779,30.7838402
+3100434,KwaZulu-Natal,West Suburbs,Drummond,-29.7616539,30.6947556
+3100174,KwaZulu-Natal,West Suburbs,Gillitts,-29.7865105,30.7962246
+3100175,KwaZulu-Natal,West Suburbs,Hillcrest,-29.7694492,30.7867126
+3100176,KwaZulu-Natal,West Suburbs,Kloof,-29.7785339,30.8326664
+3100435,KwaZulu-Natal,West Suburbs,New Germany,-29.7980347,30.878603
+3100550,KwaZulu-Natal,West Suburbs,Other,-29.8415031,30.7208881
+3100177,KwaZulu-Natal,West Suburbs,Pinetown,-29.8345013,30.8384094
+3100528,KwaZulu-Natal,West Suburbs,Queensburgh,-29.8793507,30.9073048
+3100533,KwaZulu-Natal,West Suburbs,Reservoir Hills,-29.7936592,30.9359989
+3100436,KwaZulu-Natal,West Suburbs,Waterfall,-29.736742,30.8326664
+3100179,KwaZulu-Natal,West Suburbs,Westville,-29.8316727,30.9302597
+3100677,Limpopo,,Bela-Bela / Warmbad,-24.8844471,28.3287106
+3100600,Limpopo,,Dendron,-23.6024303,29.6962681
+3100678,Limpopo,,Giyani,-23.3663216,30.8039474
+3100706,Limpopo,,Hoedspruit,-24.3461399,30.9732914
+3100679,Limpopo,,Lebowakgomo,-24.2585449,29.6499157
+3100680,Limpopo,,Lephalale / Ellisras,-23.6664658,27.7448292
+3100389,Limpopo,,Louis Trichardt,-23.0462418,29.9046555
+3100681,Limpopo,,Lulekani,-23.8630524,31.0822353
+3100682,Limpopo,,Mankweng,-23.8836689,29.7078781
+3100683,Limpopo,,Marblehall,-24.9650574,29.2814693
+3100225,Limpopo,,Modimolle / Nylstroom,-24.7095699,28.3987846
+3100684,Limpopo,,Modjadji / Duiwelskloof,-23.6230984,30.3464336
+3100685,Limpopo,,Mokopane / Potgietersrus,-24.1771774,29.0018978
+3100224,Limpopo,,Musina / Messina,-22.3812504,30.0318546
+3100686,Limpopo,,Mutale,-22.5108299,30.8039474
+3100687,Limpopo,,Nkowankowa,-23.8904533,30.3003044
+3100567,Limpopo,,Other Limpopo,-23.2329044,27.835453
+3100387,Limpopo,,Phalaborwa,-23.942318,31.1406746
+3100226,Limpopo,,Polokwane / Pietersburg,-23.8961716,29.4486256
+3100688,Limpopo,,Soekmekaar,-23.5107651,29.9277954
+3100689,Limpopo,,Thabazimbi,-24.6837673,27.3616467
+3100690,Limpopo,,Thohoyandou,-22.8785419,30.4818439
+3100691,Limpopo,,Thulamela,-22.8921833,30.6199894
+3100388,Limpopo,,Tzaneen,-23.8683262,30.0665245
+3100397,Mpumalanga,,Balfour,-26.7747269,28.5797977
+3100391,Mpumalanga,,Barberton,-25.7460403,31.0335102
+3100398,Mpumalanga,,Bethal,-26.4578667,29.4666538
+3100648,Mpumalanga,,Breyten,-26.3019676,29.9827251
+3100392,Mpumalanga,,Bushbuckridge,-24.8204956,31.1710396
+3100649,Mpumalanga,,Carolina,-26.0730801,30.1069603
+3100399,Mpumalanga,,Delmas,-26.1633987,28.8130684
+3100406,Mpumalanga,,Dullstroom,-25.4183826,30.1040707
+3100650,Mpumalanga,,Ekangala,-25.6800594,28.7402077
+3100405,Mpumalanga,,eMakhazeni / Belfast,-25.6823177,30.0376339
+3100651,Mpumalanga,,Embalenhle,-26.5524311,29.0750828
+3100652,Mpumalanga,,Empuluzi,-26.3608818,30.8154354
+3100416,Mpumalanga,,Ermelo,-26.4402943,30.0665245
+3100400,Mpumalanga,,Greylingstad,-26.7433186,28.7540684
+3100653,Mpumalanga,,Groblersdal,-25.1673603,29.3986912
+3100393,Mpumalanga,,Hazyview,-25.0519123,31.1366711
+3100415,Mpumalanga,,Hendrina,-26.1598969,29.7252293
+3100654,Mpumalanga,,Komatipoort,-25.4509716,31.9586868
+3100401,Mpumalanga,,Kriel,-26.255106,29.2633972
+3100655,Mpumalanga,,KwaNgema,-27.0073204,30.4876041
+3100656,Mpumalanga,,Leslie / Lebogang,-26.383337,28.903368
+3100407,Mpumalanga,,Lydenburg,-25.0815811,30.4472847
+3100408,Mpumalanga,,Machadodorp,-25.667284,30.2455025
+3100394,Mpumalanga,,Malelane,-25.4860592,31.548418
+3100395,Mpumalanga,,Mbombela / Nelspruit,-25.4752979,30.9694157
+3100305,Mpumalanga,,Middelburg,-25.7770023,29.4701614
+3100409,Mpumalanga,,New-Location,-25.875,29.2148991
+3100657,Mpumalanga,,Ogies / Phola,-26.04739,29.0605392
+3100605,Mpumalanga,,Other Mpumalanga,-24.9135723,30.9056187
+3100417,Mpumalanga,,Piet Retief,-26.9916401,30.6199894
+3100410,Mpumalanga,,Sabie,-25.0981121,30.779192
+3100402,Mpumalanga,,Secunda,-26.5157795,29.191391
+3100658,Mpumalanga,,Siyabuswa,-25.109951,29.0714798
+3100403,Mpumalanga,,Standerton,-26.9522877,29.3250351
+3100705,Mpumalanga,,Trichardt,-26.4844799,29.2233601
+3100418,Mpumalanga,,Volksrust,-27.1662025,29.8815212
+3100419,Mpumalanga,,Wakkerstroom,-27.3540726,30.1242847
+3100404,Mpumalanga,,Witbank,-25.8727818,29.2553234
+3100396,Mpumalanga,,Witrivier,-25.3299294,31.0163078
+3100503,North West,,Bloemhof,-27.6263256,25.5799503
+3100524,North West,,Bray,-25.4686184,23.7030354
+3100517,North West,,Brits,-25.4242287,27.8402786
+3100504,North West,,Christiana,-27.6110554,25.3785725
+3100512,North West,,Delareyville,-26.6610012,25.7575188
+3100692,North West,,Fochville,-26.4770565,27.4908733
+3100518,North West,,Hartbeespoort,-25.7477322,27.8871784
+3100505,North West,,Klerksdorp,-26.8617935,26.5137959
+3100519,North West,,Koster,-25.738224,26.8910351
+3100513,North West,,Lichtenburg,-26.0613804,26.1359425
+3100520,North West,,Mabopane,-25.512682,28.0552807
+3100522,North West,,Magaliesburg,-25.9934196,27.5437145
+3100514,North West,,Mahikeng / Mafikeng,-25.855978,25.6403103
+3100659,North West,,Mmbatho,-25.8377628,25.5947514
+3100660,North West,,Mogwase,-25.2133312,26.8910351
+3100661,North West,,Mothibistad,-27.3821468,23.4704552
+3100506,North West,,Orkney,-26.9278736,26.7260704
+3100603,North West,,Other North West,-28.1128521,25.7108288
+3100693,North West,,Ottosdal / Letsopa,-26.8056164,25.9852314
+3100662,North West,,Pomfret,-25.6594238,23.4776096
+3100507,North West,,Potchefstroom,-26.7468128,27.0794086
+3100663,North West,,Reivilo,-27.4756012,24.2390499
+3100521,North West,,Rustenburg,-25.6629887,27.2676125
+3100525,North West,,Schweizer-Reneke,-27.2605495,25.3785725
+3100526,North West,,Stella,-26.5478592,24.8745518
+3100508,North West,,Stilfontein,-26.8428173,26.774519
+3100509,North West,,Ventersdorp,-26.2622833,26.8910351
+3100527,North West,,Vryburg,-26.946846,24.7142925
+3100510,North West,,Wolmaransstad,-27.2867088,26.1359425
+3100515,North West,,Zeerust,-25.5622787,26.10005
+3100702,Northern Cape,,Aggeneys,-29.2207909,18.9264526
+3100494,Northern Cape,,Alexander Bay,-28.6073647,16.4847622
+3100486,Northern Cape,,Barkly West,-28.5367374,24.5197639
+3100491,Northern Cape,,Beeshoek,-28.237854,23.013113
+3100478,Northern Cape,,Calvinia,-31.12714,19.9496861
+3100664,Northern Cape,,Carnarvon,-30.5971279,22.0476379
+3100482,Northern Cape,,Colesberg,-30.8134766,24.9991455
+3100497,Northern Cape,,Danielskuil,-28.2854099,23.6680756
+3100483,Northern Cape,,De Aar,-30.6550789,24.0087528
+3100701,Northern Cape,,Douglas,-29.1154709,23.7513828
+3100479,Northern Cape,,Fraserburg,-31.8437881,20.902977
+3100665,Northern Cape,,Garies,-30.5575199,17.858387
+3100666,Northern Cape,,Griekwastad,-29.0237999,23.4776096
+3100667,Northern Cape,,Groblershoop,-28.9018497,21.6660728
+3100487,Northern Cape,,Hartswater,-27.7736206,24.7617836
+3100488,Northern Cape,,Jan Kempdorp,-27.9179192,24.8389435
+3100668,Northern Cape,,Kathu,-27.6451416,23.0488548
+3100498,Northern Cape,,Keimoes,-28.7086124,20.9759693
+3100489,Northern Cape,,Kimberley,-28.7552834,24.6667938
+3100492,Northern Cape,,Kuruman,-27.6136837,23.4776096
+3100669,Northern Cape,,Mier,-26.8645401,20.4262085
+3100602,Northern Cape,,Other Northern Cape,-32.2609482,21.8494797
+3100670,Northern Cape,,Pampierstad,-27.7805347,24.6964817
+3100499,Northern Cape,,Pofadder,-29.1905365,19.2831535
+3100671,Northern Cape,,Port Nolloth,-28.8656139,17.1011925
+3100500,Northern Cape,,Postmasburg,-28.2833595,23.191803
+3100672,Northern Cape,,Prieska,-29.3718834,22.5245094
+3100673,Northern Cape,,Ritchie,-29.0049324,24.5895977
+3100495,Northern Cape,,Springbok,-29.1251583,17.858387
+3100674,Northern Cape,,Strydenburg,-29.9590836,23.6799774
+3100480,Northern Cape,,Sutherland,-32.410099,20.6705284
+3100501,Northern Cape,,Upington,-28.4574623,21.2426643
+3100675,Northern Cape,,Vanderkloof,-30.0051174,24.7410069
+3100484,Northern Cape,,Victoria West,-31.4297714,23.191803
+3100676,Northern Cape,,Warrenton,-28.2120686,24.7617836
+3100276,Western Cape,Atlantic Seaboard,Bantry Bay,-33.9283066,18.3793888
+3100017,Western Cape,Atlantic Seaboard,Camps Bay,-33.9512978,18.3830986
+3100277,Western Cape,Atlantic Seaboard,Clifton,-33.9414749,18.3738365
+3100021,Western Cape,Atlantic Seaboard,Green Point & Waterfront,-33.9069595,18.4064331
+3100022,Western Cape,Atlantic Seaboard,Hout Bay,-34.020874,18.3682632
+3100730,Western Cape,Atlantic Seaboard,Llandudno,-34.0099525,18.3430481
+3100278,Western Cape,Atlantic Seaboard,Mouille Point,-33.9004097,18.4031258
+3100587,Western Cape,Atlantic Seaboard,Other,-33.9797745,18.3585339
+3100025,Western Cape,Atlantic Seaboard,Sea Point & Three Anchor Bay,-33.9169502,18.3875484
+3100722,Western Cape,Cape Flats,Airport industria,-33.9725037,18.5852451
+3100540,Western Cape,Cape Flats,Athlone,-33.9644852,18.5031986
+3100721,Western Cape,Cape Flats,Belhar,-33.9458656,18.632412
+3100279,Western Cape,Cape Flats,Blue Downs,-33.9872398,18.6907558
+3100280,Western Cape,Cape Flats,Delft,-33.9743576,18.6425648
+3100713,Western Cape,Cape Flats,Eerste Rivier,-33.9980927,18.7393074
+3100281,Western Cape,Cape Flats,Elsie's River,-33.9309196,18.5772438
+3100282,Western Cape,Cape Flats,Gugulethu,-33.9820175,18.5670948
+3100283,Western Cape,Cape Flats,Khayelitsha,-34.0378265,18.6798897
+3100739,Western Cape,Cape Flats,Langa,-33.9446983,18.5323086
+3100284,Western Cape,Cape Flats,Mitchell's Plain,-34.0485954,18.6056881
+3100586,Western Cape,Cape Flats,Other,-33.9714584,18.6344051
+3100290,Western Cape,Cape Town,Bo-Kaap,-33.9182243,18.4142513
+3100758,Western Cape,Cape Town,Brooklyn,-33.9084892,18.4813175
+3100536,Western Cape,Cape Town,Century City,-33.8898621,18.5066395
+3100029,Western Cape,Cape Town,City Centre,-33.9242706,18.4187031
+3100275,Western Cape,Cape Town,De Waterkant,-33.9154015,18.419445
+3100030,Western Cape,Cape Town,Devils Peak,-33.9370193,18.4320564
+3100287,Western Cape,Cape Town,Foreshore,-33.9221802,18.440958
+3100031,Western Cape,Cape Town,Gardens,-33.9352951,18.4083176
+3100286,Western Cape,Cape Town,Higgovale,-33.9238434,18.4235706
+3100719,Western Cape,Cape Town,Maitland,-33.9203796,18.501873
+3100285,Western Cape,Cape Town,Oranjezicht,-33.9413414,18.4127693
+3100541,Western Cape,Cape Town,Other,-34.2818756,18.4611759
+3100288,Western Cape,Cape Town,Salt River,-33.9293175,18.4636917
+3100034,Western Cape,Cape Town,Tamboerskloof,-33.9281311,18.4023838
+3100289,Western Cape,Cape Town,University Estate,-33.9386368,18.4520855
+3100035,Western Cape,Cape Town,Vredehoek,-33.9410858,18.4231529
+3100274,Western Cape,Cape Town,Woodstock,-33.9294128,18.4497261
+3100291,Western Cape,Cape Winelands,Ashton,-33.8298798,20.0509224
+3100292,Western Cape,Cape Winelands,Ceres,-33.4133949,19.2831535
+3100588,Western Cape,Cape Winelands,Franschhoek,-33.8974838,19.1523285
+3100585,Western Cape,Cape Winelands,Other,-32.6545372,20.5079689
+3100293,Western Cape,Cape Winelands,Paarl,-33.5808983,19.0453205
+3100294,Western Cape,Cape Winelands,Robertson,-33.8360786,19.8544197
+3100295,Western Cape,Cape Winelands,Stellenbosch,-33.9405479,18.9502239
+3100296,Western Cape,Cape Winelands,Wellington,-33.64048,19.0096569
+3100297,Western Cape,Cape Winelands,Worcester,-33.7272263,19.4735069
+3100244,Western Cape,Central Karoo,Beaufort West,-32.5353279,22.8105507
+3100531,Western Cape,Central Karoo,Klein Karoo,-32.0258331,23.2219448
+3100298,Western Cape,Central Karoo,Laingsburg,-33.2275124,20.902977
+3100584,Western Cape,Central Karoo,Other,-33.4639931,22.3983917
+3100263,Western Cape,Central Karoo,Prince Albert,-33.2268257,22.0357132
+3100255,Western Cape,Eden,George,-33.9200592,22.4768295
+3100307,Western Cape,Eden,Knysna,-33.9122543,22.9535408
+3100746,Western Cape,Eden,Ladismith,-33.4878311,21.2785416
+3100242,Western Cape,Eden,Mosselbaai,-34.174736,22.0834064
+3100582,Western Cape,Eden,Other,-34.0005302,23.5857792
+3100308,Western Cape,Eden,Oudtshoorn,-33.601284,22.1430206
+3100256,Western Cape,Eden,Plettenberg Bay,-34.0574875,23.3644924
+3100745,Western Cape,Eden,Riversdale,-34.0317192,21.2487316
+3100738,Western Cape,Eden,Stanford,-34.4507942,19.4526825
+3100211,Western Cape,Helderberg,Gordon's Bay,-34.1442032,18.8596039
+3100734,Western Cape,Helderberg,Macassar,-34.0521736,18.7541561
+3100583,Western Cape,Helderberg,Other,-34.0022087,18.9071636
+3100210,Western Cape,Helderberg,Somerset West,-34.0756912,18.8432655
+3100212,Western Cape,Helderberg,Strand,-34.1123199,18.8492069
+3100037,Western Cape,Northern Suburbs,Bellville,-33.894268,18.6294384
+3100189,Western Cape,Northern Suburbs,Brackenfell,-33.881588,18.6954479
+3100727,Western Cape,Northern Suburbs,Buh rein,-33.8204613,18.7140636
+3100038,Western Cape,Northern Suburbs,Durbanville,-33.8275337,18.6526852
+3100309,Western Cape,Northern Suburbs,Edgemead,-33.8726654,18.5433483
+3100190,Western Cape,Northern Suburbs,Goodwood,-33.9116707,18.5522537
+3100310,Western Cape,Northern Suburbs,Kensington,-33.9121437,18.5070801
+3100188,Western Cape,Northern Suburbs,Kraaifontein,-33.8472672,18.7174435
+3100191,Western Cape,Northern Suburbs,Kuils River,-33.9227295,18.6898041
+3100064,Western Cape,Northern Suburbs,Milnerton,-33.8659668,18.5344429
+3100714,Western Cape,Northern Suburbs,Montague Gardens,-33.8610725,18.5213642
+3100543,Western Cape,Northern Suburbs,Other,-33.8416786,18.4975491
+3100204,Western Cape,Northern Suburbs,Parow,-33.9067917,18.5808105
+3100723,Western Cape,Northern Suburbs,Plattekloof,-33.8579216,18.557951
+3100729,Western Cape,Overberg,Betty's Bay,-34.3474693,18.9205093
+3100312,Western Cape,Overberg,Bredasdorp,-34.5385208,20.0568771
+3100313,Western Cape,Overberg,Caledon,-34.2313652,19.4252453
+3100254,Western Cape,Overberg,Cape Agulhas,-34.4873848,20.0449657
+3100732,Western Cape,Overberg,Gansbaai,-34.5805397,19.3517532
+3100253,Western Cape,Overberg,Hermanus,-34.4091988,19.2504444
+3100718,Western Cape,Overberg,Kleinmond,-34.3353996,19.0126286
+3100545,Western Cape,Overberg,Other,-34.0109406,20.3259773
+3100733,Western Cape,Overberg,Pringle Bay,-34.3478127,18.8343544
+3100539,Western Cape,Overberg,Rooi-Els,-34.3035583,18.8180161
+3100246,Western Cape,Overberg,Swellendam,-34.0257072,20.4381256
+3100741,Western Cape,Overberg,Villiersdorp,-33.9859238,19.2861271
+3100731,Western Cape,Southern Peninsula,Capri,-34.1340408,18.3867512
+3100051,Western Cape,Southern Peninsula,Fish Hoek,-34.1340866,18.4187031
+3100322,Western Cape,Southern Peninsula,Glencairn,-34.1648445,18.4310036
+3100323,Western Cape,Southern Peninsula,Kalk Bay,-34.1291695,18.4461498
+3100324,Western Cape,Southern Peninsula,Kommetjie,-34.1403122,18.329195
+3100711,Western Cape,Southern Peninsula,Lakeside,-34.0866928,18.4557953
+3100055,Western Cape,Southern Peninsula,Muizenberg,-34.0898857,18.4958591
+3100056,Western Cape,Southern Peninsula,Noordhoek,-34.0947533,18.3949661
+3100325,Western Cape,Southern Peninsula,Ocean View,-34.1495399,18.3534298
+3100546,Western Cape,Southern Peninsula,Other,-33.221817,18.3124218
+3100057,Western Cape,Southern Peninsula,Scarborough,-34.1969681,18.3738823
+3100058,Western Cape,Southern Peninsula,Simon's Town,-34.1937637,18.4356651
+3100724,Western Cape,Southern Peninsula,Strandfontein,-31.7469234,18.2288551
+3100717,Western Cape,Southern Suburbs,Bergvliet,-34.0479393,18.4543114
+3100041,Western Cape,Southern Suburbs,Claremont & Newlands,-33.9891548,18.4691486
+3100042,Western Cape,Southern Suburbs,Constantia,-34.0257607,18.4230785
+3100589,Western Cape,Southern Suburbs,Crawford,-33.9798279,18.5032787
+3100043,Western Cape,Southern Suburbs,Diep River,-34.0342293,18.4646969
+3100716,Western Cape,Southern Suburbs,Grassy Park,-34.0478859,18.5037804
+3100315,Western Cape,Southern Suburbs,Heathfield,-34.0472145,18.4676647
+3100044,Western Cape,Southern Suburbs,Kenilworth,-33.9948235,18.4729424
+3100316,Western Cape,Southern Suburbs,Kenwyn,-33.9930878,18.4958591
+3100735,Western Cape,Southern Suburbs,Kirstenhof,-34.0694466,18.4543114
+3100590,Western Cape,Southern Suburbs,Lansdowne,-33.9860535,18.4966927
+3100317,Western Cape,Southern Suburbs,Meadowridge,-34.0327797,18.4500408
+3100314,Western Cape,Southern Suburbs,Mowbray,-33.9480133,18.4769783
+3100318,Western Cape,Southern Suburbs,Newlands,-33.9789124,18.4483757
+3100319,Western Cape,Southern Suburbs,Observatory,-33.9382019,18.4687786
+3100544,Western Cape,Southern Suburbs,Other,-34.0321007,18.4543037
+3100740,Western Cape,Southern Suburbs,Ottery,-34.0111885,18.5092144
+3100707,Western Cape,Southern Suburbs,Pinelands,-33.9334755,18.5086327
+3100320,Western Cape,Southern Suburbs,Plumstead,-34.0259438,18.4761772
+3100321,Western Cape,Southern Suburbs,Retreat,-34.0613136,18.4721165
+3100047,Western Cape,Southern Suburbs,Rondebosch,-33.9635811,18.4762764
+3100720,Western Cape,Southern Suburbs,Thornton,-33.9229736,18.5314751
+3100048,Western Cape,Southern Suburbs,Tokai,-34.0621033,18.440958
+3100049,Western Cape,Southern Suburbs,Wynberg & Plumstead,-34.0084457,18.4661808
+3100728,Western Cape,West Coast,Atlantis,-33.5062675,18.4869556
+3100061,Western Cape,West Coast,Blouberg,-33.8194504,18.4865665
+3100326,Western Cape,West Coast,Cederberg,-32.3380547,19.125555
+3100327,Western Cape,West Coast,Citrusdal,-32.589119,19.0118256
+3100328,Western Cape,West Coast,Clanwilliam,-32.1975784,18.89674
+3100743,Western Cape,West Coast,Darling,-33.3755836,18.3860645
+3100532,Western Cape,West Coast,Flamingo Vlei,-33.8348846,18.5003109
+3100737,Western Cape,West Coast,Hopefield,-33.0281715,18.314867
+3100744,Western Cape,West Coast,Lamberts Bay,-32.0978432,18.3267326
+3100062,Western Cape,West Coast,Langebaan,-33.0546989,18.065794
+3100709,Western Cape,West Coast,Malmesbury,-33.4654961,18.7184792
+3100063,Western Cape,West Coast,Melkbosstrand,-33.7192955,18.4543114
+3100715,Western Cape,West Coast,Moorreesburg,-33.1452255,18.6680374
+3100547,Western Cape,West Coast,Other,-30.9901981,18.4766655
+3100530,Western Cape,West Coast,Parklands,-33.8133278,18.5003109
+3100736,Western Cape,West Coast,Piketberg,-32.9047279,18.766037
+3100725,Western Cape,West Coast,Porterville,-33.018322,18.9947968
+3100535,Western Cape,West Coast,Redelinghuys,-32.4837303,18.5359268
+3100742,Western Cape,West Coast,Riebeeck Kasteel,-33.3852654,18.8997116
+3100330,Western Cape,West Coast,Saldanha,-33.0276985,17.9176311
+3100710,Western Cape,West Coast,St.Helena Bay,-32.7505455,18.0035572
+3100712,Western Cape,West Coast,Sunningdale,-33.8097725,18.4884396
+3100529,Western Cape,West Coast,Tableview,-33.8218346,18.4915047
+3100208,Western Cape,West Coast,Vanrhynsdorp - North,-31.6092358,18.7452469
+3100331,Western Cape,West Coast,Velddrif,-32.8096695,18.7125797
+3100708,Western Cape,West Coast,Vredenburg,-32.9127808,17.9946671
+3100332,Western Cape,West Coast,Vredendal,-31.6124897,18.5225716
+3100333,Western Cape,West Coast,West Beach,-33.8066711,18.4736004
+3100726,Western Cape,West Coast,Yzerfontein,-33.3598595,18.159174
