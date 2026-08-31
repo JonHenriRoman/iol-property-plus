@@ -17,6 +17,7 @@ propctrl-import = "iol_importers.propctrl.cli:main"
 remax-import = "iol_importers.remax.cli:main"
 entegral-import = "iol_importers.entegral.cli:main"
 propertyengine-import = "iol_importers.propertyengine.cli:main"
+fusion-import = "iol_importers.fusion.cli:main"
 
 [dependency-groups]
 dev = [

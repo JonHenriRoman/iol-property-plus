@@ -44,4 +44,21 @@ describe('serverEnvSchema', () => {
     vi.stubEnv('APP_ENV', 'qa');
     await expect(loadEnv()).rejects.toThrow(/APP_ENV/);
   });
+
+  it('treats a blank optional feed var as unset (cp .env.example .env.local)', async () => {
+    vi.stubEnv('NODE_ENV', 'test');
+    vi.stubEnv('FUSION_CLIENT_ID', '');
+    vi.stubEnv('FUSION_API_BASE_URL', '');
+    vi.stubEnv('PROPCTRL_API_BASE_URL', '');
+    const { serverEnv } = await loadEnv();
+    expect(serverEnv.FUSION_CLIENT_ID).toBeUndefined();
+    expect(serverEnv.FUSION_API_BASE_URL).toBeUndefined();
+    expect(serverEnv.PROPCTRL_API_BASE_URL).toBeUndefined();
+  });
+
+  it('still validates a non-empty optional feed URL', async () => {
+    vi.stubEnv('NODE_ENV', 'test');
+    vi.stubEnv('FUSION_API_BASE_URL', 'not-a-url');
+    await expect(loadEnv()).rejects.toThrow(/Invalid server environment/);
+  });
 });

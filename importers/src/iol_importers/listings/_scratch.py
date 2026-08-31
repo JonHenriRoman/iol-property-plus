@@ -116,11 +116,16 @@ CREATE TABLE property_type_vendor_mappings (
 CREATE TABLE agencies (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     name text NOT NULL,
+    trading_name text,
     email text,
     phone text,
+    street_address text,
+    suburb_id int REFERENCES suburbs(id) ON DELETE SET NULL,
     status text NOT NULL DEFAULT 'Active',
     created_at timestamptz NOT NULL DEFAULT now(),
-    updated_at timestamptz NOT NULL DEFAULT now()
+    updated_at timestamptz NOT NULL DEFAULT now(),
+    CONSTRAINT agencies_status_check
+        CHECK (status IN ('Active', 'Inactive', 'Suspended'))
 );
 CREATE TABLE agents (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -129,9 +134,15 @@ CREATE TABLE agents (
     last_name text NOT NULL,
     display_name text,
     email text,
+    phone text,
+    mobile text,
+    photo_url text,
+    bio text,
     status text NOT NULL DEFAULT 'Active',
     created_at timestamptz NOT NULL DEFAULT now(),
-    updated_at timestamptz NOT NULL DEFAULT now()
+    updated_at timestamptz NOT NULL DEFAULT now(),
+    CONSTRAINT agents_status_check
+        CHECK (status IN ('Active', 'Inactive', 'Suspended'))
 );
 CREATE TABLE agency_vendor_ids (
     id bigserial PRIMARY KEY,

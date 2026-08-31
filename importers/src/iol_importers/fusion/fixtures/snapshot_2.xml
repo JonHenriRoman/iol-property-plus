@@ -1,0 +1,41 @@
+<Changes clientId="458" commitToken="snap-token-2" syncEventsCount="2">
+  <Snapshot>
+    <Listing id="101" officeId="4" agencyName="Demo Realty" branchName="Cape Town South"
+      fusionRef="DR-101" publishedDateTime="2026-08-01 09:00">
+      <Type listingType="Rent" listingZone="Residential" propertyType="Flat" />
+      <RentDetails rentalState="ToRent" rentalPrice="14500" deposit="14500"
+        priceSuffix="PerMonth" />
+      <Address streetNumber="5" streetName="Main" streetType="Road"
+        suburbId="9" addressHidden="true" />
+      <Agents>
+        <AgentRef id="441" />
+      </Agents>
+      <MainFeatures numBedrooms="2" numBathrooms="1" numGarages="1"
+        numCoveredParkings="1" numOpenParkings="0" />
+      <SecondaryFeatures isFurnished="true" hasBalcony="true" />
+      <Photos>
+        <Photo url="https://img.example.test/101/pic1.jpg" />
+      </Photos>
+      <Description>Bright two-bedroom apartment with a north-facing balcony.</Description>
+      <Marketing>
+        <MarketingHeader>Bright 2 Bed in Rondebosch</MarketingHeader>
+      </Marketing>
+    </Listing>
+  </Snapshot>
+  <Snapshot>
+    <Listing id="102" officeId="4" agencyName="Demo Realty" branchName="Cape Town South"
+      fusionRef="DR-102" publishedDateTime="2026-05-03 08:30">
+      <Type listingType="Sale" listingZone="Residential" propertyType="Land" />
+      <SaleDetails saleState="ForSale" mandateType="Open" sellingPrice="1250000"
+        priceSuffix="" />
+      <Address streetNumber="0" streetName="Plot 14 Riverbend" streetType="Road"
+        suburbId="99" latitude="0" longitude="0" addressHidden="false" />
+      <MainFeatures numBathrooms="0" landArea="1.4" landAreaUnits="ha" />
+      <Photos />
+      <Description>Level 1.4 hectare residential stand with services at the boundary.</Description>
+      <Marketing>
+        <MarketingHeader>1.4ha Residential Stand</MarketingHeader>
+      </Marketing>
+    </Listing>
+  </Snapshot>
+</Changes>

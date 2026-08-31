@@ -1,0 +1,24 @@
+<Changes clientId="458" commitToken="snap-token-3" syncEventsCount="2">
+  <Snapshot>
+    <AreaTree>
+      <Country countryId="za" name="South Africa">
+        <Province provinceId="WesternCape" name="Western Cape">
+          <City cityId="1" name="Cape Town">
+            <Suburb suburbId="8" name="Claremont" />
+            <Suburb suburbId="9" name="Rondebosch" />
+          </City>
+        </Province>
+        <Province provinceId="Gauteng" name="Gauteng">
+          <City cityId="2" name="Johannesburg">
+            <Suburb suburbId="10" name="Sandton" />
+            <Suburb suburbId="11" name="Rosebank" />
+          </City>
+        </Province>
+      </Country>
+    </AreaTree>
+  </Snapshot>
+  <Snapshot>
+    <Development id="543" name="Greenacres Estate" officeId="4" suburbId="8" />
+  </Snapshot>
+  <EndSnapshot />
+</Changes>
