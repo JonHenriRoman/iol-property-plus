@@ -49,6 +49,52 @@ const SUBSET_DDL = `
     CONSTRAINT property_types_category_check
       CHECK (category = ANY (ARRAY['Residential', 'Commercial', 'Agricultural', 'Land']))
   );
+
+  CREATE TYPE feed_format AS ENUM ('XML', 'JSON', 'CSV', 'API');
+  CREATE TYPE import_job_status AS ENUM ('Pending', 'Running', 'Success', 'PartialSuccess', 'Failed');
+
+  CREATE TABLE feed_sources (
+    id serial PRIMARY KEY NOT NULL,
+    code text NOT NULL,
+    name text NOT NULL,
+    vendor_name text NOT NULL,
+    format feed_format DEFAULT 'XML' NOT NULL,
+    base_url text,
+    auth_config jsonb DEFAULT '{}' NOT NULL,
+    ttl_minutes integer DEFAULT 1440 NOT NULL,
+    is_active boolean DEFAULT true NOT NULL,
+    created_at timestamptz DEFAULT now() NOT NULL,
+    updated_at timestamptz DEFAULT now() NOT NULL,
+    CONSTRAINT uq_feed_sources_code UNIQUE (code),
+    CONSTRAINT feed_sources_ttl_minutes_check CHECK (ttl_minutes > 0)
+  );
+
+  CREATE TABLE import_jobs (
+    id bigserial PRIMARY KEY NOT NULL,
+    feed_source_id integer NOT NULL REFERENCES feed_sources(id) ON DELETE CASCADE,
+    status import_job_status DEFAULT 'Pending' NOT NULL,
+    started_at timestamptz DEFAULT now() NOT NULL,
+    finished_at timestamptz,
+    records_seen integer DEFAULT 0 NOT NULL,
+    records_inserted integer DEFAULT 0 NOT NULL,
+    records_updated integer DEFAULT 0 NOT NULL,
+    records_expired integer DEFAULT 0 NOT NULL,
+    records_failed integer DEFAULT 0 NOT NULL,
+    file_reference text,
+    checksum text,
+    created_at timestamptz DEFAULT now() NOT NULL
+  );
+
+  CREATE TABLE import_errors (
+    id bigserial PRIMARY KEY NOT NULL,
+    import_job_id bigint NOT NULL REFERENCES import_jobs(id) ON DELETE CASCADE,
+    feed_source_id integer NOT NULL REFERENCES feed_sources(id) ON DELETE CASCADE,
+    vendor_listing_id text,
+    error_type text NOT NULL,
+    error_message text NOT NULL,
+    raw_payload jsonb,
+    occurred_at timestamptz DEFAULT now() NOT NULL
+  );
 `;
 
 type TestDb = ReturnType<typeof drizzle<typeof schema>> & { $client: PGlite };

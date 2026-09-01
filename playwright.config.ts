@@ -25,6 +25,8 @@ export default defineConfig({
     env: {
       NEXT_PUBLIC_SITE_URL: BASE_URL,
       PORT: String(PORT),
+      // The internal /ops UI is always on in local dev; make it explicit for e2e.
+      OPS_UI_ENABLED: '1',
     },
   },
 });

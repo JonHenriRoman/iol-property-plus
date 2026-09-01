@@ -5,6 +5,7 @@ import { expect, test } from './fixtures';
 for (const { name, path } of [
   { name: 'home', path: '/' },
   { name: '404', path: '/no-such-page' },
+  { name: 'ops add-feed', path: '/ops/feeds/new' },
 ]) {
   test(`${name} has no serious or critical accessibility violations`, async ({ page }) => {
     await page.goto(path);

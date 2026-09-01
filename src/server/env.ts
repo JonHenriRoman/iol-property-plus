@@ -81,6 +81,10 @@ const serverEnvSchema = z.object({
   // Re-hosted listing media: directory the /media route handler serves from.
   // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
   MEDIA_ROOT_DIR: optional(z.string().min(1)),
+  // Internal feed-operations UI (/ops). Off by default; always on in local
+  // development. Set to '1' or 'true' to enable it in a deployed environment —
+  // but only once an auth gate is in front of it (see src/server/ops-access.ts).
+  OPS_UI_ENABLED: optional(z.enum(['1', 'true'])),
 });
 
 const parsed = serverEnvSchema.safeParse(process.env);

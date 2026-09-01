@@ -77,6 +77,7 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 | `GIT_COMMIT_SHA`       | server-only                                           | `src/server/env.ts` | `dev`                                           |
 | `DATABASE_URL`         | server-only                                           | `src/server/env.ts` | `postgresql://localhost:5432/iol_property_plus` |
 | `MEDIA_ROOT_DIR`       | server-only                                           | `src/server/env.ts` | `<repo>/data/media`                             |
+| `OPS_UI_ENABLED`       | server-only                                           | `src/server/env.ts` | unset (always on in local dev)                  |
 
 `MEDIA_ROOT_DIR` is the directory `src/app/media/[...path]/route.ts` serves
 re-hosted listing photos from; the feed importers write there. The feed-adapter
@@ -442,6 +443,27 @@ serves the files from `MEDIA_ROOT_DIR` (default `<repo>/data/media`) with
 traversal + extension guards and an immutable cache. `data/` is git- and
 Docker-ignored, so a container needs a volume mounted at `data/media` — see
 [Not yet implemented](#not-yet-implemented).
+
+### Feed operations UI (`/ops/feeds`)
+
+The first internal screen in the app. It lists the `feed_sources` rows, adds and
+edits them (a per-vendor form: the visible identity fields — agency id, site id,
+provinces — go on the row; shared vendor account secrets stay in the environment
+and are never entered here), shows each feed's `import_jobs` / `import_errors`
+history, and runs a **dry-run** test import that fetches and parses a feed
+without writing anything.
+
+The dry-run shells out to the Python importer:
+`src/server/importer/run-dry-run.ts` runs
+`uv run --project importers python -m iol_importers.dryrun <vendor> <code> --json`
+and parses the result. That file is the single seam to swap for an HTTP call to
+an importer service, or an ECS RunTask, when the importer is deployed separately.
+
+There is **no authentication yet**. `/ops` is available in local development and
+returns 404 everywhere else unless `OPS_UI_ENABLED` is set — and even then it is
+meant to sit behind a network control until a real auth gate lands in
+`src/server/ops-access.ts`. `propdata`, `propctrl` and `remax` have no dry-run
+mode yet, so the test button is disabled for those with a note.
 
 ## Merge gates
 

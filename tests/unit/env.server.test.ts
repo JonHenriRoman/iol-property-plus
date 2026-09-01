@@ -55,7 +55,9 @@ describe('serverEnvSchema', () => {
     vi.stubEnv('PROPERTYPOST_FEED_BASE_URL', '');
     vi.stubEnv('RT3_FEED_BASE_URL', '');
     vi.stubEnv('WEBBOX_FEED_URL_TEMPLATE', '');
+    vi.stubEnv('OPS_UI_ENABLED', '');
     const { serverEnv } = await loadEnv();
+    expect(serverEnv.OPS_UI_ENABLED).toBeUndefined();
     expect(serverEnv.FUSION_CLIENT_ID).toBeUndefined();
     expect(serverEnv.FUSION_API_BASE_URL).toBeUndefined();
     expect(serverEnv.PROPCTRL_API_BASE_URL).toBeUndefined();

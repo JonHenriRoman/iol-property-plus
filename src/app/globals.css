@@ -1,7 +1,55 @@
 @import 'tailwindcss';
 
+/*
+ * The app's first design tokens. Kept deliberately small — a plain internal-tool
+ * palette for the /ops screens. Each `--color-*` maps to a role variable that is
+ * redefined under `prefers-color-scheme: dark`, so utilities like `bg-surface`
+ * and `text-ink-muted` follow the viewer's theme with no `dark:` variants.
+ */
+@theme {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+}
+
 :root {
   color-scheme: light dark;
+
+  --canvas: #f4f5f7;
+  --surface: #ffffff;
+  --raised: #fbfbfc;
+  --line: #dfe3e8;
+  --ink: #1b1f27;
+  --ink-muted: #5c6672;
+  --accent: #2457d6;
+  --accent-ink: #ffffff;
+  --ok: #1f7a3d;
+  --warn: #9a5b12;
+  --danger: #b3261e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #0d1016;
+    --surface: #151a22;
+    --raised: #1b212b;
+    --line: #2a323e;
+    --ink: #e7eaef;
+    --ink-muted: #99a4b2;
+    --accent: #6f9bff;
+    --accent-ink: #0b0f16;
+    --ok: #57c98a;
+    --warn: #e0a350;
+    --danger: #ef6b62;
+  }
 }
 
 html {
@@ -10,4 +58,6 @@ html {
 
 body {
   min-height: 100vh;
+  background: var(--color-canvas);
+  color: var(--color-ink);
 }

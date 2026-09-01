@@ -906,6 +906,22 @@ Served to the browser by the Next.js route handler
 immutable cache. Under Docker that directory needs a mounted volume — see the
 root README's "Not yet implemented".
 
+## Dry-run wrapper (`iol_importers.dryrun`)
+
+The web app's feed-operations UI (`/ops/feeds`) calls this to run a test import:
+
+```sh
+uv run --project importers python -m iol_importers.dryrun <vendor> <feed_sources.code> --json
+```
+
+It owns the `vendor -> adapter` dispatch table and normalises every adapter's
+`run(dry_run=True)` result to one JSON shape (`ok`, `records_seen`,
+`diagnostics`, `message`). It never writes: dry-run returns before any
+`import_jobs` row is opened. A feed-side failure (unreachable feed, missing
+`feed_sources` row, absent credentials) comes back as `{"ok": false, ...}`, not a
+crash. `remax`, `propdata` and `propctrl` have no dry-run mode and return a
+`supported: false` sentinel.
+
 ## Development
 
 ```sh
