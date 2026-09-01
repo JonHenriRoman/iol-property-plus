@@ -815,6 +815,74 @@ and maps every record — no database writes. See
 nightly pull per agency, every configured province; the feed is a full resend,
 not a short poll.
 
+## Webbox feed adapter (`iol_importers.webbox`)
+
+One XML file per site at
+`{domain}/template/feeds,WebboxFeedForSite.vm/siteid/{siteid}/securitykey/{securitykey}/feed.xml`
+— a plain GET where **the URL itself is the credential**. Stream-parsed with
+stdlib `xml.etree.ElementTree.iterparse` (no lxml — the same "trusted vendor over
+TLS" call AllSA / Fusion make, and `iterparse` covers the objective's stream-parse
+ask). Full resend → parse, enrich agencies/agents, `import_listings`, hotlink
+media, `withdraw_missing`.
+
+**One `feed_sources` row per site.** The URL is the credential, so the per-site
+values are the domain (`base_url`) and the `siteid` + `securitykey` pair
+(`auth_config`) — never in the source tree, an env var, or a log line:
+
+```sql
+INSERT INTO feed_sources (code, name, vendor_name, base_url, auth_config)
+VALUES ('webbox-valuables', 'Valuables Properties (Webbox)', 'Webbox',
+        'https://www.valuablesproperties.co.za',
+        '{"siteid": "612", "securitykey": "<opaque key>"}');
+```
+
+**Outer structure** (confirmed from the sibling Go pack's real 21- and
+411-property captures): `<agencies>` → `<agency>` (1+) → `<agency-details>` +
+`<properties>` → `<property>[]`. The repeated `<property>` nests two levels inside
+`<agency>`, so the parser carries each agency's `<agency-details>` context down
+onto its flat property records. It also accepts a bare `<property>` root and a
+consecutive stream — `outer_form` (`wrapped` / `bare-property` / `streamed`) is
+reported on every run.
+
+**Vendor specifics** (from the Go pack + the real 3-property sample):
+
+- `listing-type` (`Sale` / `Rent`) is the listing type — no lifecycle field;
+- **`price/currency` must be `ZAR`** (Step 14 has no per-listing currency column)
+  — a non-ZAR listing is **rejected**; **`location/country` is validated, not
+  hardcoded** — a non-`South Africa` listing is imported with `suburb_id` NULL
+  and tallied;
+- an empty `<amount/>` is a real price-on-application case;
+- `<features>` is a free-form bag — `bedrooms` / `bathrooms` (decimal) /
+  `garages` → columns, `taxes` → `rates_and_taxes`, unknown tags → `raw_data`;
+- `land-size` / `property-size` carry a lowercase unit string (`meters_squared`,
+  `hectares`) → unit-aware `erf_size` / `floor_size`;
+- multiple `<agent>` — the first drives the FK, the full roster →
+  `raw_data.webbox_agents`; rich agency/agent contact fields reach the canonical
+  `agencies` / `agents` tables through `webbox/reference.py` (run before the
+  import), keyed on `agency-details/id` and `agent-id`;
+- `description` embeds `Availability:` / `Deposit R…` free text — left verbatim;
+- **no date field of any kind** → `listed_at` NULL.
+
+Photos hotlinked (`primary_image_url` + `listing_media`).
+
+```sh
+uv run --project importers webbox-import --feed-source webbox-valuables
+uv run --project importers webbox-import \
+    --base-url https://www.valuablesproperties.co.za --siteid 612 --securitykey <key> --dry-run
+uv run --project importers webbox-import --feed-source webbox-valuables --file feed.xml
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.webbox.demo
+```
+
+`WEBBOX_LIVE_DOMAIN=… WEBBOX_LIVE_SITEID=… WEBBOX_LIVE_SECURITYKEY=… pytest -m live
+-k webbox` does a real fetch, maps every property, and prints the confirmed
+`outer_form` — no database writes. See
+[`webbox/MAPPING_NOTES.md`](src/iol_importers/webbox/MAPPING_NOTES.md).
+
+**Scheduling** (not wired — see the root README's "Not yet implemented"): a
+nightly pull per site; the feed is a full resend, not a short poll.
+
 ## Media store (`iol_importers.media`)
 
 Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the
