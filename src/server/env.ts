@@ -64,6 +64,10 @@ const serverEnvSchema = z.object({
   // opaque feed token is on the feed_sources row (auth_config->>'token'), not
   // here; this only overrides the default host.
   MYROOF_FEED_BASE_URL: optional(z.url()),
+  // PropertyPost feed adapter (Python importer) — one static per-agency URL, a
+  // plain GET with no credential. The full feed URL is on the feed_sources row
+  // (base_url); this only supplies a default host for a row that omits it.
+  PROPERTYPOST_FEED_BASE_URL: optional(z.url()),
   // Re-hosted listing media: directory the /media route handler serves from.
   // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
   MEDIA_ROOT_DIR: optional(z.string().min(1)),

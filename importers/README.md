@@ -683,6 +683,71 @@ every record — no database writes. See
 **Scheduling** (not wired — see the root README's "Not yet implemented"): a
 nightly pull per franchise; the feed is a full resend, not a short poll.
 
+## PropertyPost feed adapter (`iol_importers.propertypost`)
+
+One static per-agency URL (e.g. `http://lms.propertypost.co.za/BstProperties.txt`,
+redirecting plain HTTP to HTTPS) — a plain GET with **no auth of any kind**,
+returning the agency's whole book (~640 KB / ~200 listings) as the same bracketed
+key-value text format. The last of the three bracket-KV vendors and the third
+adapter **built on the shared parser `iol_importers.bracket_kv`**. Full resend →
+parse, map, `import_listings`, then `lifecycle.withdraw_missing`.
+
+**One `feed_sources` row per agency.** There is no credential, so the per-agency
+value is the full URL itself (its filename identifies the agency):
+
+```sql
+INSERT INTO feed_sources (code, name, vendor_name, base_url)
+VALUES ('propertypost-bst', 'BST Properties (PropertyPost)', 'PropertyPost',
+        'http://lms.propertypost.co.za/BstProperties.txt');
+```
+
+**Vendor specifics** (from a real 197-record fetch):
+
+- **one file carries both `For Sale` and `To Let`** — there is no separate rental
+  endpoint; the run reports the split;
+- the sampled URL is **one independent agency** (`Branch_ID` `39350` on every
+  record), but agency identity is resolved **per record** from
+  `Branch_ID`/`Branch_Name`, so a multi-branch file needs no code change and the
+  distinct-branch count is on every run's result;
+- `Beds`/`Baths` duplicate `Bedrooms`/`Bathrooms` — coalesced (`Bedrooms`/
+  `Bathrooms` win, a blank side falls back), a genuine numeric disagreement
+  recorded in `raw_data` and tallied, never silently overwritten or double-counted;
+- `GPS` is simply **absent** from a record with no coordinates — no sentinel;
+- the 14 amenity keys (`Fence` … `Kitchens`) are pure `YES` booleans →
+  feature labels (`Kitchens: YES` is a flag here, not MyRoof's count);
+- `Type` → seeded `property_types` (`Stand` → Vacant Land, `Smallholding` → Farm,
+  `Apartment Or Flat`/`Flat` → Apartment); every live value maps;
+- `Carports` → `parking_spaces`, `Verified` → `vendor_updated_at`, a missing
+  `Heading` → a synthesized title (first line of `Description`, else
+  `"{property_type} in {suburb}"`), tallied;
+- `Features_Description` is unstructured prose with an embedded
+  `Label - Value - Detail` triple format — kept **verbatim** in `raw_data`, never
+  parsed; `Admin_ID` is a constant company contact kept as
+  `raw_data.propertypost_admin_email`, distinct from the per-listing agent;
+- every other unlisted key is captured under `raw_data.propertypost_<Key>`;
+- the live feed has a handful of byte-identical duplicate `Reference` records and
+  a trailing run of bare `[[Listing_Start]]` padding — both are harmless (the
+  upsert makes a duplicate a no-op; the parser drops the padding).
+
+Photos hotlinked (`primary_image_url` + `listing_media`).
+
+```sh
+uv run --project importers propertypost-import --feed-source propertypost-bst
+uv run --project importers propertypost-import \
+    --feed-url http://lms.propertypost.co.za/BstProperties.txt --dry-run
+uv run --project importers propertypost-import --feed-source propertypost-bst --file feed.txt
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.propertypost.demo
+```
+
+`PROPERTYPOST_LIVE_FEED_URL=<url> pytest -m live -k propertypost` does a real fetch
+and maps every record — no database writes. See
+[`propertypost/MAPPING_NOTES.md`](src/iol_importers/propertypost/MAPPING_NOTES.md).
+
+**Scheduling** (not wired — see the root README's "Not yet implemented"): a
+nightly pull per agency; the feed is a full resend, not a short poll.
+
 ## Media store (`iol_importers.media`)
 
 Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the

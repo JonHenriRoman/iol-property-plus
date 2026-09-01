@@ -82,12 +82,14 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 re-hosted listing photos from; the feed importers write there. The feed-adapter
 credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`,
 `PROPERTYENGINE_FEED_*`, `FUSION_*`, `ALLSA_FEED_BASE_URL`,
-`MYROOF_FEED_BASE_URL`) are also server-only and optional — the web app never
-reads them; only the Python importers do. `FUSION_PASSWORD` feeds the per-call
-Fusion SecurityToken digest but is still a raw credential. AllSA needs no
-credentials (the feed is public) and MyRoof's per-franchise feed token lives on
-its `feed_sources` row (`auth_config->>'token'`), not in an env var; the
-`*_FEED_BASE_URL` vars only override the default endpoint host. `PROPERTYENGINE_FEED_URL` is still
+`MYROOF_FEED_BASE_URL`, `PROPERTYPOST_FEED_BASE_URL`) are also server-only and
+optional — the web app never reads them; only the Python importers do.
+`FUSION_PASSWORD` feeds the per-call Fusion SecurityToken digest but is still a
+raw credential. AllSA and PropertyPost need no credentials (both feeds are
+public); MyRoof's per-franchise feed token lives on its `feed_sources` row
+(`auth_config->>'token'`) and each PropertyPost agency's full feed URL lives on
+its own row (`base_url`), not in an env var; the `*_FEED_BASE_URL` vars only
+override the default endpoint host. `PROPERTYENGINE_FEED_URL` is still
 blank pending the URL from PropertyEngine (the Gumtree Pro schema doc specifies
 the file format only); `PROPERTYENGINE_FEED_AUTH_TOKEN` /
 `PROPERTYENGINE_FEED_AUTH_SCHEME` (`bearer` | `basic`) are only used if that URL
@@ -356,6 +358,27 @@ splits (bare-comma sentinel → NULL); `Type` crosswalks to `property_types`
 override only) is in `.env.example` and `src/server/env.ts`. See
 `myroof/MAPPING_NOTES.md` and [`importers/README.md`](importers/README.md).
 
+### PropertyPost feed adapter
+
+`importers/src/iol_importers/propertypost/` — the ninth vendor feed and the last
+of the three bracket-KV vendors (RT3, MyRoof, PropertyPost), on the same shared
+`iol_importers.bracket_kv` parser. One static per-agency URL (e.g.
+`http://lms.propertypost.co.za/BstProperties.txt`, redirecting to HTTPS), a plain
+GET with **no credential of any kind** — the full URL lives on the agency's
+`feed_sources` row (`base_url`). Full resend → parse, map, `import_listings`,
+`lifecycle.withdraw_missing` for absences. One file carries both `For Sale` and
+`To Let`; the sampled feed is a single agency, but agency identity is resolved
+per record from `Branch_ID`/`Branch_Name` and the distinct-branch count is
+reported on every run. `Beds`/`Baths` duplicate `Bedrooms`/`Bathrooms` — coalesced,
+never double-counted, a genuine disagreement flagged not dropped. `GPS` is simply
+absent when there are no coordinates (no sentinel). `Carports` → `parking_spaces`,
+`Verified` → `vendor_updated_at`, missing `Heading` → a synthesized title.
+`Features_Description` (unstructured prose) and every other unlisted key are kept
+under `raw_data.propertypost_<Key>`, never parsed; `Admin_ID` is a company contact
+kept distinct from the agent. Photos hotlinked. `PROPERTYPOST_FEED_BASE_URL`
+(optional, override only) is in `.env.example` and `src/server/env.ts`. See
+`propertypost/MAPPING_NOTES.md` and [`importers/README.md`](importers/README.md).
+
 ### Re-hosted listing media
 
 `importers/src/iol_importers/media/` — a shared, feed-agnostic layer that
@@ -460,13 +483,16 @@ federated. The following are deferred follow-ups:
   `propertyengine-import` (nightly; schedule unconfirmed with PropertyEngine),
   `fusion-import` (poll every ~15 min, or drive it from the notification webhook
   below), `allsa-import` (nightly per agency; full resend), `myroof-import`
-  (nightly per franchise; full resend) or `iol-expire-listings`. Each command's
-  docstring carries the intended cadence.
-- **AllSA / MyRoof `feed_sources` rows.** Each AllSA agency
-  (`code='allsa-<agencyid>'`, `auth_config->>'agency_id'`) and each MyRoof
-  franchise (`code='myroof-<franchise>'`, `auth_config->>'token'`) needs a seeded
-  `feed_sources` row; feed sources are configuration and are never created by an
-  import run. See `importers/src/iol_importers/{allsa,myroof}/MAPPING_NOTES.md`.
+  (nightly per franchise; full resend), `propertypost-import` (nightly per agency;
+  full resend) or `iol-expire-listings`. Each command's docstring carries the
+  intended cadence.
+- **AllSA / MyRoof / PropertyPost `feed_sources` rows.** Each AllSA agency
+  (`code='allsa-<agencyid>'`, `auth_config->>'agency_id'`), each MyRoof franchise
+  (`code='myroof-<franchise>'`, `auth_config->>'token'`) and each PropertyPost
+  agency (`code='propertypost-<agency>'`, full feed URL in `base_url`) needs a
+  seeded `feed_sources` row; feed sources are configuration and are never created
+  by an import run. See
+  `importers/src/iol_importers/{allsa,myroof,propertypost}/MAPPING_NOTES.md`.
 - **Fusion `NotifyChangesAvailable` webhook.** The Fusion adapter implements the
   polling side (`RequestSnapshot` / `GetChanges`) only. Fusion can also call
   **into** us to signal "the queue has data" — an inbound endpoint that verifies

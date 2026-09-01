@@ -39,6 +39,10 @@ _DEFAULT_ALLSA_BASE_URL = "https://www.allsaproperty.co.za/feeds/iol.ashx"
 # `token` path segment is the credential and lives on the feed_sources row, not
 # here (see `iol_importers.myroof.source`).
 _DEFAULT_MYROOF_BASE_URL = "https://rat.myroof.co.za"
+# PropertyPost — one static per-agency URL (e.g. `.../BstProperties.txt`), a plain
+# GET with no auth of any kind. The full URL lives on the feed_sources row
+# (`base_url`); this only supplies a default host for a row that omits it.
+_DEFAULT_PROPERTYPOST_BASE_URL = "http://lms.propertypost.co.za"
 _REMAX_URL_ENV_NAMES = (
     "REMAX_API_BASE_URL",
     "REMAX_LIST_API_URL",
@@ -284,4 +288,17 @@ def resolve_myroof_base_url() -> str:
     ``iol_importers.myroof.source``); it is never an env var and never logged.
     """
     raw = _from_env_or_local("MYROOF_FEED_BASE_URL") or _DEFAULT_MYROOF_BASE_URL
+    return raw.strip().rstrip("/")
+
+
+def resolve_propertypost_base_url() -> str:
+    """The PropertyPost feed host, from PROPERTYPOST_FEED_BASE_URL (process env or
+    .env.local) else the default ``http://lms.propertypost.co.za``.
+
+    Only the host is resolved here — used as a fallback when a ``feed_sources`` row
+    carries a bare host with no ``/<file>.txt`` path. The full per-agency URL lives
+    on the row (see ``iol_importers.propertypost.source``). The vendor redirects
+    plain HTTP to HTTPS; the client follows that redirect. There is no credential.
+    """
+    raw = _from_env_or_local("PROPERTYPOST_FEED_BASE_URL") or _DEFAULT_PROPERTYPOST_BASE_URL
     return raw.strip().rstrip("/")
