@@ -73,6 +73,11 @@ const serverEnvSchema = z.object({
   // publishes is on the feed_sources row (auth_config->>'provinces'); this only
   // overrides the default host.
   RT3_FEED_BASE_URL: optional(z.url()),
+  // Webbox feed adapter (Python importer) — one XML file per site where the URL
+  // itself is the credential (siteid + securitykey in the path). The domain and
+  // siteid/securitykey are on the feed_sources row; this only overrides the
+  // shared URL path template.
+  WEBBOX_FEED_URL_TEMPLATE: optional(z.string().min(1)),
   // Re-hosted listing media: directory the /media route handler serves from.
   // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
   MEDIA_ROOT_DIR: optional(z.string().min(1)),

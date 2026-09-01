@@ -48,6 +48,13 @@ _DEFAULT_PROPERTYPOST_BASE_URL = "http://lms.propertypost.co.za"
 # feed_sources row (`auth_config->>'provinces'`), never here (see
 # `iol_importers.rt3.source`).
 _DEFAULT_RT3_BASE_URL = "https://webservices.rawsonproperties.co.za"
+# Webbox — one XML file per site at `{domain}{path}`, a plain GET where the URL
+# itself is the credential (siteid + securitykey embedded in the path). The
+# per-agency domain and the siteid/securitykey live on the feed_sources row
+# (`base_url` + `auth_config`); this is only the shared path template.
+_DEFAULT_WEBBOX_FEED_URL_TEMPLATE = (
+    "/template/feeds,WebboxFeedForSite.vm/siteid/{siteid}/securitykey/{securitykey}/feed.xml"
+)
 _REMAX_URL_ENV_NAMES = (
     "REMAX_API_BASE_URL",
     "REMAX_LIST_API_URL",
@@ -320,3 +327,17 @@ def resolve_rt3_base_url() -> str:
     """
     raw = _from_env_or_local("RT3_FEED_BASE_URL") or _DEFAULT_RT3_BASE_URL
     return raw.strip().rstrip("/")
+
+
+def resolve_webbox_feed_template() -> str:
+    """The Webbox feed URL path template, from WEBBOX_FEED_URL_TEMPLATE (process
+    env or .env.local) else the default
+    ``/template/feeds,WebboxFeedForSite.vm/siteid/{siteid}/securitykey/{securitykey}/feed.xml``.
+
+    Only the path template is resolved here. The per-agency domain lives on the
+    ``feed_sources`` row (``base_url``) and the ``siteid`` / ``securitykey`` live
+    in its ``auth_config`` (see ``iol_importers.webbox.source``) — the URL itself
+    is the credential and is never an env var and never logged.
+    """
+    raw = _from_env_or_local("WEBBOX_FEED_URL_TEMPLATE") or _DEFAULT_WEBBOX_FEED_URL_TEMPLATE
+    return raw.strip()

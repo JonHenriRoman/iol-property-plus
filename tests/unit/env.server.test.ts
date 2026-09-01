@@ -54,6 +54,7 @@ describe('serverEnvSchema', () => {
     vi.stubEnv('MYROOF_FEED_BASE_URL', '');
     vi.stubEnv('PROPERTYPOST_FEED_BASE_URL', '');
     vi.stubEnv('RT3_FEED_BASE_URL', '');
+    vi.stubEnv('WEBBOX_FEED_URL_TEMPLATE', '');
     const { serverEnv } = await loadEnv();
     expect(serverEnv.FUSION_CLIENT_ID).toBeUndefined();
     expect(serverEnv.FUSION_API_BASE_URL).toBeUndefined();
@@ -62,6 +63,7 @@ describe('serverEnvSchema', () => {
     expect(serverEnv.MYROOF_FEED_BASE_URL).toBeUndefined();
     expect(serverEnv.PROPERTYPOST_FEED_BASE_URL).toBeUndefined();
     expect(serverEnv.RT3_FEED_BASE_URL).toBeUndefined();
+    expect(serverEnv.WEBBOX_FEED_URL_TEMPLATE).toBeUndefined();
   });
 
   it('still validates a non-empty optional feed URL', async () => {
