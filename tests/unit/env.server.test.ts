@@ -52,12 +52,14 @@ describe('serverEnvSchema', () => {
     vi.stubEnv('PROPCTRL_API_BASE_URL', '');
     vi.stubEnv('ALLSA_FEED_BASE_URL', '');
     vi.stubEnv('MYROOF_FEED_BASE_URL', '');
+    vi.stubEnv('PROPERTYPOST_FEED_BASE_URL', '');
     const { serverEnv } = await loadEnv();
     expect(serverEnv.FUSION_CLIENT_ID).toBeUndefined();
     expect(serverEnv.FUSION_API_BASE_URL).toBeUndefined();
     expect(serverEnv.PROPCTRL_API_BASE_URL).toBeUndefined();
     expect(serverEnv.ALLSA_FEED_BASE_URL).toBeUndefined();
     expect(serverEnv.MYROOF_FEED_BASE_URL).toBeUndefined();
+    expect(serverEnv.PROPERTYPOST_FEED_BASE_URL).toBeUndefined();
   });
 
   it('still validates a non-empty optional feed URL', async () => {
