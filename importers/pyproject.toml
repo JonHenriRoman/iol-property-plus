@@ -21,6 +21,7 @@ fusion-import = "iol_importers.fusion.cli:main"
 allsa-import = "iol_importers.allsa.cli:main"
 myroof-import = "iol_importers.myroof.cli:main"
 propertypost-import = "iol_importers.propertypost.cli:main"
+rt3-import = "iol_importers.rt3.cli:main"
 
 [dependency-groups]
 dev = [

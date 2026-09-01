@@ -68,6 +68,11 @@ const serverEnvSchema = z.object({
   // plain GET with no credential. The full feed URL is on the feed_sources row
   // (base_url); this only supplies a default host for a row that omits it.
   PROPERTYPOST_FEED_BASE_URL: optional(z.url()),
+  // RT3 (Rawson) feed adapter (Python importer) — one bracket-KV file per
+  // province, a plain GET with no credential. Which provinces an agency
+  // publishes is on the feed_sources row (auth_config->>'provinces'); this only
+  // overrides the default host.
+  RT3_FEED_BASE_URL: optional(z.url()),
   // Re-hosted listing media: directory the /media route handler serves from.
   // Defaults to <repo>/data/media when unset (see src/app/media/[...path]/route.ts).
   MEDIA_ROOT_DIR: optional(z.string().min(1)),

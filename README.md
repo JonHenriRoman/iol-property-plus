@@ -82,14 +82,15 @@ DATABASE_URL=postgresql://localhost:5432/iol_property_plus
 re-hosted listing photos from; the feed importers write there. The feed-adapter
 credentials (`PROP_DATA_*`, `PROPCTRL_*`, `REMAX_*`, `ENTEGRAL_*`,
 `PROPERTYENGINE_FEED_*`, `FUSION_*`, `ALLSA_FEED_BASE_URL`,
-`MYROOF_FEED_BASE_URL`, `PROPERTYPOST_FEED_BASE_URL`) are also server-only and
-optional — the web app never reads them; only the Python importers do.
-`FUSION_PASSWORD` feeds the per-call Fusion SecurityToken digest but is still a
-raw credential. AllSA and PropertyPost need no credentials (both feeds are
-public); MyRoof's per-franchise feed token lives on its `feed_sources` row
-(`auth_config->>'token'`) and each PropertyPost agency's full feed URL lives on
-its own row (`base_url`), not in an env var; the `*_FEED_BASE_URL` vars only
-override the default endpoint host. `PROPERTYENGINE_FEED_URL` is still
+`MYROOF_FEED_BASE_URL`, `PROPERTYPOST_FEED_BASE_URL`, `RT3_FEED_BASE_URL`) are
+also server-only and optional — the web app never reads them; only the Python
+importers do. `FUSION_PASSWORD` feeds the per-call Fusion SecurityToken digest
+but is still a raw credential. AllSA, PropertyPost and RT3 need no credentials
+(all three feeds are public); MyRoof's per-franchise feed token lives on its
+`feed_sources` row (`auth_config->>'token'`), each PropertyPost agency's full
+feed URL lives on its own row (`base_url`), and each RT3 agency's province list
+lives on its row (`auth_config->>'provinces'`), not in an env var; the
+`*_FEED_BASE_URL` vars only override the default endpoint host. `PROPERTYENGINE_FEED_URL` is still
 blank pending the URL from PropertyEngine (the Gumtree Pro schema doc specifies
 the file format only); `PROPERTYENGINE_FEED_AUTH_TOKEN` /
 `PROPERTYENGINE_FEED_AUTH_SCHEME` (`bearer` | `basic`) are only used if that URL
@@ -360,8 +361,8 @@ override only) is in `.env.example` and `src/server/env.ts`. See
 
 ### PropertyPost feed adapter
 
-`importers/src/iol_importers/propertypost/` — the ninth vendor feed and the last
-of the three bracket-KV vendors (RT3, MyRoof, PropertyPost), on the same shared
+`importers/src/iol_importers/propertypost/` — the ninth vendor feed, one of the
+three bracket-KV vendors (RT3, MyRoof, PropertyPost), on the same shared
 `iol_importers.bracket_kv` parser. One static per-agency URL (e.g.
 `http://lms.propertypost.co.za/BstProperties.txt`, redirecting to HTTPS), a plain
 GET with **no credential of any kind** — the full URL lives on the agency's
@@ -378,6 +379,30 @@ under `raw_data.propertypost_<Key>`, never parsed; `Admin_ID` is a company conta
 kept distinct from the agent. Photos hotlinked. `PROPERTYPOST_FEED_BASE_URL`
 (optional, override only) is in `.env.example` and `src/server/env.ts`. See
 `propertypost/MAPPING_NOTES.md` and [`importers/README.md`](importers/README.md).
+
+### RT3 (Rawson) feed adapter
+
+`importers/src/iol_importers/rt3/` — the tenth vendor feed; the last of the three
+bracket-KV vendors on the shared `iol_importers.bracket_kv` parser. One
+bracket-KV file per province at
+`https://webservices.rawsonproperties.co.za/iol-{Province}.txt`, a plain public
+GET with **no auth of any kind**. RT3 is a single brand ("Rawson Properties");
+what is per-agency is _which province files_ it publishes — a JSON array of URL
+tokens on the `feed_sources` row (`auth_config->>'provinces'`). Every configured
+province is fetched up front (any fetch failure aborts before anything is
+imported or reconciled), all imported in one job, then **reconciled per province**
+via `withdraw_missing(raw_scope=("rt3_province", province))` so a broken or
+missing province can't withdraw another's listings. `Branch_ID`/`Branch_Name` are
+the per-listing office identity used as the agency. Numbered co-agent fields
+(`Agent_Name`, `Agent_Name_2`, …) — first agent through Step 14, full roster to
+`raw_data.rt3_agents`. `Kitchens` is an underscore-token list (`_gas hob_, …`,
+unique to RT3) parsed into `raw_data.rt3_kitchen_fittings`. `Views`/`Security`/
+`Balcony`/`Patio`/`Garden` are comma-separated free-text tag lists folded into
+`features`. Hyphenated `Type` taxonomy (`Commercial - Offices` → Office, etc.;
+`Guest House`/`Unclassified` quarantine). `GPS` zero sentinel is
+`"0.00000000,0.00000000"`. Photos hotlinked. `RT3_FEED_BASE_URL` (optional,
+override only) is in `.env.example` and `src/server/env.ts`. See
+`rt3/MAPPING_NOTES.md` and [`importers/README.md`](importers/README.md).
 
 ### Re-hosted listing media
 
@@ -484,15 +509,17 @@ federated. The following are deferred follow-ups:
   `fusion-import` (poll every ~15 min, or drive it from the notification webhook
   below), `allsa-import` (nightly per agency; full resend), `myroof-import`
   (nightly per franchise; full resend), `propertypost-import` (nightly per agency;
-  full resend) or `iol-expire-listings`. Each command's docstring carries the
-  intended cadence.
-- **AllSA / MyRoof / PropertyPost `feed_sources` rows.** Each AllSA agency
+  full resend), `rt3-import` (nightly per agency, every configured province; full
+  resend) or `iol-expire-listings`. Each command's docstring carries the intended
+  cadence.
+- **AllSA / MyRoof / PropertyPost / RT3 `feed_sources` rows.** Each AllSA agency
   (`code='allsa-<agencyid>'`, `auth_config->>'agency_id'`), each MyRoof franchise
-  (`code='myroof-<franchise>'`, `auth_config->>'token'`) and each PropertyPost
-  agency (`code='propertypost-<agency>'`, full feed URL in `base_url`) needs a
-  seeded `feed_sources` row; feed sources are configuration and are never created
-  by an import run. See
-  `importers/src/iol_importers/{allsa,myroof,propertypost}/MAPPING_NOTES.md`.
+  (`code='myroof-<franchise>'`, `auth_config->>'token'`), each PropertyPost agency
+  (`code='propertypost-<agency>'`, full feed URL in `base_url`) and each RT3
+  agency (`code='rt3-<agency>'`, province URL tokens in
+  `auth_config->>'provinces'`) needs a seeded `feed_sources` row; feed sources
+  are configuration and are never created by an import run. See
+  `importers/src/iol_importers/{allsa,myroof,propertypost,rt3}/MAPPING_NOTES.md`.
 - **Fusion `NotifyChangesAvailable` webhook.** The Fusion adapter implements the
   polling side (`RequestSnapshot` / `GetChanges`) only. Fusion can also call
   **into** us to signal "the queue has data" — an inbound endpoint that verifies

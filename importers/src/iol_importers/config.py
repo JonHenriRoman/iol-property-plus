@@ -43,6 +43,11 @@ _DEFAULT_MYROOF_BASE_URL = "https://rat.myroof.co.za"
 # GET with no auth of any kind. The full URL lives on the feed_sources row
 # (`base_url`); this only supplies a default host for a row that omits it.
 _DEFAULT_PROPERTYPOST_BASE_URL = "http://lms.propertypost.co.za"
+# RT3 (Rawson) — one bracket-KV file per province at `{base_url}/iol-{Province}.txt`,
+# a plain GET with no auth. Which provinces an agency publishes is config on the
+# feed_sources row (`auth_config->>'provinces'`), never here (see
+# `iol_importers.rt3.source`).
+_DEFAULT_RT3_BASE_URL = "https://webservices.rawsonproperties.co.za"
 _REMAX_URL_ENV_NAMES = (
     "REMAX_API_BASE_URL",
     "REMAX_LIST_API_URL",
@@ -301,4 +306,17 @@ def resolve_propertypost_base_url() -> str:
     plain HTTP to HTTPS; the client follows that redirect. There is no credential.
     """
     raw = _from_env_or_local("PROPERTYPOST_FEED_BASE_URL") or _DEFAULT_PROPERTYPOST_BASE_URL
+    return raw.strip().rstrip("/")
+
+
+def resolve_rt3_base_url() -> str:
+    """The RT3 (Rawson) feed host, from RT3_FEED_BASE_URL (process env or
+    .env.local) else the default ``https://webservices.rawsonproperties.co.za``.
+
+    Only the host is resolved here. Which provinces an agency publishes is config
+    on the ``feed_sources`` row (``auth_config->>'provinces'``, see
+    ``iol_importers.rt3.source``) — never an env var. There is no credential; the
+    province files are plain public URLs.
+    """
+    raw = _from_env_or_local("RT3_FEED_BASE_URL") or _DEFAULT_RT3_BASE_URL
     return raw.strip().rstrip("/")
