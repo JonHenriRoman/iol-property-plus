@@ -748,6 +748,73 @@ and maps every record — no database writes. See
 **Scheduling** (not wired — see the root README's "Not yet implemented"): a
 nightly pull per agency; the feed is a full resend, not a short poll.
 
+## RT3 (Rawson) feed adapter (`iol_importers.rt3`)
+
+One bracket-KV file per province at
+`https://webservices.rawsonproperties.co.za/iol-{Province}.txt` — a plain public
+GET with **no auth of any kind**, ~17 MB per province. The last of the three
+bracket-KV vendors on the shared `iol_importers.bracket_kv` parser.
+
+**One `feed_sources` row per agency, with the province list.** RT3 is a single
+brand ("Rawson Properties"); what is per-agency is *which province files* it
+publishes — a JSON array of URL tokens (the exact `{Province}` segment):
+
+```sql
+INSERT INTO feed_sources (code, name, vendor_name, base_url, auth_config)
+VALUES ('rt3-rawson', 'Rawson Properties (RT3)', 'RT3',
+        'https://webservices.rawsonproperties.co.za',
+        '{"provinces": ["Western_Cape", "Gauteng", "KwaZulu-Natal"]}');
+```
+
+Run shape: **every configured province file is fetched up front** (any fetch
+failure aborts the whole run before anything is imported or reconciled) → all
+provinces imported in one job → photos hotlinked → **per-province reconcile** via
+`withdraw_missing(code, seen, raw_scope=("rt3_province", province))`, so a broken
+or missing province never withdraws another province's listings.
+
+**Vendor specifics** (from a real 4,137-record Gauteng run):
+
+- single brand — `Branch_ID` / `Branch_Name` are the per-listing office identity,
+  used directly as the agency; `"Rawson Properties"` → `raw_data.rt3_brand`;
+- **numbered co-agent fields** — `Agent_Name` / `Cell_No` / `Email`, then
+  `Agent_Name_2` … for an arbitrary number more. The first agent resolves through
+  Step 14; the full ordered roster → `raw_data.rt3_agents` (+ `rt3_co_agent_count`).
+  Handles zero / one / many / gappy suffix sets;
+- **`Kitchens` is an underscore-token list** (`_gas hob_, _granite tops_`) —
+  unique to RT3 (MyRoof / PropertyPost use it as a plain count/flag). Parsed into
+  `raw_data.rt3_kitchen_fittings`; not a feature, not a count;
+- **`Views` / `Security` / `Balcony` / `Patio` / `Garden` are comma-separated
+  free-text tag lists** — every token folded into `features` (plus `Pool` /
+  `Alarm` / `Laundry` / `Staff_Accomm` / `Ensuites` as boolean labels);
+- `Study` / `Family_Rooms` / `Reception_Rooms` / `Levels` are numeric counts →
+  `raw_data`;
+- hyphenated `Type` taxonomy — `Commercial - Offices` → Office,
+  `Commercial - Factory`/`Warehouse` → Industrial, `Commercial - Vacant Land` →
+  Vacant Land, the rest of `Commercial - *` → Commercial; `Guest House` /
+  `Unclassified` quarantine rather than guess;
+- `GPS` zero sentinel is `"0.00000000,0.00000000"` (also `"0,0"` / both-zero);
+- `Status` (`For Sale` / `To Let`) is the listing type; `Listed` is a
+  `YYYY-MM-DD` publish date.
+
+Photos hotlinked (`primary_image_url` + `listing_media`).
+
+```sh
+uv run --project importers rt3-import --feed-source rt3-rawson
+uv run --project importers rt3-import --province Gauteng --province Western_Cape --dry-run
+uv run --project importers rt3-import --file Gauteng=iol-Gauteng.txt --file Western_Cape=iol-Western_Cape.txt
+
+TEST_DATABASE_URL=postgresql://localhost:5432/postgres \
+    uv run --project importers python -m iol_importers.rt3.demo
+```
+
+`RT3_LIVE_PROVINCE_URL=<url> pytest -m live -k rt3` does a real one-province fetch
+and maps every record — no database writes. See
+[`rt3/MAPPING_NOTES.md`](src/iol_importers/rt3/MAPPING_NOTES.md).
+
+**Scheduling** (not wired — see the root README's "Not yet implemented"): a
+nightly pull per agency, every configured province; the feed is a full resend,
+not a short poll.
+
 ## Media store (`iol_importers.media`)
 
 Shared, feed-agnostic photo re-hosting — Entegral is its first consumer; the
